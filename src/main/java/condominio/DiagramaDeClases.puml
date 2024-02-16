@@ -1,0 +1,108 @@
+@startuml
+'https://plantuml.com/class-diagram
+note as N1
+    <b><color: Red>TODO:
+    <b>Completar los atributos, métodos
+    <b>y enumeraciones de las clases que faltan
+end note
+abstract class Usuario
+{
+    {field} int id
+    {field} String user
+    {field} String password
+    {field} String Nombre
+    {field} String Apellido
+    {field} String email
+    {method} Registrar()
+    {method} IniciarSesion()
+    {method} RecuperarContrasena()
+    '{method} ListarUsuarios()
+}
+class Administrador
+class Residente
+class Guardia
+class Condominio
+{
+    int NumParqueaderosVisitas
+}
+class Unidad
+{
+    {field} EstadosUnidad estado
+}
+' enumeración de estados: disponible, reservado, vendido
+enum EstadosUnidad {
+ DISPONIBLE
+ RESERVADO
+ VENDIDO
+}
+class Reserva{
+    {method} Crear()
+    {method} Modificar()
+    {method} Cancelar()
+    {method} Listar()
+}
+class AreaComun
+class Visita
+note bottom: "la visita puede no visitar a un \n residente como el caso de proveedores"
+
+class Pago
+{
+    {field} int idResidente
+    {field} Date fechaDePago
+    {field} Date fechaVencimientoPago
+    {field} double valor
+    {field} tipoPago tPago
+    ' enum alicuota o extraordinaria
+    {field} metodoPago mPago
+    ' enum metodoPago: efectivo, tarjetas de crédito,
+    'tarjetas de débito o transferencia
+    {method} ListarPagos()
+    ' crear pago....
+}
+
+
+
+class ParqueaderoVisita
+{
+    {field} numero
+    {field} estado
+    ' enumeración de estados: disponible u ocupado
+}
+
+class Comunicacion
+{
+    {field} emisor
+    {field} receptores
+    {field} tipoComunicacion
+    'enumeración tipoComunicacion:
+    'alerta, directo, anuncio, visita, reservas, pagos
+    {field} cuerpo
+    {field} fecha
+    {method} listarComunicados()
+    {method} CrearComunicado()
+    {method} ModificarComunicado())
+}
+
+Usuario <|-- Administrador
+Usuario <|-- Residente
+Usuario <|-- Guardia
+Administrador "1"--> "*" Condominio: gestiona
+Administrador --> AreaComun: gestiona
+Administrador --> Reserva: aprueba
+Residente "1"-- "*"Unidad: posee
+Condominio "1" *-- "*"Unidad: tiene
+Condominio "1"*-- "*"AreaComun: tiene
+Condominio "1"*-- "*"ParqueaderoVisita: tiene
+Guardia -- Visita: registra
+Guardia --> ParqueaderoVisita: asigna
+'Residente -- AreaComun
+Reserva "1" -- "1" AreaComun
+Usuario "0..1"<-- "1"Visita: visita
+Residente "1" --> "*"Reserva: realiza
+Residente "1" --> "*" Pago: realiza
+Administrador --> Unidad: asigna
+Usuario "1" --> "*" Comunicacion: envia
+Administrador"1" --> "*"Pago: supervisa
+
+'una enumeración para los tipos de unidades
+@enduml
