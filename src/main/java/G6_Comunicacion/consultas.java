@@ -1,9 +1,9 @@
 
 package G6_Comunicacion;
 
-import Comunicacion.Conexion;
-import model.Comunicacion.Views.Comunicado;
-import model.Comunicacion.Views.Principal;
+import condominio.Conexion;
+import G6_Comunicacion.Comunicado;
+import G6_Comunicacion.Principal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
