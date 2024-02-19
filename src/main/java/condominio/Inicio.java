@@ -4,8 +4,9 @@
  */
 package condominio;
 
-import G2_Usuarios.InicioSesion;
-import G2_Usuarios.RegistroUsuario;
+
+import GestionUsuariosYAdministracion.InicioSesion;
+import GestionUsuariosYAdministracion.RegistroUsuario;
 
 /**
  *
