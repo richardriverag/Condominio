@@ -165,12 +165,12 @@ public class consultas {
         Statement statement = null;
         ResultSet resultSet = null;
         
-        String []datos= new String[5];
-        int contador = 0;
+        String []datos= new String[20];
         
         //generacion de la tabla comunicado
         DefaultTableModel tcomunicado = new DefaultTableModel();
-        tcomunicado.addColumn("ID");
+        tcomunicado.addColumn("ID_Comunicado");
+        tcomunicado.addColumn("ID_Administrador");
         tcomunicado.addColumn("ID_Usuario");
         tcomunicado.addColumn("Fecha");
         tcomunicado.addColumn("Titulo");
@@ -191,7 +191,12 @@ public class consultas {
 
             // Paso 4: Procesa los resultados
             while (resultSet.next()) {
-                datos[contador] = resultSet.getString(contador+1);
+                datos[0] = resultSet.getString(1);
+                datos[1] = resultSet.getString(2);
+                datos[2] = resultSet.getString(3);
+                datos[3] = resultSet.getString(4);
+                datos[4] = resultSet.getString(5);
+                datos[5] = resultSet.getString(6);
                 tcomunicado.addRow(datos);
             }
             Comunicado.jTable2.setModel(tcomunicado);
@@ -203,12 +208,56 @@ public class consultas {
             cerrarRecursos(connection, statement, resultSet);
         }
         
-        
-        
     }
     
-    
-    
+    public static void consultaAnunciosGeneralesGUITabla() {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        
+        String []datos= new String[20];
+        
+        //generacion de la tabla comunicado
+        DefaultTableModel tanuncio = new DefaultTableModel();
+        tanuncio.addColumn("ID_AnunciosGenerales");
+        tanuncio.addColumn("ID_Administrador");
+        tanuncio.addColumn("ID_Usuario");
+        tanuncio.addColumn("Fecha");
+        tanuncio.addColumn("Titulo");
+        tanuncio.addColumn("Descripcion");
+
+        Anuncios.jTAnuncio.setModel(tanuncio);
+        
+        
+        try {
+            // Paso 1: Crea la conexión
+            connection = Conexion.getCon();
+
+            // Paso 2: Crea el statement
+            statement = connection.createStatement();
+
+            // Paso 3: Ejecuta la consulta SQL
+            resultSet = statement.executeQuery("SELECT * FROM Anuncios_Generales");
+
+            // Paso 4: Procesa los resultados
+            while (resultSet.next()) {
+                datos[0] = resultSet.getString(1);
+                datos[1] = resultSet.getString(2);
+                datos[2] = resultSet.getString(3);
+                datos[3] = resultSet.getString(4);
+                datos[4] = resultSet.getString(5);
+                datos[5] = resultSet.getString(6);
+                tanuncio.addRow(datos);
+            }
+            Anuncios.jTAnuncio.setModel(tanuncio);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Paso 5: Cierra la conexión y los recursos
+            cerrarRecursos(connection, statement, resultSet);
+        }
+    }
     public static void cerrarRecursos(Connection connection, Statement statement, ResultSet resultSet) {
         try {
             if (resultSet != null) resultSet.close();

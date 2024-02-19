@@ -1,9 +1,6 @@
 
 package G6_Comunicacion;
 
-import G6_Comunicacion.views.Principal;
-import G6_Comunicacion.views.Anuncios;
-import G6_Comunicacion.views.Comunicado;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
