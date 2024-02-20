@@ -887,6 +887,11 @@ public class Modulossss extends javax.swing.JFrame {
         });
 
         botonEditarCatalogo.setText("Editar");
+        botonEditarCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditarCatalogoActionPerformed(evt);
+            }
+        });
 
         botonEliminarCatalogo.setText("Eliminar");
 
@@ -1436,6 +1441,8 @@ public class Modulossss extends javax.swing.JFrame {
         // Hacer visible la ventana de agregar condominio
         ventanaAgregar.setVisible(true);
         
+        
+        
     }//GEN-LAST:event_botonAgregarCatalogoActionPerformed
 
     private void botonAgregarAIGes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAIGes1ActionPerformed
@@ -1463,6 +1470,24 @@ public class Modulossss extends javax.swing.JFrame {
         
         //System.out.println(numeCedula);
     }//GEN-LAST:event_botonAgregarAIGes1ActionPerformed
+
+    private void botonEditarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarCatalogoActionPerformed
+        // TODO add your handling code here:
+        // Obtener la fila seleccionada en la tabla
+    int filaSeleccionada = tablaCatalogo.getSelectedRow();
+    if (filaSeleccionada != -1) { // Verificar si se ha seleccionado una fila
+        String id = (String) tablaCatalogo.getValueAt(filaSeleccionada, 0);
+        String dimension = (String) tablaCatalogo.getValueAt(filaSeleccionada, 1);
+        String numHabitaciones = (String) tablaCatalogo.getValueAt(filaSeleccionada, 2);
+        String servicios = (String) tablaCatalogo.getValueAt(filaSeleccionada, 3);
+        String normas = (String) tablaCatalogo.getValueAt(filaSeleccionada, 4);
+
+        EditarCondominioDialog ventanaEditar = new EditarCondominioDialog(this, true, id, dimension, numHabitaciones, servicios, normas, tablaCatalogo);
+        ventanaEditar.setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione un condominio para editar.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_botonEditarCatalogoActionPerformed
 
     /**
      * @param args the command line arguments
