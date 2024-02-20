@@ -9,9 +9,6 @@ package G1_Finanzas;
  */
 public class Cuotas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Cuotas
-     */
     public Cuotas() {
         initComponents();
         
