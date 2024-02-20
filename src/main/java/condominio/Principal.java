@@ -4,7 +4,7 @@
  */
 package condominio;
 
-import G4_Reservas.AreasComunes;
+import G4_Reservas.AreasComunesUsuarios;
 
 /**
  *
@@ -170,7 +170,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciar3ActionPerformed
 
     private void btnIniciar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar4ActionPerformed
-        new AreasComunes().setVisible(true);
+        new AreasComunesUsuarios().setVisible(true);
     }//GEN-LAST:event_btnIniciar4ActionPerformed
 
     private void btnIniciar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar5ActionPerformed
