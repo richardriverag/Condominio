@@ -116,3 +116,50 @@ INSERT INTO CUOTA (ID_PAGOS,  NUM_CUOTA, MONTO_CUOTA, FECHAV_CUOTA, ESTADO_CUOTA
 (1, 2, 150.00, '2023-02-01', 'Pendiente');
 
 select * FROM CUOTA
+
+
+/*===============================================================================================*/
+/*=========================TABLAS USADAS POR MODULO CHECKIN GRUPO 5=============================*/
+/*===============================================================================================*/
+
+create table Visitante(
+	idVisitante int not null,
+	id_usuario int,
+	nombreVisitante varchar(50) not null,
+	motivoVisita varchar(50) not null,
+	fecha varchar(50) not null,
+	hora varchar(20) not null,
+	vehiculo varchar(20) not null,
+	tipoUsuario int DEFAULT NULL,
+	PRIMARY KEY (idVisitante), 
+	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);         
+
+
+
+Create Table IngresoResidente(
+	id_usuario int,
+	fecha varchar(50) not null,
+	hora varchar(20) not null,
+	PRIMARY KEY (id_usuario,fecha), 
+	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+); 
+
+
+CREATE VIEW historialIngresosCondominio AS
+SELECT 'Visitante' AS TipoUsuario, nombreVisitante AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
+FROM Visitante
+UNION ALL
+SELECT 'Residente' AS TipoUsuario, CONCAT(Usuario.nombre, ' ', Usuario.apellido) AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
+FROM Usuario
+JOIN IngresoResidente ON Usuario.id_usuario = IngresoResidente.id_usuario
+
+
+select * from  historialIngresosCondominio
+
+
+
+create table ParqueaderoVisita(
+	idParqueadero int not null,
+	estado varchar(20) not null
+);
