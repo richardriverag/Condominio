@@ -159,3 +159,53 @@ VALUES
 
 SELECT * FROM AREACOMUN;
 SELECT * FROM RESERVA;
+
+/*===============================================================================================*/
+/*=========================TABLAS USADAS POR MODULO RESERVAS GRUPO 6=============================*/
+/*===============================================================================================*/
+
+-- Drop tables if they already exist
+/*DROP TABLE IF EXISTS Comunicado;*/
+/*DROP TABLE IF EXISTS Anuncios_Generales;*/
+
+-- Creating table Anuncios_Generales
+CREATE TABLE Anuncios_Generales (
+    ID_AnunciosGenerales INT PRIMARY KEY,
+    ID_Administrador INT,
+    ID_Usuario INT,
+    Fecha_Anuncio DATE,
+    Titulo_Anuncio VARCHAR(50),
+    Descripcion_Anuncio VARCHAR(150),
+    FOREIGN KEY (ID_Administrador) REFERENCES Administrador(ID_Administrador),
+    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
+);
+
+-- Creating table Comunicado
+CREATE TABLE Comunicado (
+    ID_Comunicado INT PRIMARY KEY,
+    ID_Administrador INT,
+    ID_Usuario INT,
+    Fecha_Comunicado DATE,
+    Titulo_Comunicado VARCHAR(50),
+    Descripcion_Comunicado VARCHAR(150),
+    FOREIGN KEY (ID_Administrador) REFERENCES Administrador(ID_Administrador),
+    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
+);
+
+-- Generar e insertar datos aleatorios para la tabla Anuncios_Generales
+INSERT INTO Anuncios_Generales (ID_AnunciosGenerales, ID_Administrador, ID_Usuario, Fecha_Anuncio, Titulo_Anuncio, Descripcion_Anuncio)
+VALUES 
+(1, 1, 2, '2024-02-17', 'Nuevo horario de atención', 'Se informa a todos los usuarios que a partir del día de mañana el horario de atención será de 8:00 a.m. a 5:00 p.m.'),
+(2, 2, 4, '2024-02-17', 'Cambio de ubicación de la oficina', 'Por motivos de remodelación, la oficina se trasladará temporalmente a la siguiente dirección: Calle Principal #123.'),
+(3, 3, 1, '2024-02-17', 'Suspensión de servicio de agua', 'Se comunica a los usuarios que el servicio de agua estará suspendido el próximo sábado debido a trabajos de mantenimiento.'),
+(4, 4, 3, '2024-02-17', 'Reunión de condominio', 'Recordatorio: La reunión de condominio se llevará a cabo el próximo viernes a las 7:00 p.m. en el salón comunal.'),
+(5, 5, 5, '2024-02-17', 'Nueva política de seguridad', 'A partir del mes próximo, se implementará una nueva política de seguridad en el edificio. Se solicita la cooperación de todos los residentes.');
+
+-- Generar e insertar datos aleatorios para la tabla Comunicado
+INSERT INTO Comunicado (ID_Comunicado, ID_Administrador, ID_Usuario, Fecha_Comunicado, Titulo_Comunicado, Descripcion_Comunicado)
+VALUES 
+(1, 2, 3, '2024-02-17', 'Recordatorio de pago de expensas', 'Se recuerda a todos los residentes que el plazo para el pago de expensas vence el próximo viernes.'),
+(2, 3, 5, '2024-02-17', 'Fiesta de fin de año', 'Estimados residentes, les informamos que la fiesta de fin de año se llevará a cabo el sábado 20 de diciembre en la terraza del edificio.'),
+(3, 4, 2, '2024-02-17', 'Cierre temporal de parqueadero', 'Por motivos de mantenimiento, el parqueadero estará cerrado desde el lunes hasta el miércoles de la próxima semana.'),
+(4, 5, 4, '2024-02-17', 'Horario especial de atención', 'Durante la temporada navideña, la administración estará atendiendo en horario extendido.'),
+(5, 1, 1, '2024-02-17', 'Asamblea extraordinaria', 'Se convoca a todos los propietarios a una asamblea extraordinaria que se llevará a cabo el próximo domingo a las 10:00 a.m.');
