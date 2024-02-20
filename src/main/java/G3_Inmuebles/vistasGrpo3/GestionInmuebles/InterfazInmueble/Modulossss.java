@@ -6,6 +6,10 @@ package G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble;
 
 import java.awt.Color;
 import G3_Inmuebles.modelGrpo3.PestanaGestionInmuebles;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -871,6 +875,11 @@ public class Modulossss extends javax.swing.JFrame {
         jLabel11.setText("Buscar tipo condominio:");
 
         botonAgregarCatalogo.setText("Agregar");
+        botonAgregarCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAgregarCatalogoActionPerformed(evt);
+            }
+        });
 
         botonEditarCatalogo.setText("Editar");
 
@@ -1415,6 +1424,14 @@ public class Modulossss extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void botonAgregarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarCatalogoActionPerformed
+        // TODO add your handling code here:
+        AgregarCondominioDialog ventanaAgregar = new AgregarCondominioDialog(this, true, (DefaultTableModel) tablaCatalogo.getModel());
+        // Hacer visible la ventana de agregar condominio
+        ventanaAgregar.setVisible(true);
+        
+    }//GEN-LAST:event_botonAgregarCatalogoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1567,5 +1584,6 @@ public class Modulossss extends javax.swing.JFrame {
     private javax.swing.JTextField textObsAdicionales1;
     private javax.swing.JTextField textUnidadReserva1;
     // End of variables declaration//GEN-END:variables
+
     
 }
