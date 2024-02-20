@@ -4,19 +4,28 @@
  */
 package G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble;
 
+import G3_Inmuebles.modelGrpo3.BusquedaPropiedades;
+import G3_Inmuebles.modelGrpo3.FiltroTabla;
 import java.awt.Color;
 import G3_Inmuebles.modelGrpo3.PestanaGestionInmuebles;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author dopar
  */
 public class Modulossss extends javax.swing.JFrame {
-    
+    private JComboBox<String> comboBoxDimension;
+    private JComboBox<String> comboBoxNumHabitaciones;
+    private JComboBox<String> comboBoxServicios;
+    private JComboBox<String> comboBoxNormas;
     
 
     /**
@@ -128,15 +137,6 @@ public class Modulossss extends javax.swing.JFrame {
         jComboBox9 = new javax.swing.JComboBox<>();
         jComboBox10 = new javax.swing.JComboBox<>();
         jButton6 = new javax.swing.JButton();
-        panelGestPropiedad = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         panelReportes = new javax.swing.JPanel();
         jTabbedPane6 = new javax.swing.JTabbedPane();
         jPanel10 = new javax.swing.JPanel();
@@ -154,6 +154,16 @@ public class Modulossss extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
         jScrollPane12 = new javax.swing.JScrollPane();
         jTable8 = new javax.swing.JTable();
+        panelGestPropiedad = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -894,6 +904,11 @@ public class Modulossss extends javax.swing.JFrame {
         });
 
         botonEliminarCatalogo.setText("Eliminar");
+        botonEliminarCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarCatalogoActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Dimensión");
 
@@ -904,6 +919,11 @@ public class Modulossss extends javax.swing.JFrame {
         jLabel37.setText("Normas");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grande", "Mediano", "Pequeño", "Todo" }));
+        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox7ActionPerformed(evt);
+            }
+        });
 
         jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "Todo" }));
 
@@ -912,6 +932,11 @@ public class Modulossss extends javax.swing.JFrame {
         jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO fumar", "NO animales", "NO bicicletas" }));
 
         jButton6.setText("Filtrar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCatalogoLayout = new javax.swing.GroupLayout(panelCatalogo);
         panelCatalogo.setLayout(panelCatalogoLayout);
@@ -995,103 +1020,6 @@ public class Modulossss extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("tab4", panelCatalogo);
-
-        jLabel23.setText("Seleccionar Propietario:");
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Actualizar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Cedula", "Nombre", "Bloque", "Edificio", "Piso", "Departamento", "Observaciones"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane8.setViewportView(jTable4);
-
-        jLabel24.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
-        jLabel24.setText("Gestión de propiedades");
-
-        jLabel38.setText("Cedula:");
-
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelGestPropiedadLayout = new javax.swing.GroupLayout(panelGestPropiedad);
-        panelGestPropiedad.setLayout(panelGestPropiedadLayout);
-        panelGestPropiedadLayout.setHorizontalGroup(
-            panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGestPropiedadLayout.createSequentialGroup()
-                .addGroup(panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelGestPropiedadLayout.createSequentialGroup()
-                        .addContainerGap(163, Short.MAX_VALUE)
-                        .addGroup(panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestPropiedadLayout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(439, 439, 439))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(panelGestPropiedadLayout.createSequentialGroup()
-                                    .addComponent(jLabel23)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(288, 288, 288)
-                                    .addComponent(jLabel38)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestPropiedadLayout.createSequentialGroup()
-                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(151, 151, 151)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelGestPropiedadLayout.createSequentialGroup()
-                        .addGap(402, 402, 402)
-                        .addComponent(jLabel24)))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        panelGestPropiedadLayout.setVerticalGroup(
-            panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestPropiedadLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel24)
-                .addGap(18, 18, 18)
-                .addGroup(panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel38)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jButton2)
-                .addContainerGap(135, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("tab6", panelGestPropiedad);
 
         jButton8.setText("Subir Reporte");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -1262,6 +1190,113 @@ public class Modulossss extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("tab7", panelReportes);
+
+        jLabel23.setText("Seleccionar Propietario:");
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Actualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cedula", "Nombre", "Bloque", "Edificio", "Piso", "Departamento", "Observaciones"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(jTable4);
+
+        jLabel24.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
+        jLabel24.setText("Gestión de propiedades");
+
+        jLabel38.setText("Cedula:");
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelGestPropiedadLayout = new javax.swing.GroupLayout(panelGestPropiedad);
+        panelGestPropiedad.setLayout(panelGestPropiedadLayout);
+        panelGestPropiedadLayout.setHorizontalGroup(
+            panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGestPropiedadLayout.createSequentialGroup()
+                .addGroup(panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelGestPropiedadLayout.createSequentialGroup()
+                        .addContainerGap(93, Short.MAX_VALUE)
+                        .addGroup(panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestPropiedadLayout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(439, 439, 439))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelGestPropiedadLayout.createSequentialGroup()
+                                    .addComponent(jLabel23)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(288, 288, 288)
+                                    .addComponent(jLabel38)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(40, 40, 40)
+                                    .addComponent(jButton1))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestPropiedadLayout.createSequentialGroup()
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(151, 151, 151)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelGestPropiedadLayout.createSequentialGroup()
+                        .addGap(402, 402, 402)
+                        .addComponent(jLabel24)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelGestPropiedadLayout.setVerticalGroup(
+            panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGestPropiedadLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addGroup(panelGestPropiedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jButton2)
+                .addContainerGap(134, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab6", panelGestPropiedad);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 1010, 570));
 
@@ -1489,6 +1524,44 @@ public class Modulossss extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_botonEditarCatalogoActionPerformed
 
+    private void botonEliminarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCatalogoActionPerformed
+        // TODO add your handling code here:
+        
+        // Obtener la fila seleccionada en la tabla
+        int filaSeleccionada = tablaCatalogo.getSelectedRow();
+    
+    // Verificar si se ha seleccionado una fila
+        if (filaSeleccionada != -1) {
+        // Confirmar con el usuario si realmente desea eliminar el condominio
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar este condominio?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        
+            // Si el usuario confirma la eliminación
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                // Eliminar la fila del modelo de la tabla
+                DefaultTableModel modeloTabla = (DefaultTableModel) tablaCatalogo.getModel();
+                modeloTabla.removeRow(filaSeleccionada);
+            }
+        } else {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione un condominio para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botonEliminarCatalogoActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       FiltroTabla.filtrar(tablaCatalogo, comboBoxDimension, comboBoxNumHabitaciones, comboBoxServicios, comboBoxNormas);
+       
+       
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+            // TODO add your handling code here:
+            
+    }//GEN-LAST:event_jComboBox7ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1538,6 +1611,7 @@ public class Modulossss extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxMesReservaAgenda;
     private javax.swing.JComboBox<String> comboBoxMesSGR1;
     private javax.swing.JComboBox<String> comboBoxVisualizacionUsuarioGestionUnidades2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
