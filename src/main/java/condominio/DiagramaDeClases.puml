@@ -13,12 +13,15 @@ abstract class Usuario
     {field} String Nombre
     {field} String Apellido
     {field} String email
-    {method} Registrar()
+    {field} int tipoUsuario
     {method} IniciarSesion()
     {method} RecuperarContrasena()
-    '{method} ListarUsuarios()
 }
-class Administrador
+class Administrador 
+{
+    {method} Registrar()
+    {method} ListarUsuarios()
+}
 class Residente
 class Guardia
 class Condominio

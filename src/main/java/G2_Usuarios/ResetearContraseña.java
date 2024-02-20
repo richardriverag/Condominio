@@ -1,5 +1,5 @@
 
-package GestionUsuariosYAdministracion;
+package G2_Usuarios;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;

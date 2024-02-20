@@ -6,7 +6,7 @@ package condominio;
 
 
 import GestionUsuariosYAdministracion.InicioSesion;
-import GestionUsuariosYAdministracion.RegistroUsuario;
+import G2_Usuarios.RegistroUsuario;
 
 /**
  *

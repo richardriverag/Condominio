@@ -1,6 +1,7 @@
 
-package GestionUsuariosYAdministracion;
+package G2_Usuarios;
 
+import G2_Usuarios.ValidarLogin;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
