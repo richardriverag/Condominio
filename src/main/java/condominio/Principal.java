@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -104,7 +104,6 @@ public class Principal extends javax.swing.JFrame {
 
         btnSalir.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
-        btnSalir.setActionCommand("");
         btnSalir.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 102, 255), null));
         btnSalir.setName("btnIniciar"); // NOI18N
         btnSalir.addActionListener(new java.awt.event.ActionListener() {

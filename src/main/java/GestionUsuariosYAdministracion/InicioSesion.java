@@ -1,6 +1,4 @@
-package G2_Usuarios;
-
-import condominio.Principal;
+package GestionUsuariosYAdministracion;
 
 public class InicioSesion extends javax.swing.JFrame {
 
@@ -257,8 +255,6 @@ public class InicioSesion extends javax.swing.JFrame {
 
     private void jLBIniciarSesion1MouseClicked(java.awt.event.MouseEvent evt) {
         // Establece la conexión a la base de datos
-        //Para pruebas si el inicio es correcto
-        new Principal().setVisible(true);
 
 
     }
