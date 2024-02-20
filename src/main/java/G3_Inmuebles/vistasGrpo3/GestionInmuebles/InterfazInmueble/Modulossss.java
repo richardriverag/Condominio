@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble;
+package view.vistasGrpo3.GestionInmuebles.InterfazInmueble;
 
 import java.awt.Color;
-import G3_Inmuebles.modelGrpo3.PestanaGestionInmuebles;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import model.modelGrpo3.PestanaGestionInmuebles;
 
 /**
  *
@@ -443,6 +445,11 @@ public class Modulossss extends javax.swing.JFrame {
         jTabbedPane1.addTab("tab1", jPanel2);
 
         botonAgregarAIGes1.setText("Agregar");
+        botonAgregarAIGes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAgregarAIGes1ActionPerformed(evt);
+            }
+        });
 
         jLabel28.setText("Nombre del arrendatario");
 
@@ -1414,6 +1421,32 @@ public class Modulossss extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void botonAgregarAIGes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAIGes1ActionPerformed
+        String numeCedula = textCedulaArrendatario1.getText();
+        String nombreUsuario = PestanaGestionInmuebles.BuscarPorCedula(numeCedula);
+        String diaSeleccionado = (String) comboBoxDiaSGR1.getSelectedItem();
+        String mesSeleccionado = (String) comboBoxMesSGR1.getSelectedItem();
+        String añoSeleccionado = (String) comboBoxAñoSGR1.getSelectedItem();
+        
+        
+        //System.out.println(diaSeleccionado);
+        //System.out.println(mesSeleccionado);
+        //System.out.println(añoSeleccionado);
+        //String fech = diaSeleccionado + "/"+ mesSeleccionado+ "/"+ añoSeleccionado ;
+        String Fecha = diaSeleccionado + "/"+ mesSeleccionado+ "/"+ añoSeleccionado ;
+        String Unidad = textUnidadReserva1.getText();
+        String Observaciones = textObsAdicionales1.getText();
+        PestanaGestionInmuebles.EnviarReserva(numeCedula, nombreUsuario, Fecha, Unidad, Observaciones);
+        
+        
+        
+            
+        //tablaGestionReserva1.setModel(model);
+        
+        
+        //System.out.println(numeCedula);
+    }//GEN-LAST:event_botonAgregarAIGes1ActionPerformed
 
     /**
      * @param args the command line arguments

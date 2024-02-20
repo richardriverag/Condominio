@@ -95,6 +95,26 @@ public class PestanaGestionInmuebles {
         
     }
 
+    public static void EnviarReserva(String numeCedula, String nombreUsuario, String fecha, String unidad, String observaciones) {
+        String query = "INSERT INTO reserva (cedula_cliente, nombre_usuario, fecha, unidad, observaciones) VALUES (?, ?, ?, ?, ?)";
+        try (
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            PreparedStatement statement = connection.prepareStatement(query);
+        ) {
+            statement.setString(1, numeCedula);
+            statement.setString(2, nombreUsuario);
+            statement.setString(3, fecha);
+            statement.setString(4, unidad);
+            statement.setString(5, observaciones);
+            
+            // Ejecutar la consulta para insertar la reserva
+            statement.executeUpdate();
+            System.out.println("Reserva enviada correctamente a la base de datos.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
    
 
     
