@@ -117,49 +117,45 @@ INSERT INTO CUOTA (ID_PAGOS,  NUM_CUOTA, MONTO_CUOTA, FECHAV_CUOTA, ESTADO_CUOTA
 
 select * FROM CUOTA
 
-
 /*===============================================================================================*/
-/*=========================TABLAS USADAS POR MODULO CHECKIN GRUPO 5=============================*/
+/*=========================TABLAS USADAS POR MODULO RESERVAS GRUPO 4=============================*/
 /*===============================================================================================*/
+DROP TABLE IF EXISTS RESERVA;
+DROP TABLE IF EXISTS AREACOMUN;
 
-create table Visitante(
-	idVisitante int not null,
-	id_usuario int,
-	nombreVisitante varchar(50) not null,
-	motivoVisita varchar(50) not null,
-	fecha varchar(50) not null,
-	hora varchar(20) not null,
-	vehiculo varchar(20) not null,
-	tipoUsuario int DEFAULT NULL,
-	PRIMARY KEY (idVisitante), 
-	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-);         
-
-
-
-Create Table IngresoResidente(
-	id_usuario int,
-	fecha varchar(50) not null,
-	hora varchar(20) not null,
-	PRIMARY KEY (id_usuario,fecha), 
-	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-); 
-
-
-CREATE VIEW historialIngresosCondominio AS
-SELECT 'Visitante' AS TipoUsuario, nombreVisitante AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
-FROM Visitante
-UNION ALL
-SELECT 'Residente' AS TipoUsuario, CONCAT(Usuario.nombre, ' ', Usuario.apellido) AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
-FROM Usuario
-JOIN IngresoResidente ON Usuario.id_usuario = IngresoResidente.id_usuario
-
-
-select * from  historialIngresosCondominio
-
-
-
-create table ParqueaderoVisita(
-	idParqueadero int not null,
-	estado varchar(20) not null
+/*=====================ÁREAS COMUNES=====================*/
+CREATE TABLE AREACOMUN (
+    NOMBRE_AREA VARCHAR(100) PRIMARY KEY,
+    ESTADO_AREA ENUM('DISPONIBLE', 'OCUPADO'),
+    HORA_INICIO TIME,
+    HORA_FIN TIME
 );
+
+-- Insertar registros en la tabla AREACOMUN
+INSERT INTO AREACOMUN (NOMBRE_AREA, ESTADO_AREA, HORA_INICIO, HORA_FIN) 
+VALUES 
+('Área de Picnic', 'DISPONIBLE', '00:00:00', '00:00:00'),
+('Canchas Múltiples', 'DISPONIBLE', '00:00:00', '00:00:00'),
+('Gimnasio', 'OCUPADO', '7:00:00', '13:00:00');
+
+/*=====================RESERVA=====================*/
+CREATE TABLE RESERVA (
+    ID_RESERVA INT AUTO_INCREMENT PRIMARY KEY,
+    AREA_RESERVADA VARCHAR(100),
+    FECHA_RESERVA DATE,
+    HORA_RESERVA TIME,
+    DURACION INT,
+    ESTADO_RESERVA ENUM('PROCESADA', 'EN ESPERA', 'CANCELADA'),
+    CANCELADO BIT,
+    FOREIGN KEY (AREA_RESERVADA) REFERENCES AREACOMUN(NOMBRE_AREA)
+);
+
+-- Insertar registros en la tabla RESERVA
+INSERT INTO RESERVA (AREA_RESERVADA, FECHA_RESERVA, HORA_RESERVA, DURACION, ESTADO_RESERVA, CANCELADO) 
+VALUES 
+('Área de Picnic', '2024-02-20', '10:00:00', 2, 'EN ESPERA', 0),
+('Canchas Múltiples', '2024-02-21', '11:30:00', 1, 'PROCESADA', 0),
+('Gimnasio', '2024-02-22', '14:00:00', 3, 'CANCELADA', 1);
+
+SELECT * FROM AREACOMUN;
+SELECT * FROM RESERVA;
