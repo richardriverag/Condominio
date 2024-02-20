@@ -5,17 +5,15 @@
 package G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble;
 
 import java.awt.Color;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import G3_Inmuebles.modelGrpo3.PestanaGestionInmuebles;
 
 /**
  *
  * @author dopar
  */
 public class Modulossss extends javax.swing.JFrame {
+    
+    
 
     /**
      * Creates new form Modulossss
@@ -83,6 +81,7 @@ public class Modulossss extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
+        btnConsultacliente = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         tablaVisualizacionUsuarioGestionUnidades1 = new javax.swing.JTable();
@@ -397,7 +396,7 @@ public class Modulossss extends javax.swing.JFrame {
 
         logo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logo2.setToolTipText("");
-        getContentPane().add(logo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 90));
+        getContentPane().add(logo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1010, 100));
 
         jLabel12.setFont(new java.awt.Font("Perpetua Titling MT", 1, 36)); // NOI18N
         jLabel12.setText("GESTION DE INMUEBLES");
@@ -503,6 +502,13 @@ public class Modulossss extends javax.swing.JFrame {
         jLabel35.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
         jLabel35.setText("Consulta del cliente");
 
+        btnConsultacliente.setText("Consultar");
+        btnConsultacliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaclienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -512,23 +518,28 @@ public class Modulossss extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel28)
-                            .addComponent(jLabel29)
-                            .addComponent(jLabel30)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel33))
-                        .addGap(106, 106, 106)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textCedulaArrendatario1)
-                            .addComponent(textUnidadReserva1)
-                            .addComponent(textObsAdicionales1)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(comboBoxDiaSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboBoxMesSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboBoxAñoSGR1, 0, 71, Short.MAX_VALUE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel28)
+                                    .addComponent(jLabel29)
+                                    .addComponent(jLabel30)
+                                    .addComponent(jLabel31)
+                                    .addComponent(jLabel33))
+                                .addGap(106, 106, 106)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textCedulaArrendatario1)
+                                    .addComponent(textUnidadReserva1)
+                                    .addComponent(textObsAdicionales1)
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(comboBoxDiaSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboBoxMesSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboBoxAñoSGR1, 0, 71, Short.MAX_VALUE))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(154, 154, 154)
+                                .addComponent(btnConsultacliente)))
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -569,7 +580,7 @@ public class Modulossss extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel28)
                             .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
+                        .addGap(68, 68, 68)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29)
                             .addComponent(comboBoxDiaSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -597,7 +608,11 @@ public class Modulossss extends javax.swing.JFrame {
                                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(79, 79, 79))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addComponent(btnConsultacliente)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonAgregarAIGes1)
                         .addContainerGap())))
@@ -725,6 +740,11 @@ public class Modulossss extends javax.swing.JFrame {
         jLabel3.setText("Cedula del cliente: ");
 
         jButton4.setText("Consultar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Perpetua Titling MT", 1, 12)); // NOI18N
         jLabel4.setText("Cedula del cliente: ");
@@ -1375,7 +1395,60 @@ public class Modulossss extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    private void btnConsultaclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaclienteActionPerformed
+        // TODO add your handling code here:
+        String numeCedula = textCedulaArrendatario1.getText();
+        //System.out.println(numeCedula);
+        String nombreUsuario = PestanaGestionInmuebles.BuscarPorCedula(numeCedula);
+        PestanaGestionInmuebles.TraertablaReserva(numeCedula, tablaGestionReserva1);
+        
+        //System.out.println(nombreUsuario);
+        jLabel1.setText(nombreUsuario);
+       
+        
+        
+        
+        //textCedulaArrendatario1.setText(numeCedula);
+    }//GEN-LAST:event_btnConsultaclienteActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Modulossss.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Modulossss.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Modulossss.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Modulossss.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Modulossss().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregarAIGes1;
@@ -1383,6 +1456,7 @@ public class Modulossss extends javax.swing.JFrame {
     private javax.swing.JToggleButton botonEditarCatalogo;
     private javax.swing.JButton botonEliminarAIG1;
     private javax.swing.JToggleButton botonEliminarCatalogo;
+    private javax.swing.JButton btnConsultacliente;
     private javax.swing.JComboBox<String> comboBoxAñoReservaAgenda;
     private javax.swing.JComboBox<String> comboBoxAñoSGR1;
     private javax.swing.JComboBox<String> comboBoxDiaReservaAgenda;
@@ -1493,46 +1567,5 @@ public class Modulossss extends javax.swing.JFrame {
     private javax.swing.JTextField textObsAdicionales1;
     private javax.swing.JTextField textUnidadReserva1;
     // End of variables declaration//GEN-END:variables
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Modulossss.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Modulossss.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Modulossss.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Modulossss.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Modulossss().setVisible(true);
-            }
-        });
-        
-        
-    }
-    
-    //Catalogo
-
     
 }
-    
