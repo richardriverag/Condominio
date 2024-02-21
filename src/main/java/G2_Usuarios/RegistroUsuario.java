@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GestionUsuariosYAdministracion;
+package G2_Usuarios;
 
 
 import java.awt.Color;
@@ -58,18 +58,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jLNC3.setVisible(false);
         jLNC4.setVisible(false);
         jLNC5.setVisible(false);
-        jLNC6.setVisible(false);
-        
-     
-        //para no pedir ingrese el ping si ya esta lleno 
-        if (!jTPin1.getText().equals("")||!jTPin2.getText().equals("")
-                ||!jTPin3.getText().equals("")
-                ||!jTPin4.getText().equals("")
-                ||!jTPin5.getText().equals("")
-                ||!jTPin6.getText().equals("")
-                ) {
-            jLNC6.setVisible(false);
-        }
 
 
 
@@ -125,12 +113,9 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTFApeCUsuario = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jTFNomCUsuario = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
-        jTFCIUsuario = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
+        jTFEmailUsuario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTFUsuario = new javax.swing.JTextField();
@@ -149,17 +134,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jTFContraseñaUsuario1 = new javax.swing.JPasswordField();
         jLNC5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jSeparator7 = new javax.swing.JSeparator();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jLNC6 = new javax.swing.JLabel();
-        jTPin1 = new javax.swing.JTextField();
-        jTPin2 = new javax.swing.JTextField();
-        jTPin3 = new javax.swing.JTextField();
-        jTPin4 = new javax.swing.JTextField();
-        jTPin5 = new javax.swing.JTextField();
-        jTPin6 = new javax.swing.JTextField();
-        jSeparator6 = new javax.swing.JSeparator();
-        jSeparator8 = new javax.swing.JSeparator();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -194,7 +170,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Nombres Completos");
+        jLabel3.setText("Nombre");
         jLabel3.setAutoscrolls(true);
         jLabel3.setDoubleBuffered(true);
         jLabel3.setFocusCycleRoot(true);
@@ -227,15 +203,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
 
-        jSeparator1.setAutoscrolls(true);
-        jSeparator1.setDoubleBuffered(true);
-        jSeparator1.setFocusCycleRoot(true);
-        jSeparator1.setFocusTraversalPolicyProvider(true);
-        jSeparator1.setFocusable(true);
-        jSeparator1.setInheritsPopupMenu(true);
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Apellidos Completos");
+        jLabel4.setText("Apellido");
         jLabel4.setAutoscrolls(true);
         jLabel4.setDoubleBuffered(true);
         jLabel4.setFocusCycleRoot(true);
@@ -265,49 +234,35 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
 
-        jSeparator2.setAutoscrolls(true);
-        jSeparator2.setDoubleBuffered(true);
-        jSeparator2.setFocusCycleRoot(true);
-        jSeparator2.setFocusTraversalPolicyProvider(true);
-        jSeparator2.setFocusable(true);
-        jSeparator2.setInheritsPopupMenu(true);
-
-        jTFCIUsuario.setBorder(null);
-        jTFCIUsuario.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTFCIUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTFEmailUsuario.setBorder(null);
+        jTFEmailUsuario.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTFEmailUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFCIUsuarioMouseClicked(evt);
+                jTFEmailUsuarioMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTFCIUsuarioMouseEntered(evt);
+                jTFEmailUsuarioMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTFCIUsuarioMouseExited(evt);
+                jTFEmailUsuarioMouseExited(evt);
             }
         });
-        jTFCIUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jTFEmailUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFCIUsuarioActionPerformed(evt);
+                jTFEmailUsuarioActionPerformed(evt);
             }
         });
-        jTFCIUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTFEmailUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTFCIUsuarioKeyPressed(evt);
+                jTFEmailUsuarioKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTFCIUsuarioKeyTyped(evt);
+                jTFEmailUsuarioKeyTyped(evt);
             }
         });
 
-        jSeparator3.setAutoscrolls(true);
-        jSeparator3.setDoubleBuffered(true);
-        jSeparator3.setFocusCycleRoot(true);
-        jSeparator3.setFocusTraversalPolicyProvider(true);
-        jSeparator3.setFocusable(true);
-        jSeparator3.setInheritsPopupMenu(true);
-
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setText("Cédula de Identidad");
+        jLabel6.setText("Email");
         jLabel6.setAutoscrolls(true);
         jLabel6.setDoubleBuffered(true);
         jLabel6.setFocusCycleRoot(true);
@@ -381,7 +336,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Registrate");
+        jLabel1.setText("Registrar Usuario");
 
         jLNC.setForeground(new java.awt.Color(255, 102, 0));
         jLNC.setText("*Por favor, ingresa tus nombres completos");
@@ -456,146 +411,14 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jLabel9.setFocusCycleRoot(true);
         jLabel9.setFocusTraversalPolicyProvider(true);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar rol", "Guardia", "Visita", "Residente", "Administrador" }));
+
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel10.setText("PIN ");
+        jLabel10.setText("Rol");
         jLabel10.setAutoscrolls(true);
         jLabel10.setDoubleBuffered(true);
         jLabel10.setFocusCycleRoot(true);
         jLabel10.setFocusTraversalPolicyProvider(true);
-
-        jLNC6.setForeground(new java.awt.Color(255, 102, 0));
-        jLNC6.setText("*Por favor, ingresa un PIN de seguridad");
-
-        jTPin1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTPin1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTPin1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jTPin1.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTPin1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTPin1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTPin1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTPin1MouseExited(evt);
-            }
-        });
-        jTPin1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTPin1ActionPerformed(evt);
-            }
-        });
-        jTPin1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTPin1KeyTyped(evt);
-            }
-        });
-
-        jTPin2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTPin2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTPin2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jTPin2.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTPin2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTPin2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTPin2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTPin2MouseExited(evt);
-            }
-        });
-        jTPin2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTPin2ActionPerformed(evt);
-            }
-        });
-
-        jTPin3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTPin3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTPin3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jTPin3.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTPin3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTPin3MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTPin3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTPin3MouseExited(evt);
-            }
-        });
-        jTPin3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTPin3ActionPerformed(evt);
-            }
-        });
-
-        jTPin4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTPin4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTPin4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jTPin4.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTPin4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTPin4MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTPin4MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTPin4MouseExited(evt);
-            }
-        });
-        jTPin4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTPin4ActionPerformed(evt);
-            }
-        });
-
-        jTPin5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTPin5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTPin5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jTPin5.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTPin5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTPin5MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTPin5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTPin5MouseExited(evt);
-            }
-        });
-        jTPin5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTPin5ActionPerformed(evt);
-            }
-        });
-
-        jTPin6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTPin6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTPin6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jTPin6.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTPin6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTPin6MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTPin6MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTPin6MouseExited(evt);
-            }
-        });
-        jTPin6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTPin6ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -606,35 +429,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTFNomCUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTFApeCUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTFCIUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTPin1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTPin2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTPin3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLNC6)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTPin4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTPin5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTPin6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLNC1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -643,108 +437,93 @@ public class RegistroUsuario extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLNC, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTFNomCUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                                        .addComponent(jTFEmailUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLNC1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addGap(2, 2, 2)
+                                            .addComponent(jTFApeCUsuario)))
                                     .addComponent(jTFContraseñaUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLNC5, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLNC3))
-                                .addComponent(jTFUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLNC4, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jTFContraseñaUsuario, javax.swing.GroupLayout.Alignment.LEADING))))
+                                        .addComponent(jLNC5, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTFContraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLNC4, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLNC3))
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(146, 146, 146)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(205, 205, 205)
+                        .addComponent(jLabel1)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLNC))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFNomCUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLNC1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFApeCUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLNC2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFCIUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                    .addComponent(jLNC3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTFEmailUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLNC3))
+                .addGap(18, 18, 18)
                 .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLNC6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTPin1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTPin2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTPin3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTPin4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTPin5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTPin6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLNC4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel8)
+                    .addComponent(jLNC4))
+                .addGap(18, 18, 18)
                 .addComponent(jTFContraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-                    .addComponent(jLNC5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNC5)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jTFContraseñaUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(22, 22, 22)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox1)
@@ -767,178 +546,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTPin5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPin5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin5ActionPerformed
-
-    private void jTPin5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin5MouseExited
-        jLNC6.setVisible(false);
-    }//GEN-LAST:event_jTPin5MouseExited
-
-    private void jTPin5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin5MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin5MouseEntered
-
-    private void jTPin5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin5MouseClicked
-      jLNC6.setVisible(true);
-       String cedula= jTFCIUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
-    }//GEN-LAST:event_jTPin5MouseClicked
-
-    private void jTPin4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPin4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin4ActionPerformed
-
-    private void jTPin4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin4MouseExited
-       jLNC6.setVisible(false);
-    }//GEN-LAST:event_jTPin4MouseExited
-
-    private void jTPin4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin4MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin4MouseEntered
-
-    private void jTPin4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin4MouseClicked
-        jLNC6.setVisible(true);
-         String cedula= jTFCIUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
-    }//GEN-LAST:event_jTPin4MouseClicked
-
-    private void jTPin3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPin3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin3ActionPerformed
-
-    private void jTPin3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin3MouseExited
-       jLNC6.setVisible(false);
-    }//GEN-LAST:event_jTPin3MouseExited
-
-    private void jTPin3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin3MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin3MouseEntered
-
-    private void jTPin3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin3MouseClicked
-        jLNC6.setVisible(true);
-         String cedula= jTFCIUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
-    }//GEN-LAST:event_jTPin3MouseClicked
-
-    private void jTPin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPin2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin2ActionPerformed
-
-    private void jTPin2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin2MouseExited
-      jLNC6.setVisible(false);
-    }//GEN-LAST:event_jTPin2MouseExited
-
-    private void jTPin2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin2MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin2MouseEntered
-
-    private void jTPin2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin2MouseClicked
-        jLNC6.setVisible(true);
-         String cedula= jTFCIUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
-    }//GEN-LAST:event_jTPin2MouseClicked
-
-    private void jTPin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPin1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin1ActionPerformed
-
-    private void jTPin1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin1MouseExited
-       jLNC6.setVisible(false);
-    }//GEN-LAST:event_jTPin1MouseExited
-
-    private void jTPin1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin1MouseEntered
-
-    private void jTPin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin1MouseClicked
-      jLNC6.setVisible(true);
-      
-      
-       String cedula= jTFCIUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
-    }//GEN-LAST:event_jTPin1MouseClicked
-
     private void jTFContraseñaUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFContraseñaUsuario1ActionPerformed
@@ -956,11 +563,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private void jTFContraseñaUsuario1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1MouseClicked
         jLNC5.setVisible(true);
         
-         String cedula= jTFCIUsuario.getText();
+         String cedula= jTFEmailUsuario.getText();
         validar.validateCedula(cedula);
         if(!cedula.equals("")){
         if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
+                jTFEmailUsuario.setText("");
                 jLNC2.setVisible(true);
                 jLNC2.setText("*Cédula de Identidad Inválida");
             jLNC2.setForeground(java.awt.Color.red);//color de letras
@@ -977,11 +584,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFContraseñaUsuario1MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
- String cedula= jTFCIUsuario.getText();
+ String cedula= jTFEmailUsuario.getText();
         validar.validateCedula(cedula);
         if(!cedula.equals("")){
         if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
+                jTFEmailUsuario.setText("");
                 jLNC2.setVisible(true);
                 jLNC2.setText("*Cédula de Identidad Inválida");
             jLNC2.setForeground(java.awt.Color.red);//color de letras
@@ -1039,11 +646,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
         
         
         
-         String cedula= jTFCIUsuario.getText();
+         String cedula= jTFEmailUsuario.getText();
         validar.validateCedula(cedula);
         if(!cedula.equals("")){
         if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
+                jTFEmailUsuario.setText("");
                 jLNC2.setVisible(true);
                 jLNC2.setText("*Cédula de Identidad Inválida");
             jLNC2.setForeground(java.awt.Color.red);//color de letras
@@ -1073,11 +680,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void jTFUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFUsuarioMouseClicked
         jLNC3.setVisible(true);
-        String cedula= jTFCIUsuario.getText();
+        String cedula= jTFEmailUsuario.getText();
         validar.validateCedula(cedula);
         if(!cedula.equals("")){
         if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
+                jTFEmailUsuario.setText("");
                 jLNC2.setVisible(true);
                 jLNC2.setText("*Cédula de Identidad Inválida");
             jLNC2.setForeground(java.awt.Color.red);//color de letras
@@ -1097,25 +704,25 @@ public class RegistroUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTFUsuarioMouseClicked
 
-    private void jTFCIUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCIUsuarioActionPerformed
+    private void jTFEmailUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFCIUsuarioActionPerformed
+    }//GEN-LAST:event_jTFEmailUsuarioActionPerformed
 
-    private void jTFCIUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFCIUsuarioMouseExited
+    private void jTFEmailUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioMouseExited
         jLNC2.setVisible(false);
-    }//GEN-LAST:event_jTFCIUsuarioMouseExited
+    }//GEN-LAST:event_jTFEmailUsuarioMouseExited
 
-    private void jTFCIUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFCIUsuarioMouseEntered
+    private void jTFEmailUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFCIUsuarioMouseEntered
+    }//GEN-LAST:event_jTFEmailUsuarioMouseEntered
 
-    private void jTFCIUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFCIUsuarioMouseClicked
+    private void jTFEmailUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioMouseClicked
         jLNC2.setVisible(true);
-        if(jTFCIUsuario.equals("")){
+        if(jTFEmailUsuario.equals("")){
         jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
             jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
         }
-    }//GEN-LAST:event_jTFCIUsuarioMouseClicked
+    }//GEN-LAST:event_jTFEmailUsuarioMouseClicked
 
     private void jTFNomCUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioActionPerformed
         // TODO add your handling code here:
@@ -1135,11 +742,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
         
         
         
-         String cedula= jTFCIUsuario.getText();
+         String cedula= jTFEmailUsuario.getText();
         validar.validateCedula(cedula);
         if(!cedula.equals("")){
         if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
+                jTFEmailUsuario.setText("");
                 jLNC2.setVisible(true);
                 jLNC2.setText("*Cédula de Identidad Inválida");
             jLNC2.setForeground(java.awt.Color.red);//color de letras
@@ -1170,11 +777,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void jTFApeCUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioMouseClicked
         jLNC1.setVisible(true);
-         String cedula= jTFCIUsuario.getText();
+         String cedula= jTFEmailUsuario.getText();
         validar.validateCedula(cedula);
         if(!cedula.equals("")){
         if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
+                jTFEmailUsuario.setText("");
                 jLNC2.setVisible(true);
                 jLNC2.setText("*Cédula de Identidad Inválida");
             jLNC2.setForeground(java.awt.Color.red);//color de letras
@@ -1191,44 +798,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jTFApeCUsuarioMouseClicked
-
-    private void jTPin6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPin6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin6ActionPerformed
-
-    private void jTPin6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin6MouseExited
-        jLNC6.setVisible(false);
-    }//GEN-LAST:event_jTPin6MouseExited
-
-    private void jTPin6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin6MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPin6MouseEntered
-
-    private void jTPin6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPin6MouseClicked
-        jLNC6.setVisible(true);
-         String cedula= jTFCIUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
-    }//GEN-LAST:event_jTPin6MouseClicked
-
-    private void jTPin1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPin1KeyTyped
-       
-    }//GEN-LAST:event_jTPin1KeyTyped
 
     private void jTFContraseñaUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyPressed
  //parra regresar a la normalidad 
@@ -1323,16 +892,16 @@ public class RegistroUsuario extends javax.swing.JFrame {
 });
     }//GEN-LAST:event_jTFApeCUsuarioKeyPressed
 
-    private void jTFCIUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCIUsuarioKeyPressed
- jTFCIUsuario.addKeyListener(new KeyAdapter() {
+    private void jTFEmailUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioKeyPressed
+ jTFEmailUsuario.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                String cedula = jTFCIUsuario.getText();
+                String cedula = jTFEmailUsuario.getText();
 
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                /*if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (!cedula.equals("")) {
                         if (!validar.validateCedula(cedula)) {
-                            jTFCIUsuario.setText("");
+                            jTFEmailUsuario.setText("");
                             jLNC2.setVisible(true);
                             jLNC2.setText("*Cédula de Identidad Inválida");
                             jLNC2.setForeground(java.awt.Color.RED);
@@ -1343,10 +912,10 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     } else {
                         jLNC2.setVisible(false);
                     }
-                }
+                }*/
             }
         });
-    }//GEN-LAST:event_jTFCIUsuarioKeyPressed
+    }//GEN-LAST:event_jTFEmailUsuarioKeyPressed
 
     private void jTFContraseñaUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyTyped
        //parra regresar a la normalidad 
@@ -1380,11 +949,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFUsuarioKeyTyped
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-         String cedula= jTFCIUsuario.getText();
+         String cedula= jTFEmailUsuario.getText();
         validar.validateCedula(cedula);
         if(!cedula.equals("")){
         if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
+                jTFEmailUsuario.setText("");
                 jLNC2.setVisible(true);
                 jLNC2.setText("*Cédula de Identidad Inválida");
             jLNC2.setForeground(java.awt.Color.red);//color de letras
@@ -1401,11 +970,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
-         String cedula= jTFCIUsuario.getText();
+         String cedula= jTFEmailUsuario.getText();
         validar.validateCedula(cedula);
         if(!cedula.equals("")){
         if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
+                jTFEmailUsuario.setText("");
                 jLNC2.setVisible(true);
                 jLNC2.setText("*Cédula de Identidad Inválida");
             jLNC2.setForeground(java.awt.Color.red);//color de letras
@@ -1422,11 +991,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextArea1MouseClicked
 
     private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
-         String cedula= jTFCIUsuario.getText();
-        validar.validateCedula(cedula);
+         String cedula= jTFEmailUsuario.getText();
+        /*validar.validateCedula(cedula);
         if(!cedula.equals("")){
         if(!validar.validateCedula(cedula)){
-                jTFCIUsuario.setText("");
+                jTFEmailUsuario.setText("");
                 jLNC2.setVisible(true);
                 jLNC2.setText("*Cédula de Identidad Inválida");
             jLNC2.setForeground(java.awt.Color.red);//color de letras
@@ -1439,20 +1008,20 @@ public class RegistroUsuario extends javax.swing.JFrame {
                jLNC2.setVisible(false);
                 jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
             jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
+        }*/
     }//GEN-LAST:event_jCheckBox1MouseClicked
 
-    private void jTFCIUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCIUsuarioKeyTyped
-jTFCIUsuario.addKeyListener(new KeyAdapter() {
+    private void jTFEmailUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioKeyTyped
+jTFEmailUsuario.addKeyListener(new KeyAdapter() {
     public void keyTyped(KeyEvent e) {
-        char c = e.getKeyChar();
+        /*char c = e.getKeyChar();
         if (!Character.isDigit(c)) {
             Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
             e.consume();
-        }
+        }*/
     }
 });        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFCIUsuarioKeyTyped
+    }//GEN-LAST:event_jTFEmailUsuarioKeyTyped
 
  public void CheckBoxButtonExample(JCheckBox  checkBox, JButton button  ) {
          button.setEnabled(false);
@@ -1506,7 +1075,7 @@ jTFCIUsuario.addKeyListener(new KeyAdapter() {
  
  
  public void DigitTextFieldDemo() {
-        textFields = new JTextField[MAX_TEXTFIELDS];
+        /*textFields = new JTextField[MAX_TEXTFIELDS];
         textFields[0] = jTPin1;
         textFields[1] = jTPin2;
         textFields[2] = jTPin3;
@@ -1529,7 +1098,7 @@ jTFCIUsuario.addKeyListener(new KeyAdapter() {
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
         pack();
-        setVisible(true);
+        setVisible(true);*/
     }
 
 
@@ -1635,6 +1204,7 @@ jTFCIUsuario.addKeyListener(new KeyAdapter() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLNC;
@@ -1643,7 +1213,6 @@ jTFCIUsuario.addKeyListener(new KeyAdapter() {
     private javax.swing.JLabel jLNC3;
     private javax.swing.JLabel jLNC4;
     private javax.swing.JLabel jLNC5;
-    private javax.swing.JLabel jLNC6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
@@ -1654,24 +1223,12 @@ jTFCIUsuario.addKeyListener(new KeyAdapter() {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextField jTFApeCUsuario;
-    private javax.swing.JTextField jTFCIUsuario;
     private javax.swing.JPasswordField jTFContraseñaUsuario;
     private javax.swing.JPasswordField jTFContraseñaUsuario1;
+    private javax.swing.JTextField jTFEmailUsuario;
     private javax.swing.JTextField jTFNomCUsuario;
     private javax.swing.JTextField jTFUsuario;
-    private javax.swing.JTextField jTPin1;
-    private javax.swing.JTextField jTPin2;
-    private javax.swing.JTextField jTPin3;
-    private javax.swing.JTextField jTPin4;
-    private javax.swing.JTextField jTPin5;
-    private javax.swing.JTextField jTPin6;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

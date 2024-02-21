@@ -2,27 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GestionUsuariosYAdministracion;
+package G2_Usuarios;
 
-import GestionUsuariosYAdministracion.RegistroUsuario;
-import GestionUsuariosYAdministracion.ValidarLogin;
-import GestionUsuariosYAdministracion.ResetearContraseña;
-import GestionUsuariosYAdministracion.BloqueoVentana;
-import java.awt.BorderLayout;
+import condominio.Conexion;
 import java.awt.Cursor;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.awt.image.renderable.ParameterBlock;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.image.BufferedImage;
@@ -34,7 +23,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.imageio.ImageIO;
-import javax.swing.Timer;
 /**
  *
  * @author JoisH
@@ -43,17 +31,15 @@ public class Login extends javax.swing.JFrame {
     ValidarLogin validar;
  
     private int intentosFallidos = 0;
-    private String contraseña;
-    String nombreUsuarioInput; // Obtenerlo desde JTextField
-    String ciInput; // Obtenerlo desde JTextField
-    String pinInput;
+    Conexion connection = new Conexion();
     
     /**
      * Creates new form Login1
      */
     public Login() {
+        connection.getCon();
         //camb = new CambiarContraseña();
-        this.validar = new ValidarLogin(nombreUsuarioInput, ciInput, pinInput, contraseña );
+        //this.validar = new ValidarLogin(nombreUsuarioInput, ciInput, pinInput, contraseña );
         
         initComponents();
         setLocationRelativeTo(null);
@@ -355,8 +341,6 @@ if(jTFUsuario.getText().equals("")|| jTFContraseñaUsuario.getText().equals(""))
 
 
 try {
-    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sgcpvcplevnajuv", "root", "");
-
     // Obtén los valores del usuario y la contraseña ingresados
     String usuario = jTFUsuario.getText();
     String contraseña = jTFContraseñaUsuario.getText();
