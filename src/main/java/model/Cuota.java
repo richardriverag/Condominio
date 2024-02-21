@@ -17,12 +17,20 @@ public class Cuota {
     private String id_Cuota;
     private int numero_Cuota;
     private float monto_Cuota;
-    private Date fechaV_cuota;
+    private String fechaV_cuota;
 
     public Cuota() {
     }
 
-    public Cuota(String id_Pagos, String id_Cuota, int numero_Cuota, float monto_Cuota, Date fechaV_cuota) {
+    public Cuota(String id_Pagos, String id_Cuota, int numero_Cuota, float monto_Cuota, String fechaV_cuota) {
+        this.id_Pagos = id_Pagos;
+        this.id_Cuota = id_Cuota;
+        this.numero_Cuota = numero_Cuota;
+        this.monto_Cuota = monto_Cuota;
+        this.fechaV_cuota = fechaV_cuota;
+    }
+    
+        public Cuota(int numero_Cuota, float monto_Cuota, String fechaV_cuota) {
         this.id_Pagos = id_Pagos;
         this.id_Cuota = id_Cuota;
         this.numero_Cuota = numero_Cuota;
@@ -62,11 +70,11 @@ public class Cuota {
         this.monto_Cuota = monto_Cuota;
     }
 
-    public Date getFechaV_cuota() {
+    public String getFechaV_cuota() {
         return fechaV_cuota;
     }
 
-    public void setFechaV_cuota(Date fechaV_cuota) {
+    public void setFechaV_cuota(String fechaV_cuota) {
         this.fechaV_cuota = fechaV_cuota;
     }
     

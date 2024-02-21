@@ -1,7 +1,6 @@
 
 package G1_Finanzas;
 
-import condominio.*;
 import java.sql.*;
 import javax.swing.JOptionPane;
 public class ConexionGrupo1 {
@@ -18,7 +17,7 @@ public class ConexionGrupo1 {
             
             con= (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio?serverTimezone=UTC", "root", "P@ssw0rd");
             if(con !=null){
-                JOptionPane.showMessageDialog(null, "Conexion existosa", "alert", JOptionPane.ERROR_MESSAGE);
+               // JOptionPane.showMessageDialog(null, "Conexion existosa", "alert", JOptionPane.ERROR_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "Conexion NO    existosa", "alert", JOptionPane.ERROR_MESSAGE);
             }

@@ -10,14 +10,14 @@ import java.util.logging.Logger;
  *
  * @author eddya
  */
-public class FinanzasCliente extends javax.swing.JFrame {
+public class Vista_FinanzasCliente extends javax.swing.JFrame {
 
     Metodos_Sql_Cuotas tabCuota;
     ConexionGrupo1 conexion;
     Connection cn;
     
     // RECIBIR *String idUsuario*/ DESDE LOGIN
-    public FinanzasCliente() throws SQLException {
+    public Vista_FinanzasCliente() throws SQLException {
         initComponents();       
         this.setLocationRelativeTo(this);  
         conexion = new ConexionGrupo1();
@@ -187,14 +187,18 @@ public class FinanzasCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FinanzasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Vista_FinanzasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FinanzasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Vista_FinanzasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FinanzasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Vista_FinanzasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FinanzasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Vista_FinanzasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -204,9 +208,9 @@ public class FinanzasCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new FinanzasCliente().setVisible(true);
+                    new Vista_FinanzasCliente().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(FinanzasCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Vista_FinanzasCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
