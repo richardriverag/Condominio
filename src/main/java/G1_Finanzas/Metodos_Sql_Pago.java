@@ -32,23 +32,29 @@ public class Metodos_Sql_Pago {
         modelo.addColumn("Tipo de Pago");
         modelo.addColumn("Fecha de Vencimiento");
         modelo.addColumn("Estado de Pago");
+        modelo.addColumn("Descripción");
 
         String tipo_Pago = "";
+        String tipo_Pago2 = "";
+        String sql="";
         if (Ingreso && !Egreso) {
-            tipo_Pago = "Ingreso";
+            tipo_Pago = "INGRESO ORDINARIO";
+            tipo_Pago2 = "INGRESO EXTRAORDINARIO";
+             sql = "SELECT ID_PAGOS, ID_USUARIO, FECHA_PAGO, ID_METODOPAGO, MONTO_PAGO, TIPO_PAGO, FECHAVENCIMIENTO_PAGO, ESTADO_PAGO, DESCRIPCION FROM PAGO WHERE TIPO_PAGO = \""+tipo_Pago+"\" OR TIPO_PAGO= \""+tipo_Pago2+"\";";
         } else if (Egreso && !Ingreso) {
-            tipo_Pago = "Egreso";
-        }
-        // Consulta SQL para seleccionar los ingresos
-        String sql = "SELECT ID_PAGOS, ID_USUARIO, FECHA_PAGO, ID_METODOPAGO, MONTO_PAGO, TIPO_PAGO, FECHAVENCIMIENTO_PAGO, ESTADO_PAGO FROM PAGO WHERE TIPO_PAGO = \""+tipo_Pago+"\";";
+            tipo_Pago = "EGRESO ORDINARIO";
+            // Consulta SQL para seleccionar los ingresos
+        sql = "SELECT ID_PAGOS, ID_USUARIO, FECHA_PAGO, ID_METODOPAGO, MONTO_PAGO, TIPO_PAGO, FECHAVENCIMIENTO_PAGO, ESTADO_PAGO, DESCRIPCION FROM PAGO WHERE TIPO_PAGO = \""+tipo_Pago+"\";";
 
+        }
+        
         try{
             PreparedStatement pps = cn.prepareStatement(sql);
             ResultSet rs = pps.executeQuery();
 
             // Leer los resultados de la consulta y agregarlos al modelo de la tabla
             while(rs.next()){
-                Object[] fila = new Object[8]; // Crear un array de objetos para la fila
+                Object[] fila = new Object[9]; // Crear un array de objetos para la fila
                 fila[0] = rs.getString("ID_PAGOS");
                 fila[1] = rs.getString("ID_USUARIO");
                 fila[2] = rs.getDate("FECHA_PAGO");
@@ -57,6 +63,7 @@ public class Metodos_Sql_Pago {
                 fila[5] = rs.getString("TIPO_PAGO");
                 fila[6] = rs.getDate("FECHAVENCIMIENTO_PAGO");
                 fila[7] = rs.getString("ESTADO_PAGO");
+                fila[8] = rs.getString("DESCRIPCION");
 
                 modelo.addRow(fila); // Agregar la fila al modelo de la tabla
             }
@@ -156,21 +163,22 @@ public class Metodos_Sql_Pago {
         }
     }
     
-    public void insertarPagoIngresoEgreso(Connection cn, Pago pago, boolean Ingreso,boolean Egreso){
+    public void insertarPagoIngresoEgreso(Connection cn, Pago pago, String tipo,  boolean Ingreso, boolean Egreso){
         
         String tipo_Pago = "";
+        String insertSql="";
         if (Ingreso && !Egreso) {
-            tipo_Pago = "Ingreso";
+            tipo_Pago = tipo;
         } else if (Egreso && !Ingreso) {
-            tipo_Pago = "Egreso";
+            tipo_Pago = "EGRESO ORDINARIO";
         }
-        
-            String insertSql = "INSERT INTO PAGO (ID_METODOPAGO, ID_USUARIO, FECHA_PAGO, MONTO_PAGO, TIPO_PAGO, FECHAVENCIMIENTO_PAGO, ESTADO_PAGO) " +
-             "VALUES ((SELECT ID_METODOPAGO FROM METODOPAGO WHERE NOMBRE_METODOPAGO = ?), ?, ?, ?, ?, ?, ?)";
-
+            
         try {
+            
+            insertSql = "INSERT INTO PAGO (ID_METODOPAGO, ID_USUARIO, FECHA_PAGO, MONTO_PAGO, TIPO_PAGO, FECHAVENCIMIENTO_PAGO, ESTADO_PAGO, DESCRIPCION) " +
+             "VALUES ((SELECT ID_METODOPAGO FROM METODOPAGO WHERE NOMBRE_METODOPAGO = ?), ?, ?, ?, ?, ?, ?, ?)";
 
-             
+ 
             PreparedStatement insertStatement = cn.prepareStatement(insertSql);
             insertStatement.setString(1, pago.getId_MetodoPago());
             insertStatement.setString(2, pago.getId_Usuario());
@@ -178,7 +186,9 @@ public class Metodos_Sql_Pago {
             insertStatement.setFloat(4, pago.getMonto_Pago());
             insertStatement.setString(5, tipo_Pago);
             insertStatement.setString(6, pago.getFechaVencimiento_Pago());
-            insertStatement.setString(7, "Vigente");
+            insertStatement.setString(7, "VIGENTE");
+            insertStatement.setString(8, pago.getDescripcion());
+            
 
             insertStatement.executeUpdate();
             insertStatement.close();

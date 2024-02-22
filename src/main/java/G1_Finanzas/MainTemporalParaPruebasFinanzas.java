@@ -19,5 +19,4 @@ public class MainTemporalParaPruebasFinanzas {
         Vista_FinanzasAdministrador finAd = new Vista_FinanzasAdministrador();
         finAd.setVisible(true);
     }
-    
 }

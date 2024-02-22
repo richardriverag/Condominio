@@ -15,11 +15,12 @@ public class Pago {
     private TipoPago tipoPago_Pago;  
     private String fechaVencimiento_Pago;
     private String estado_Pago;
+    private String descripcion;
 
     public Pago() {
     }
 
-    public Pago(String id_Pagos, String id_Usuario, String fecha_Pago, String id_MetodoPago, float monto_Pago, TipoPago tipoPago_Pago, String fechaVencimiento_Pago, String estado_Pago) {
+    public Pago(String id_Pagos, String id_Usuario, String fecha_Pago, String id_MetodoPago, float monto_Pago, TipoPago tipoPago_Pago, String fechaVencimiento_Pago, String estado_Pago, String descripcion) {
         this.id_Pagos = id_Pagos;
         this.id_Usuario = id_Usuario;
         this.fecha_Pago = fecha_Pago;
@@ -28,6 +29,7 @@ public class Pago {
         this.tipoPago_Pago = tipoPago_Pago;
         this.fechaVencimiento_Pago = fechaVencimiento_Pago;
         this.estado_Pago = estado_Pago;
+        this.descripcion = descripcion;
     }
 
     public String getId_Pagos() {
@@ -93,8 +95,14 @@ public class Pago {
     public void setEstado_Pago(String estado_Pago) {
         this.estado_Pago = estado_Pago;
     }
-    
-    
-    
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     
 }

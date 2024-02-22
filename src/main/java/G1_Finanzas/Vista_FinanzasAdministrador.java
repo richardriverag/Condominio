@@ -1,6 +1,8 @@
 
 package G1_Finanzas;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import model.TipoPago;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Cuota;
 import model.Pago;
@@ -42,9 +45,22 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     float interesCuota;
 
     public Vista_FinanzasAdministrador() throws SQLException {
+        
+        //setSize(300, 200);
         initComponents();
-        this.setLocationRelativeTo(this);
+        // Obtener la dimensión de la pantalla
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // Obtener el ancho de la pantalla
+        int width = (int) screenSize.getWidth();
+        
+        // Obtener el alto de la pantalla
+        int height = (int) screenSize.getHeight();
+        
+        // Establecer la ubicación del marco en la parte inferior de la pantalla
+        this.setLocation(0, height - this.getHeight());
 
+        
         conexion = new ConexionGrupo1();
         cn = conexion.conectar();
 
@@ -224,6 +240,17 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         jLabel2.setText("Valor:");
 
+        jTFValorRegistrarIngreso.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFValorRegistrarIngresoFocusLost(evt);
+            }
+        });
+        jTFValorRegistrarIngreso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFValorRegistrarIngresoKeyReleased(evt);
+            }
+        });
+
         jLabel23.setText("Forma de pago:");
 
         cmbPagoRegistrarIngreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transferencia" }));
@@ -253,7 +280,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         jLabel6.setText("Interes: ");
 
-        jComboBoxInteresRegistroIngreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4", "5", "10", "15", "20", "30" }));
+        jComboBoxInteresRegistroIngreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "5", "10", "15", "20", "30" }));
         jComboBoxInteresRegistroIngreso.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxInteresRegistroIngresoItemStateChanged(evt);
@@ -364,42 +391,44 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel14)
-                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTFValorRegistrarIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(jTFCodigoUsuarioRegistroIngreso)))
-                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel16Layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(jRBOrdinario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRBExtraordinario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(cmbPagoRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(69, 69, 69))
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jPDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jBRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14)
+                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTFValorRegistrarIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                    .addComponent(jTFCodigoUsuarioRegistroIngreso)))
+                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel16Layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jRBOrdinario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jRBExtraordinario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cmbPagoRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(69, 69, 69))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                        .addComponent(jBRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127))))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,7 +468,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
+                        .addGap(78, 78, 78)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
@@ -447,9 +476,9 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
                             .addComponent(jScrollPane7)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(68, 68, 68)
                         .addComponent(jLabel13)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,9 +494,9 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(10, 10, 10)
                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         jTabbedPane2.addTab("Ingreso", jPanel4);
@@ -625,7 +654,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("UNIDAD Y EXTRAORDINARIOS");
+        jRadioButton3.setText("ORDINARIOS Y EXTRAORDINARIOS");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton3ActionPerformed(evt);
@@ -642,7 +671,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(31, 428, Short.MAX_VALUE)
+                .addGap(31, 403, Short.MAX_VALUE)
                 .addComponent(jRadioButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -753,7 +782,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -765,7 +794,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel31)
                 .addGap(1, 1, 1)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -877,7 +906,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("VISUALIZAR EGRESOS", jPanel2);
@@ -952,7 +981,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -986,7 +1015,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49))
         );
@@ -1242,7 +1271,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("AJUSTES TIPO DE PAGO", jPanel10);
@@ -1264,9 +1293,9 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(0, 0, 0)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(0, 0, 0)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1296,8 +1325,8 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         String fecha1 = fechaActual.toString();
         //(String id_Pagos, String id_Usuario, Date fecha_Pago, String id_MetodoPago, float monto_Pago, TipoPago tipoPago_Pago, Date fechaVencimiento_Pago, String estado_Pago)
         TipoPago tipoPagoRegistrarEgreso = new TipoPago("",formapago1);
-        Pago pagoEgreso = new Pago("",usuario1,fecha1,formapago1,Float.parseFloat(valor1),tipoPagoRegistrarEgreso,fecha1,"Vigente");
-        metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoEgreso, false, true);
+        Pago pagoEgreso = new Pago("",usuario1,fecha1,formapago1,Float.parseFloat(valor1),tipoPagoRegistrarEgreso,fecha1,"VIGENTE","EGRESO ORDINARIO");
+        metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoEgreso, "EGRESO ORDINARIO", false, true);
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarEgreso, false, true);
     }//GEN-LAST:event_jBRegistrarEgresoActionPerformed
 
@@ -1310,6 +1339,9 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbPagoRegistrarIngresoActionPerformed
 
     private void jBFiltrarSaldosPorCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFiltrarSaldosPorCuentaActionPerformed
+       if(this.jTFId_UsuarioSaldosPorCuenta.getText().isEmpty()){
+               JOptionPane.showMessageDialog(null, "Ingrese el id del usuario a buscar por favor.", "alert", JOptionPane.ERROR_MESSAGE);
+       }else{
         String idUsuario = jTFId_UsuarioSaldosPorCuenta.getText();
         
         try {
@@ -1317,6 +1349,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Vista_FinanzasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
     }//GEN-LAST:event_jBFiltrarSaldosPorCuentaActionPerformed
 
     private void jBCrearTipoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearTipoPagoActionPerformed
@@ -1404,14 +1437,19 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         LocalDate fechaActualPago = LocalDate.now();
         // Sumar n meses (numeroCuotas) a la fecha actual
         LocalDate fechaVencimientoPago = fechaActualPago.plusMonths(numeroCuotas);
-        
+        String tipo="INGRESO ORDINARIO";
+        if(bandera){
+            tipo="INGRESO EXTRAORDINARIO";
+        }else{
+            tipo="INGRESO ORDINARIO";
+        }
         
         /*--------------------------------------------*/
                
         //(String id_Pagos, String id_Usuario, Date fecha_Pago, String id_MetodoPago, float monto_Pago, TipoPago tipoPago_Pago, Date fechaVencimiento_Pago, String estado_Pago)
         TipoPago tipoPagoRegistrarIngreso = new TipoPago("",formapago1);
-        Pago pagoIngreso = new Pago("",usuario1,fechaActualPago.toString(),formapago1,montoPago,tipoPagoRegistrarIngreso,fechaVencimientoPago.toString(),"Vigente");
-        metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoIngreso, true, false);
+        Pago pagoIngreso = new Pago("",usuario1,fechaActualPago.toString(),formapago1,montoPago,tipoPagoRegistrarIngreso,fechaVencimientoPago.toString(),"VIGENTE",tipo);
+        metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoIngreso,tipo, true, false);
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarIngreso, true, false);
 
         
@@ -1463,9 +1501,24 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jRBOrdinarioActionPerformed
 
+    boolean bandera;
+    
     private void jRBExtraordinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBExtraordinarioActionPerformed
         this.jPDescripcion.setVisible(true);
+        bandera = true;
     }//GEN-LAST:event_jRBExtraordinarioActionPerformed
+
+    private void jTFValorRegistrarIngresoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFValorRegistrarIngresoFocusLost
+        montoCuota= Float.parseFloat(this.jTFValorRegistrarIngreso.getText());
+        this.jLMontoCuota.setText(String.format(montoCuota+""));
+    }//GEN-LAST:event_jTFValorRegistrarIngresoFocusLost
+
+    private void jTFValorRegistrarIngresoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFValorRegistrarIngresoKeyReleased
+        String text = jTFValorRegistrarIngreso.getText();
+        if (!text.matches("\\d*(\\.\\d*)?")) { // Verificar si el texto contiene números enteros o flotantes
+            jTFValorRegistrarIngreso.setText(text.replaceAll("[^\\d.]", "")); // Eliminar los caracteres que no son dígitos o punto
+        }
+    }//GEN-LAST:event_jTFValorRegistrarIngresoKeyReleased
     
     
     private void limpiarjTFTipoPagos(){
