@@ -50,17 +50,43 @@ note bottom: "la visita puede no visitar a un \n residente como el caso de prove
 
 class Pago
 {
-    {field} int idResidente
-    {field} Date fechaDePago
+    {field} int id_Pago
+    {field} int id_Residente
+    {field} Date fecha_Pago
     {field} Date fechaVencimientoPago
-    {field} double valor
+    {field} metodoPago id_metodoPago
+     'enum metodoPago: efectivo, tarjetas de crédito'
+    {field} double Monto_Pago
     {field} tipoPago tPago
-    ' enum alicuota o extraordinaria
-    {field} metodoPago mPago
-    ' enum metodoPago: efectivo, tarjetas de crédito,
-    'tarjetas de débito o transferencia
-    {method} ListarPagos()
-    ' crear pago....
+    'enum alicuota o extraordinaria'
+    'tarjetas de débito o transferencia'
+    {field} String estado
+    'enum ingreso o egreso'
+    {field} String descripcion
+   {method} ListarPagosIngresos()
+   {method} ListarPagosEgresos()
+   {method} AnularPago(id_Pago)
+   {method} RegistrarIngreso()
+   {method} RegistrarEgreso()
+   {method} ListarSaldoPorCuenta(id_Residente)
+}
+
+class cuota{
+    {field} int id_pago
+    {field} int id_cuota
+    {field} int numero_cuota
+    {field} float monto_cuota
+    {field} float fecaVencimiento_cuota
+    {method} RegistrarCuota(id_Pago, numero_cuota)
+    {method} RegistrarCuota(id_Pago, numero_cuota)
+}
+
+class metodoPago{
+    {field} int id_metodoPago
+    {field} String nombre_MetodoPago
+    {method} RegistrarMetodoPago(nombre_MetodoPago)
+    {method} ActualizarMetodoPago(nombre_MetodoPago)
+    {method} EliminarMetodoPago(id_metodoPago)
 }
 
 
@@ -107,5 +133,7 @@ Administrador --> Unidad: asigna
 Usuario "1" --> "*" Comunicacion: envia
 Administrador"1" --> "*"Pago: supervisa
 
+Pago "1" *-- "*"cuota: contiene
+Pago -- metodoPago: posee
 'una enumeración para los tipos de unidades
 @enduml
