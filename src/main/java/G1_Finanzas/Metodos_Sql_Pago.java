@@ -140,17 +140,17 @@ public class Metodos_Sql_Pago {
     }
     
     
-    public boolean actualizarEstadoPago(Connection cn, String idPago, String estadoPago) {
+    public boolean anularPago(Connection cn, String idPago) {
         String sql = "UPDATE PAGO SET ESTADO_PAGO = ? WHERE ID_PAGOS = ?;";
         
         try (PreparedStatement pps = cn.prepareStatement(sql)) {
-            pps.setString(1, estadoPago);
+            pps.setString(1, "ANULADO");
             pps.setString(2, idPago);
             
             int affectedRows = pps.executeUpdate();
             
             if (affectedRows > 0) {
-                JOptionPane.showMessageDialog(null, "Estado del pago actualizado correctamente.");
+                JOptionPane.showMessageDialog(null, "Pago Anulado.");
                 return true; // Retornar true si la actualización fue exitosa
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró el pago con el ID especificado.");
@@ -162,7 +162,7 @@ public class Metodos_Sql_Pago {
             return false; // Retornar false si ocurrió un error
         }
     }
-    
+
     public void insertarPagoIngresoEgreso(Connection cn, Pago pago, String tipo,  boolean Ingreso, boolean Egreso){
         
         String tipo_Pago = "";

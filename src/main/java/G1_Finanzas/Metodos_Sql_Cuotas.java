@@ -113,8 +113,8 @@ public class Metodos_Sql_Cuotas {
         jtable.setModel(modelo);
 
         // Agregar columnas al modelo de la tabla
-        modelo.addColumn("ID pagos");
-        modelo.addColumn("ID cuota");
+        modelo.addColumn("ID Pago");
+        modelo.addColumn("ID Cuota");
         modelo.addColumn("Número de Cuota");
         modelo.addColumn("Monto de Cuota");
         modelo.addColumn("Fecha de Vencimiento");
@@ -141,6 +141,71 @@ public class Metodos_Sql_Cuotas {
         } catch(SQLException ex){
             //Logger.getLogger(Pago.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Ocurrió un error al recuperar los datos");
+        }
+    }
+      
+    public void desplegarCuotasPagoEspecifico(Connection cn, JTable jtable, String idPago){
+        // Crear un modelo de tabla para el JTable
+        DefaultTableModel modelo = new DefaultTableModel();
+        jtable.setModel(modelo);
+
+        // Agregar columnas al modelo de la tabla
+        modelo.addColumn("ID Pago");
+        modelo.addColumn("ID Cuota");
+        modelo.addColumn("Número de Cuota");
+        modelo.addColumn("Monto de Cuota");
+        modelo.addColumn("Fecha de Vencimiento");
+        modelo.addColumn("Estado Cuota");
+
+        // Consulta SQL para seleccionar los ingresos
+        String sql = "SELECT * FROM CUOTA WHERE ID_PAGOS = "+idPago;
+
+        try{
+           PreparedStatement  pps = cn.prepareStatement(sql);
+            ResultSet rs = pps.executeQuery();
+
+            // Leer los resultados de la consulta y agregarlos al modelo de la tabla
+            while(rs.next()){
+                Object[] fila = new Object[6]; // Crear un array de objetos para la fila
+                fila[0] = rs.getString("ID_PAGOS");
+                fila[1] = rs.getString("ID_CUOTA");
+                fila[2] = rs.getString("NUM_CUOTA");
+                fila[3] = rs.getString("MONTO_CUOTA");
+                fila[4] = rs.getString("FECHAV_CUOTA");
+                fila[5] = rs.getString("ESTADO_CUOTA");
+                modelo.addRow(fila); // Agregar la fila al modelo de la tabla
+            }
+        } catch(SQLException ex){
+            //Logger.getLogger(Pago.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al recuperar los datos");
+        }
+    }
+    
+    // Método para eliminar cuotas por ID de pago
+    public void eliminarCuotasPorIdPago(Connection cn, String idPago) {
+        // Consulta SQL para eliminar las cuotas con el ID de pago especificado
+        String sql = "DELETE FROM CUOTA WHERE ID_PAGOS = ?";
+        
+        try {
+            // Preparar la sentencia SQL
+            PreparedStatement pps = cn.prepareStatement(sql);
+            // Establecer el parámetro de la consulta con el ID de pago
+            pps.setString(1, idPago);
+            
+            // Ejecutar la sentencia SQL para eliminar las cuotas
+            int filasAfectadas = pps.executeUpdate();
+            
+            // Verificar si se eliminaron cuotas
+            if (filasAfectadas > 0) {
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontraron cuotas con el ID de pago " + idPago);
+            }
+            
+            // Cerrar el PreparedStatement
+            pps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al intentar eliminar las cuotas");
         }
     }
 }
