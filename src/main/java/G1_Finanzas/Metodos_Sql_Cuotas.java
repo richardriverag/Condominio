@@ -208,4 +208,26 @@ public class Metodos_Sql_Cuotas {
             JOptionPane.showMessageDialog(null, "Ocurrió un error al intentar eliminar las cuotas");
         }
     }
+    public boolean actualizarEstadoCuotaAPagada(Connection cn, String idCuota) {
+        String sql = "UPDATE CUOTA SET ESTADO_CUOTA = ? WHERE ID_CUOTA = ?;";
+
+        try (PreparedStatement pps = cn.prepareStatement(sql)) {
+            pps.setString(1, "PAGADO");
+            pps.setString(2, idCuota);
+
+            int affectedRows = pps.executeUpdate();
+
+            if (affectedRows > 0) {
+                JOptionPane.showMessageDialog(null, "Estado de la cuota actualizado a Pagada.");
+                return true; // Retornar true si la actualización fue exitosa
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontraron cuotas asociadas al pago con el ID especificado.");
+                return false; // Retornar false si no se actualizó ningún registro
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al actualizar el estado de la cuota.");
+            return false; // Retornar false si ocurrió un error
+        }
+    }
+    
 }

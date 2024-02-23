@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Cuota;
@@ -35,7 +34,8 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     
     ConexionGrupo1 conexion;
     Connection cn;
-
+    
+    String campoAFiltrar;
     LocalDate fechaActual = LocalDate.now();
     Date fechaSql = Date.valueOf(fechaActual);
     
@@ -47,19 +47,12 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
     public Vista_FinanzasAdministrador() throws SQLException {
         
-        //setSize(300, 200);
         initComponents();
         // Obtener la dimensión de la pantalla
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        
-        // Obtener el ancho de la pantalla
-        int width = (int) screenSize.getWidth();
-        
-        // Obtener el alto de la pantalla
         int height = (int) screenSize.getHeight();
-        
         // Establecer la ubicación del marco en la parte inferior de la pantalla
-        this.setLocation(0, height - this.getHeight());
+        this.setLocation(0, height - this.getHeight()-40);
 
         
         conexion = new ConexionGrupo1();
@@ -69,13 +62,18 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         metodosSQLTipoPago = new Metodos_Sql_TipoPago();
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableIngresos, true, false);
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableVisualizarEgresos, false, true);
-        metodosSQLPago.desplegarInformacionPagosYCuotas(cn, this.jTableCobranzas);
+        
         actualizarComboBoxMetodoPago();
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarIngreso, true, false);
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarEgreso, false, true);
         metodosSQLTipoPago.desplegarTipoPagos(cn, this.jTTipoPago);
         
         this.jPDescripcion.setVisible(false);
+        this.jTFid_CondominioAFiltrar.setEditable(false);
+        this.jTFid_DepartamentoAFiltrar.setEditable(false);
+        //metodosSQLCuota.actualizarEstadoCuotaAPagada(cn, "12");
+        metodosSQLPago.desplegarInformacionPagosYCuotas(cn, this.jTableCobranzas);
+       
     }
 
     /**
@@ -138,11 +136,12 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jTableIngresos = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         jBFiltrarVisualizarIngresos = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jRBFiltrarUnidad = new javax.swing.JRadioButton();
+        jRBFiltrarExtraordinarios = new javax.swing.JRadioButton();
+        jRBFiltrarOrdinariosYExtraordinarios = new javax.swing.JRadioButton();
+        jRFiltrarCondominio = new javax.swing.JRadioButton();
+        jTFid_CondominioAFiltrar = new javax.swing.JTextField();
+        jTFid_DepartamentoAFiltrar = new javax.swing.JTextField();
         jPanel18 = new javax.swing.JPanel();
         jBAnularIngreso = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
@@ -204,6 +203,12 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1920, 680));
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jTableRegistrarIngreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -273,7 +278,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         jLMontoCuota.setText("######");
 
-        jCBNumeroCuotas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "6", "12", "24", "48" }));
+        jCBNumeroCuotas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "6", "12", "24", "48" }));
         jCBNumeroCuotas.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCBNumeroCuotasItemStateChanged(evt);
@@ -483,8 +488,8 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel32)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,11 +536,6 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jLabel9.setText("FORMA DE PAGO:");
 
         cmbPagoRegistrarEgreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transferencia" }));
-        cmbPagoRegistrarEgreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbPagoRegistrarEgresoActionPerformed(evt);
-            }
-        });
 
         jBRegistrarEgreso.setText("REGISTRAR");
         jBRegistrarEgreso.addActionListener(new java.awt.event.ActionListener() {
@@ -622,13 +622,17 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jTabbedPane2))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane2)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane2)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("REGISTRAR", jPanel3);
@@ -654,66 +658,78 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("FILTRAR"));
 
         jBFiltrarVisualizarIngresos.setText("FILTRAR");
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("UNIDAD");
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("EXTRAORDINARIOS");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBFiltrarVisualizarIngresos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                jBFiltrarVisualizarIngresosActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("ORDINARIOS Y EXTRAORDINARIOS");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jRBFiltrarUnidad);
+        jRBFiltrarUnidad.setText("DEPARTAMENTO");
+        jRBFiltrarUnidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                jRBFiltrarUnidadActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton6);
-        jRadioButton6.setText("CONDOMINIO");
+        buttonGroup1.add(jRBFiltrarExtraordinarios);
+        jRBFiltrarExtraordinarios.setText("EXTRAORDINARIOS");
+        jRBFiltrarExtraordinarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBFiltrarExtraordinariosActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONDOMINIO 1", "CONDOMINIO 2" }));
+        buttonGroup1.add(jRBFiltrarOrdinariosYExtraordinarios);
+        jRBFiltrarOrdinariosYExtraordinarios.setText("ORDINARIOS Y EXTRAORDINARIOS");
+        jRBFiltrarOrdinariosYExtraordinarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBFiltrarOrdinariosYExtraordinariosActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRFiltrarCondominio);
+        jRFiltrarCondominio.setText("CONDOMINIO");
+        jRFiltrarCondominio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRFiltrarCondominioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(31, 429, Short.MAX_VALUE)
-                .addComponent(jRadioButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jRFiltrarCondominio, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton3)
-                .addGap(432, 432, 432))
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(393, 393, 393)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFid_CondominioAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jRBFiltrarUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTFid_DepartamentoAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRBFiltrarExtraordinarios, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(jRBFiltrarOrdinariosYExtraordinarios)
+                .addGap(109, 109, 109)
                 .addComponent(jBFiltrarVisualizarIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(230, 230, 230))
+                .addGap(159, 159, 159))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton6))
-                .addGap(3, 3, 3)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBFiltrarVisualizarIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTFid_CondominioAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRFiltrarCondominio)
+                    .addComponent(jRBFiltrarUnidad)
+                    .addComponent(jTFid_DepartamentoAFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRBFiltrarOrdinariosYExtraordinarios)
+                    .addComponent(jRBFiltrarExtraordinarios)
+                    .addComponent(jBFiltrarVisualizarIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Anular ingreso"));
@@ -744,26 +760,26 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTFId_Pago))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTF_Monto))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTF_EstadoPago)))
-                .addGap(18, 18, 18)
-                .addComponent(jBAnularIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTFId_Pago, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTF_Monto))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTF_EstadoPago)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jBAnularIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 98, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -799,7 +815,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(500, 500, 500)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(504, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -840,11 +856,6 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jTableVisualizarEgresos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTableVisualizarEgresosMousePressed(evt);
-            }
-        });
-        jTableVisualizarEgresos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTableVisualizarEgresosKeyReleased(evt);
             }
         });
         jScrollPane4.setViewportView(jTableVisualizarEgresos);
@@ -1348,20 +1359,20 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    private void jRBFiltrarOrdinariosYExtraordinariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFiltrarOrdinariosYExtraordinariosActionPerformed
+       campoAFiltrar="extraordinariosYExtraordinarios";
+       this.jTFid_CondominioAFiltrar.setEditable(false);
+       this.jTFid_DepartamentoAFiltrar.setEditable(false);
+    }//GEN-LAST:event_jRBFiltrarOrdinariosYExtraordinariosActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
-    private void cmbPagoRegistrarEgresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagoRegistrarEgresoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbPagoRegistrarEgresoActionPerformed
+    private void jRBFiltrarExtraordinariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFiltrarExtraordinariosActionPerformed
+       campoAFiltrar="extraordinarios";
+       this.jTFid_CondominioAFiltrar.setEditable(false);
+       this.jTFid_DepartamentoAFiltrar.setEditable(false);
+    }//GEN-LAST:event_jRBFiltrarExtraordinariosActionPerformed
 
     private void jBRegistrarEgresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegistrarEgresoActionPerformed
-        
+        if(!jTFCodigoUsuarioRegistroEgreso.getText().isEmpty()||!jTFValorRegistrarEgreso.getText().isEmpty()){
          // boton de registrar 
         String usuario1 = this.jTFCodigoUsuarioRegistroEgreso.getText();
         String formapago1 = this.cmbPagoRegistrarEgreso.getSelectedItem().toString();
@@ -1374,6 +1385,9 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoEgreso, "EGRESO ORDINARIO", false, true);
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarEgreso, false, true);
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableVisualizarEgresos, false, true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Ingrese todos los campos", "alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBRegistrarEgresoActionPerformed
 
     private void cmbPagoRegistrarIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagoRegistrarIngresoActionPerformed
@@ -1477,7 +1491,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
          // boton de registrar 
         String usuario1 = this.jTFCodigoUsuarioRegistroIngreso.getText();
         String formapago1 = this.cmbPagoRegistrarIngreso.getSelectedItem().toString();
-        //montoPago = Float.parseFloat(this.jTFValorRegistrarIngreso.getText()); //utilizo el que esta en el evento
+        montoPago = Float.parseFloat(this.jTFValorRegistrarIngreso.getText()); //utilizo el que esta en el evento
         //String fecha1 = fechaActualPago.toString();
         
         LocalDate fechaActualPago = LocalDate.now();
@@ -1492,7 +1506,6 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         
         /*--------------------------------------------*/
                
-        //(String id_Pagos, String id_Usuario, Date fecha_Pago, String id_MetodoPago, float monto_Pago, TipoPago tipoPago_Pago, Date fechaVencimiento_Pago, String estado_Pago)
         TipoPago tipoPagoRegistrarIngreso = new TipoPago("",formapago1);
         Pago pagoIngreso = new Pago("",usuario1,fechaActualPago.toString(),formapago1,montoPago,tipoPagoRegistrarIngreso,fechaVencimientoPago.toString(),"VIGENTE",tipo);
         metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoIngreso,tipo, true, false);
@@ -1522,10 +1535,10 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         montoPago = Float.parseFloat(this.jTFValorRegistrarIngreso.getText());
         numeroCuotas = Integer.parseInt((String)jCBNumeroCuotas.getSelectedItem());
         interesCuota = 1 + Float.parseFloat((String) this.jComboBoxInteresRegistroIngreso.getSelectedItem()) / 100;
-        double montoCuota = montoPago / numeroCuotas * interesCuota;
+        montoCuota = montoPago / numeroCuotas * interesCuota;
         BigDecimal bd = new BigDecimal(montoCuota);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
-        montoCuota = bd.doubleValue();        
+        montoCuota = (float) bd.doubleValue();        
         jLMontoCuota.setText(String.format(montoCuota+""));
         
     }//GEN-LAST:event_jCBNumeroCuotasItemStateChanged
@@ -1535,10 +1548,10 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         montoPago = Float.parseFloat(this.jTFValorRegistrarIngreso.getText());
         numeroCuotas = Integer.parseInt((String)jCBNumeroCuotas.getSelectedItem());
         interesCuota = 1 + Float.parseFloat((String) this.jComboBoxInteresRegistroIngreso.getSelectedItem()) / 100;
-        double montoCuota = montoPago / numeroCuotas * interesCuota;
+        montoCuota = montoPago / numeroCuotas * interesCuota;
         BigDecimal bd = new BigDecimal(montoCuota);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
-        montoCuota = bd.doubleValue();        
+        montoCuota = (float) bd.doubleValue();        
         jLMontoCuota.setText(String.format(montoCuota+""));
     }//GEN-LAST:event_jComboBoxInteresRegistroIngresoItemStateChanged
 
@@ -1632,10 +1645,6 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_jTableIngresosMousePressed
 
-    private void jTableVisualizarEgresosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableVisualizarEgresosKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTableVisualizarEgresosKeyReleased
-
     private void jTableVisualizarEgresosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVisualizarEgresosMousePressed
         PreparedStatement ps;
         ResultSet rs;
@@ -1662,6 +1671,50 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         metodosSQLCuota.desplegarCuotasPagoEspecifico(cn, jTCuotasPago, idIngreso);
 
     }//GEN-LAST:event_jTableRegistrarIngresoMousePressed
+
+    private void jBFiltrarVisualizarIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFiltrarVisualizarIngresosActionPerformed
+        switch(campoAFiltrar){
+            case ("condominio"):
+                metodosSQLPago.desplegarIngresosEgresosCondominio(cn,jTableIngresos,true,false,this.jTFid_CondominioAFiltrar.getText());
+                break;
+            case ("unidad"):
+                metodosSQLPago.desplegarIngresosEgresosDepartamento(cn,jTableIngresos,true,false,this.jTFid_DepartamentoAFiltrar.getText());
+                break;
+            case ("extraordinarios"):
+                metodosSQLPago.desplegarIngresosExtraordinarios(cn, jTableIngresos);
+                break;
+            case ("extraordinariosYExtraordinarios"):
+                metodosSQLPago.desplegarIngresosEgresos(cn, jTableIngresos, true, false);
+                break;
+            default:
+                break;
+                
+        }
+    }//GEN-LAST:event_jBFiltrarVisualizarIngresosActionPerformed
+
+
+    private void jRFiltrarCondominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRFiltrarCondominioActionPerformed
+        campoAFiltrar="condominio";
+        this.jTFid_CondominioAFiltrar.setEditable(true);
+        this.jTFid_DepartamentoAFiltrar.setEditable(false);
+    }//GEN-LAST:event_jRFiltrarCondominioActionPerformed
+
+    private void jRBFiltrarUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFiltrarUnidadActionPerformed
+        campoAFiltrar="unidad";
+        this.jTFid_CondominioAFiltrar.setEditable(false);
+        this.jTFid_DepartamentoAFiltrar.setEditable(true);
+    }//GEN-LAST:event_jRBFiltrarUnidadActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        /*try {
+            conexion = new ConexionGrupo1();
+            cn= conexion.conectar();
+            metodosSQLPago = new Metodos_Sql_Pago();
+            metodosSQLPago.desplegarInformacionPagosYCuotas(cn, this.jTableCobranzas);
+        } catch (SQLException ex) {
+            Logger.getLogger(Vista_FinanzasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }//GEN-LAST:event_jTabbedPane1StateChanged
     
     
     private void limpiarjTFTipoPagos(){
@@ -1766,7 +1819,6 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jBRegistrarEgreso;
     private javax.swing.JButton jBRegistrarIngreso;
     private javax.swing.JComboBox<String> jCBNumeroCuotas;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxInteresRegistroIngreso;
     private javax.swing.JLabel jLDescripcionRegistroIngreso;
     private javax.swing.JLabel jLMontoCuota;
@@ -1825,11 +1877,11 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRBExtraordinario;
+    private javax.swing.JRadioButton jRBFiltrarExtraordinarios;
+    private javax.swing.JRadioButton jRBFiltrarOrdinariosYExtraordinarios;
+    private javax.swing.JRadioButton jRBFiltrarUnidad;
     private javax.swing.JRadioButton jRBOrdinario;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRFiltrarCondominio;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1856,6 +1908,8 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     private javax.swing.JTextField jTF_EstadoPagoEgreso;
     private javax.swing.JTextField jTF_Monto;
     private javax.swing.JTextField jTF_MontoEgreso;
+    private javax.swing.JTextField jTFid_CondominioAFiltrar;
+    private javax.swing.JTextField jTFid_DepartamentoAFiltrar;
     private javax.swing.JTabbedPane jTPTipoPago;
     private javax.swing.JTable jTTipoPago;
     private javax.swing.JTabbedPane jTabbedPane1;
