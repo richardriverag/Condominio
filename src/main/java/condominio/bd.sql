@@ -23,36 +23,12 @@ CREATE TABLE Usuario (
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO FINANZAS GRUPO 1=============================*/
 /*===============================================================================================*/
-
-DROP TABLE IF EXISTS CUOTA;
-DROP TABLE IF EXISTS METODOPAGO;
-DROP TABLE IF EXISTS PAGO;
-DROP TABLE IF EXISTS USUARIO;
-DROP TABLE IF EXISTS DEPARTAMENTO_F;
-DROP TABLE IF EXISTS CONDOMINIO_F;
-
 CREATE TABLE METODOPAGO
 (
    ID_METODOPAGO        INT NOT NULL AUTO_INCREMENT,
    NOMBRE_METODOPAGO    VARCHAR(20) NOT NULL,
    PRIMARY KEY (ID_METODOPAGO)
-);
-
-CREATE TABLE CONDOMINIO_F
-(
-   ID_CONDOMINIO_F        VARCHAR(20) NOT NULL,
-   NOMBRE_CONDOMINIO_F    VARCHAR(100) NOT NULL,
-   PRIMARY KEY (ID_CONDOMINIO_F)
-);
-
-CREATE TABLE DEPARTAMENTO_F
-(
-   ID_DEPARTAMENTO_F      INT NOT NULL AUTO_INCREMENT,
-   NUMERO_DEPARTAMENTO_F  VARCHAR(20) NOT NULL,
-   ID_CONDOMINIO_F        VARCHAR(20) NOT NULL,
-   PRIMARY KEY (ID_DEPARTAMENTO_F),
-   FOREIGN KEY (ID_CONDOMINIO_F) REFERENCES CONDOMINIO_F(ID_CONDOMINIO_F)
-);
+); 
 
 CREATE TABLE USUARIO
 (
@@ -62,11 +38,28 @@ CREATE TABLE USUARIO
    DIRECCION_USUARIO    VARCHAR(20),
    CORREOELECTRONICO_USUARIO VARCHAR(100),
    TELEFONO_USUARIO     VARCHAR(20),
-   ID_CONDOMINIO_F        VARCHAR(20),
    TIPO_USUARIO         VARCHAR(20),
-   PRIMARY KEY (ID_USUARIO),
+   PRIMARY KEY (ID_USUARIO)
+); 
+
+CREATE TABLE CONDOMINIO_F
+(
+   ID_CONDOMINIO_F        INT NOT NULL AUTO_INCREMENT,
+   NOMBRE_CONDOMINIO_F    VARCHAR(50) NOT NULL,
+   PRIMARY KEY (ID_CONDOMINIO_F)
+);
+
+CREATE TABLE DEPARTAMENTO_F
+(
+   ID_DEPARTAMENTO_F      INT NOT NULL AUTO_INCREMENT,
+   NUMERO_DEPARTAMENTO_F  VARCHAR(20) NOT NULL,
+   ID_USUARIO           VARCHAR(20) NOT NULL,
+   ID_CONDOMINIO_F        INT NOT NULL,
+   PRIMARY KEY (ID_DEPARTAMENTO_F),
+   FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO),
    FOREIGN KEY (ID_CONDOMINIO_F) REFERENCES CONDOMINIO_F(ID_CONDOMINIO_F)
 );
+
 
 CREATE TABLE PAGO
 (
@@ -96,90 +89,65 @@ CREATE TABLE CUOTA 												/*SI UN PAGO SE ANULA LAS CUOTAS SE ELIMINAN*/
    FOREIGN KEY (ID_PAGOS) REFERENCES PAGO(ID_PAGOS)
 );
 
--- Insertar 10 registros en la tabla METODOPAGO
-INSERT INTO METODOPAGO (NOMBRE_METODOPAGO) VALUES 
+
+-- Insertar registros en la tabla METODOPAGO
+INSERT INTO METODOPAGO (NOMBRE_METODOPAGO) VALUES
 ('Efectivo'),
-('Tarjeta'),
+('Tarjeta de crédito'),
 ('Transferencia'),
-('Cheque'),
 ('PayPal'),
-('Bitcoin'),
-('Stripe'),
-('Venmo'),
-('Zelle'),
-('Apple Pay');
-SELECT * FROM METODOPAGO;
+('Cheque'),
+('Criptomoneda'),
+('Pago móvil'),
+('Vale de comida'),
+('Cuenta corriente'),
+('Tarjeta de débito');
 
--- Insertar 10 registros en la tabla CONDOMINIO_F
-INSERT INTO CONDOMINIO_F (ID_CONDOMINIO_F, NOMBRE_CONDOMINIO_F) VALUES 
-('1', 'Condominio A'),
-('2', 'Condominio B'),
-('3', 'Condominio C'),
-('4', 'Condominio D'),
-('5', 'Condominio E'),
-('6', 'Condominio F'),
-('7', 'Condominio G'),
-('8', 'Condominio H'),
-('9', 'Condominio I'),
-('10', 'Condominio J');
-SELECT * FROM CONDOMINIO_F;
+-- Insertar registros en la tabla USUARIO
+INSERT INTO USUARIO (ID_USUARIO, NOMBRE_USUARIO, APELLIDO_USUARIO, DIRECCION_USUARIO, CORREOELECTRONICO_USUARIO, TELEFONO_USUARIO, TIPO_USUARIO) VALUES
+('USR001', 'Juan', 'Perez', 'Calle 123', 'juan@example.com', '123456789', 'PROPIETARIO'),
+('USR002', 'Maria', 'Lopez', 'Avenida 456', 'maria@example.com', '987654321', 'INQUILINO'),
+('USR003', 'Pedro', 'Garcia', 'Plaza Principal', 'pedro@example.com', '456789123', 'PROPIETARIO'),
+('USR004', 'Ana', 'Martinez', 'Calle 789', 'ana@example.com', '741852963', 'INQUILINO'),
+('USR005', 'Carlos', 'Sanchez', 'Avenida Central', 'carlos@example.com', '159263478', 'PROPIETARIO'),
+('USR006', 'Laura', 'Rodriguez', 'Carrera 10', 'laura@example.com', '369852147', 'INQUILINO'),
+('USR007', 'Diego', 'Gomez', 'Calle 246', 'diego@example.com', '258741369', 'PROPIETARIO'),
+('USR008', 'Sofia', 'Diaz', 'Avenida Norte', 'sofia@example.com', '147258369', 'INQUILINO'),
+('USR009', 'Alejandro', 'Hernandez', 'Calle Sur', 'alejandro@example.com', '123789456', 'PROPIETARIO'),
+('USR010', 'Fernanda', 'Torres', 'Avenida Este', 'fernanda@example.com', '987654321', 'INQUILINO');
 
--- Insertar 10 registros en la tabla DEPARTAMENTO_F_F
-INSERT INTO DEPARTAMENTO_F (NUMERO_DEPARTAMENTO_F, ID_CONDOMINIO_F) VALUES 
-('101', '1'),
-('102', '1'),
-('201', '2'),
-('202', '2'),
-('301', '3'),
-('302', '3'),
-('401', '4'),
-('402', '4'),
-('501', '5'),
-('502', '5');
-SELECT * FROM DEPARTAMENTO_F;
+-- Insertar registros en la tabla CONDOMINIO_F
+INSERT INTO CONDOMINIO_F (NOMBRE_CONDOMINIO_F) VALUES
+('Edificio A'),
+('Conjunto Residencial B'),
+('Torres del Parque'),
+('Residencial La Floresta'),
+('CONDOMINIO_F El Bosque'),
+('Urbanización El Recreo'),
+('Complejo Los Pinos'),
+('Conjunto Vista Hermosa'),
+('Residencial Los Alamos'),
+('CONDOMINIO_F Las Palmas');
 
--- Insertar 10 registros en la tabla USUARIO
-INSERT INTO USUARIO (ID_USUARIO, NOMBRE_USUARIO, APELLIDO_USUARIO, DIRECCION_USUARIO, CORREOELECTRONICO_USUARIO, TELEFONO_USUARIO, ID_CONDOMINIO_F, TIPO_USUARIO) VALUES 
-('1', 'Juan', 'Perez', 'Calle 123', 'juan@example.com', '123456789', '1', 'Propietario'),
-('2', 'Maria', 'Gomez', 'Avenida 456', 'maria@example.com', '987654321', '2', 'Inquilino'),
-('3', 'Carlos', 'Lopez', 'Carrera 789', 'carlos@example.com', '456789123', '3', 'Propietario'),
-('4', 'Ana', 'Martinez', 'Calle 456', 'ana@example.com', '321654987', '4', 'Inquilino'),
-('5', 'Pedro', 'Rodriguez', 'Avenida 789', 'pedro@example.com', '789123456', '5', 'Propietario'),
-('6', 'Luisa', 'Fernandez', 'Carrera 123', 'luisa@example.com', '159357468', '6', 'Inquilino'),
-('7', 'Sofia', 'Diaz', 'Calle 789', 'sofia@example.com', '357159486', '7', 'Propietario'),
-('8', 'Jorge', 'Hernandez', 'Avenida 123', 'jorge@example.com', '486357159', '8', 'Inquilino'),
-('9', 'Laura', 'Sanchez', 'Carrera 456', 'laura@example.com', '624185379', '9', 'Propietario'),
-('10', 'Pablo', 'Gonzalez', 'Calle 789', 'pablo@example.com', '931862475', '10', 'Inquilino');
+-- Insertar registros en la tabla DEPARTAMENTO_F
+-- Se asumirá que ID_USUARIO y ID_CONDOMINIO_F se asignan aleatoriamente de los datos disponibles en las tablas correspondientes.
+INSERT INTO DEPARTAMENTO_F (NUMERO_DEPARTAMENTO_F, ID_USUARIO, ID_CONDOMINIO_F) VALUES
+('101', 'USR001', 1),
+('202', 'USR002', 2),
+('303', 'USR003', 3),
+('404', 'USR004', 4),
+('505', 'USR005', 5),
+('606', 'USR006', 6),
+('707', 'USR007', 7),
+('808', 'USR008', 8),
+('909', 'USR009', 9),
+('1010', 'USR010', 10);
+
 SELECT * FROM USUARIO;
-
--- Insertar 10 registros en la tabla PAGO
-INSERT INTO PAGO (ID_METODOPAGO, ID_USUARIO, FECHA_PAGO, MONTO_PAGO, TIPO_PAGO, FECHAVENCIMIENTO_PAGO, ESTADO_PAGO, DESCRIPCION) VALUES 
-(1, '1', '2024-02-22', 100.00, 'INGRESO ORDINARIO', '2024-03-22', 'VIGENTE', 'Cuota mensual'),
-(2, '2', '2024-02-23', 150.00, 'INGRESO ORDINARIO', '2024-03-23', 'VIGENTE', 'Cuota mensual'),
-(3, '3', '2024-02-24', 200.00, 'INGRESO ORDINARIO', '2024-03-24', 'VIGENTE', 'Cuota mensual'),
-(4, '4', '2024-02-25', 250.00, 'INGRESO ORDINARIO', '2024-03-25', 'VIGENTE', 'Cuota mensual'),
-(5, '5', '2024-02-26', 300.00, 'INGRESO ORDINARIO', '2024-03-26', 'VIGENTE', 'Cuota mensual'),
-(6, '6', '2024-02-27', 350.00, 'INGRESO ORDINARIO', '2024-03-27', 'VIGENTE', 'Cuota mensual'),
-(7, '7', '2024-02-28', 400.00, 'INGRESO ORDINARIO', '2024-03-28', 'VIGENTE', 'Cuota mensual'),
-(8, '8', '2024-02-29', 450.00, 'INGRESO ORDINARIO', '2024-03-29', 'VIGENTE', 'Cuota mensual'),
-(9, '9', '2024-03-01', 500.00, 'INGRESO ORDINARIO', '2024-03-30', 'VIGENTE', 'Cuota mensual'),
-(10, '10', '2024-03-02', 550.00, 'INGRESO ORDINARIO', '2024-03-31', 'VIGENTE', 'Cuota mensual');
-SELECT * FROM PAGO;
-
--- Insertar 10 registros en la tabla CUOTA
-INSERT INTO CUOTA (ID_PAGOS, NUM_CUOTA, MONTO_CUOTA, FECHAV_CUOTA, ESTADO_CUOTA) VALUES 
-(1, 1, 100.00, '2024-02-22', 'PENDIENTE'),
-(2, 1, 150.00, '2024-02-23', 'PENDIENTE'),
-(3, 1, 200.00, '2024-02-24', 'PENDIENTE'),
-(4, 1, 250.00, '2024-02-25', 'PENDIENTE'),
-(5, 1, 300.00, '2024-02-26', 'PENDIENTE'),
-(6, 1, 350.00, '2024-02-27', 'PENDIENTE'),
-(7, 1, 400.00, '2024-02-28', 'PENDIENTE'),
-(8, 1, 450.00, '2024-02-29', 'PENDIENTE'),
-(9, 1, 500.00, '2024-03-01', 'PENDIENTE'),
-(10, 1, 550.00, '2024-03-02', 'PENDIENTE');
 SELECT * FROM CUOTA;
-
+SELECT * FROM PAGO;
+SELECT * FROM DEPARTAMENTO_F;
+SELECT * FROM CONDOMINIO_F;
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO RESERVAS GRUPO 4=============================*/
 /*===============================================================================================*/
