@@ -481,20 +481,20 @@
                                                           <Group type="102" alignment="1" attributes="0">
                                                               <Group type="103" groupAlignment="1" attributes="0">
                                                                   <Group type="102" attributes="0">
-                                                                      <Component id="comboBoxDiaSGR2" min="-2" pref="56" max="-2" attributes="0"/>
+                                                                      <Component id="comboBoxDiaSGR" min="-2" pref="56" max="-2" attributes="0"/>
                                                                       <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="comboBoxMesSGR2" min="-2" pref="59" max="-2" attributes="0"/>
+                                                                      <Component id="comboBoxMesSGR" min="-2" pref="59" max="-2" attributes="0"/>
                                                                   </Group>
                                                                   <Group type="102" alignment="1" attributes="0">
-                                                                      <Component id="comboBoxDiaSGR1" min="-2" pref="55" max="-2" attributes="0"/>
+                                                                      <Component id="comboBoxDiaSGR2" min="-2" pref="55" max="-2" attributes="0"/>
                                                                       <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="comboBoxMesSGR1" min="-2" pref="61" max="-2" attributes="0"/>
+                                                                      <Component id="comboBoxMesSGR2" min="-2" pref="61" max="-2" attributes="0"/>
                                                                   </Group>
                                                               </Group>
                                                               <EmptySpace max="-2" attributes="0"/>
                                                               <Group type="103" groupAlignment="0" attributes="0">
                                                                   <Component id="comboBoxAñoSGR2" pref="0" max="32767" attributes="0"/>
-                                                                  <Component id="comboBoxAñoSGR1" pref="0" max="32767" attributes="0"/>
+                                                                  <Component id="comboBoxAñoSGR" pref="0" max="32767" attributes="0"/>
                                                               </Group>
                                                           </Group>
                                                           <Group type="102" alignment="1" attributes="0">
@@ -571,15 +571,15 @@
                                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="comboBoxAñoSGR1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="comboBoxDiaSGR2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="comboBoxMesSGR2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="comboBoxAñoSGR" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="comboBoxDiaSGR" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="comboBoxMesSGR" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="comboBoxDiaSGR1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="comboBoxMesSGR1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="comboBoxDiaSGR2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="comboBoxMesSGR2" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="comboBoxAñoSGR2" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -739,7 +739,7 @@
                         <Property name="text" type="java.lang.String" value="C&#xe9;dula del arrendatario"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="comboBoxDiaSGR1">
+                    <Component class="javax.swing.JComboBox" name="comboBoxDiaSGR2">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="31">
@@ -781,7 +781,7 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="comboBoxMesSGR1">
+                    <Component class="javax.swing.JComboBox" name="comboBoxMesSGR2">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="12">
@@ -804,7 +804,7 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="comboBoxA&#xf1;oSGR1">
+                    <Component class="javax.swing.JComboBox" name="comboBoxA&#xf1;oSGR">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="11">
@@ -883,7 +883,7 @@
                         <Property name="text" type="java.lang.String" value="Fecha Fin de arrendatario"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="comboBoxDiaSGR2">
+                    <Component class="javax.swing.JComboBox" name="comboBoxDiaSGR">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="31">
@@ -925,7 +925,7 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="comboBoxMesSGR2">
+                    <Component class="javax.swing.JComboBox" name="comboBoxMesSGR">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="12">
@@ -1006,16 +1006,18 @@
                                       <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jScrollPane10" alignment="0" min="-2" pref="837" max="-2" attributes="0"/>
-                                          <Component id="comboBoxVisualizacionUsuarioGestionUnidades2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="comboBoxVisualizacionUsuarioGestionUnidades2" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                              <Component id="botonFiltrarAIG1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                              <Component id="botonEliminarRegistroAIG2" min="-2" pref="118" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="312" max="-2" attributes="0"/>
                                       <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="441" max="-2" attributes="0"/>
-                                      <Component id="botonEliminarAIG1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="63" max="32767" attributes="0"/>
@@ -1025,14 +1027,17 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="9" max="32767" attributes="0"/>
+                              <EmptySpace pref="8" max="32767" attributes="0"/>
                               <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="comboBoxVisualizacionUsuarioGestionUnidades2" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="comboBoxVisualizacionUsuarioGestionUnidades2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="botonFiltrarAIG1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="botonEliminarRegistroAIG2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane10" min="-2" pref="307" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Component id="botonEliminarAIG1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1048,7 +1053,8 @@
                         <Component class="javax.swing.JTable" name="tablaVisualizacionUsuarioGestionUnidades1">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="7" rowCount="4">
+                              <Table columnCount="8" rowCount="4">
+                                <Column editable="true" title="ID" type="java.lang.Object"/>
                                 <Column editable="true" title="C&#xe9;dula" type="java.lang.Object"/>
                                 <Column editable="true" title="Nombre" type="java.lang.Object"/>
                                 <Column editable="true" title="Tipo" type="java.lang.Object"/>
@@ -1060,6 +1066,11 @@
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                   <Title/>
                                   <Editor/>
@@ -1129,10 +1140,21 @@
                         <Property name="text" type="java.lang.String" value="INTERFAZ DE USUARIO DE GESTION DE UNIDADES"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="botonEliminarAIG1">
+                    <Component class="javax.swing.JButton" name="botonFiltrarAIG1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Eliminar"/>
+                        <Property name="text" type="java.lang.String" value="Filtrar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonFiltrarAIG1ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="botonEliminarRegistroAIG2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Eliminar Fila"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminarRegistroAIG2ActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

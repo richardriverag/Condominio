@@ -89,9 +89,9 @@ public class Modulossss extends javax.swing.JFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         tablaGestionReserva1 = new javax.swing.JTable();
         jLabel33 = new javax.swing.JLabel();
-        comboBoxDiaSGR1 = new javax.swing.JComboBox<>();
-        comboBoxMesSGR1 = new javax.swing.JComboBox<>();
-        comboBoxAñoSGR1 = new javax.swing.JComboBox<>();
+        comboBoxDiaSGR2 = new javax.swing.JComboBox<>();
+        comboBoxMesSGR2 = new javax.swing.JComboBox<>();
+        comboBoxAñoSGR = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
@@ -100,8 +100,8 @@ public class Modulossss extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         btnConsultacliente = new javax.swing.JButton();
         jLabel39 = new javax.swing.JLabel();
-        comboBoxDiaSGR2 = new javax.swing.JComboBox<>();
-        comboBoxMesSGR2 = new javax.swing.JComboBox<>();
+        comboBoxDiaSGR = new javax.swing.JComboBox<>();
+        comboBoxMesSGR = new javax.swing.JComboBox<>();
         comboBoxAñoSGR2 = new javax.swing.JComboBox<>();
         comboBoxUnidadReserva = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
@@ -109,7 +109,8 @@ public class Modulossss extends javax.swing.JFrame {
         tablaVisualizacionUsuarioGestionUnidades1 = new javax.swing.JTable();
         comboBoxVisualizacionUsuarioGestionUnidades2 = new javax.swing.JComboBox<>();
         jLabel34 = new javax.swing.JLabel();
-        botonEliminarAIG1 = new javax.swing.JButton();
+        botonFiltrarAIG1 = new javax.swing.JButton();
+        botonEliminarRegistroAIG2 = new javax.swing.JButton();
         panelReserAgenda = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -497,11 +498,11 @@ public class Modulossss extends javax.swing.JFrame {
 
         jLabel33.setText("Cédula del arrendatario");
 
-        comboBoxDiaSGR1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        comboBoxDiaSGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        comboBoxMesSGR1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        comboBoxMesSGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
-        comboBoxAñoSGR1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        comboBoxAñoSGR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
 
         jLabel1.setText("...");
 
@@ -538,9 +539,9 @@ public class Modulossss extends javax.swing.JFrame {
 
         jLabel39.setText("Fecha Fin de arrendatario");
 
-        comboBoxDiaSGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        comboBoxDiaSGR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        comboBoxMesSGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        comboBoxMesSGR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
         comboBoxAñoSGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
 
@@ -573,17 +574,17 @@ public class Modulossss extends javax.swing.JFrame {
                                             .addGroup(jPanel7Layout.createSequentialGroup()
                                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addGroup(jPanel7Layout.createSequentialGroup()
-                                                        .addComponent(comboBoxDiaSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(comboBoxDiaSGR, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(comboBoxMesSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(comboBoxMesSGR, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(jPanel7Layout.createSequentialGroup()
-                                                        .addComponent(comboBoxDiaSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(comboBoxDiaSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(comboBoxMesSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(comboBoxMesSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(comboBoxAñoSGR2, 0, 1, Short.MAX_VALUE)
-                                                    .addComponent(comboBoxAñoSGR1, 0, 1, Short.MAX_VALUE)))
+                                                    .addComponent(comboBoxAñoSGR, 0, 1, Short.MAX_VALUE)))
                                             .addGroup(jPanel7Layout.createSequentialGroup()
                                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(textCedulaArrendatario1)
@@ -637,14 +638,14 @@ public class Modulossss extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29)
-                            .addComponent(comboBoxAñoSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxDiaSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxMesSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboBoxAñoSGR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxDiaSGR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxMesSGR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(17, 17, 17)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel39)
-                            .addComponent(comboBoxDiaSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxMesSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxDiaSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxMesSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboBoxAñoSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -682,13 +683,13 @@ public class Modulossss extends javax.swing.JFrame {
 
         tablaVisualizacionUsuarioGestionUnidades1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cédula", "Nombre", "Tipo", "Estado", "Fecha Inicio", "Fecha Fin", "Observacion"
+                "ID", "Cédula", "Nombre", "Tipo", "Estado", "Fecha Inicio", "Fecha Fin", "Observacion"
             }
         ));
         jScrollPane10.setViewportView(tablaVisualizacionUsuarioGestionUnidades1);
@@ -703,7 +704,19 @@ public class Modulossss extends javax.swing.JFrame {
         jLabel34.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
         jLabel34.setText("INTERFAZ DE USUARIO DE GESTION DE UNIDADES");
 
-        botonEliminarAIG1.setText("Eliminar");
+        botonFiltrarAIG1.setText("Filtrar");
+        botonFiltrarAIG1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonFiltrarAIG1ActionPerformed(evt);
+            }
+        });
+
+        botonEliminarRegistroAIG2.setText("Eliminar Fila");
+        botonEliminarRegistroAIG2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarRegistroAIG2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -715,26 +728,30 @@ public class Modulossss extends javax.swing.JFrame {
                         .addGap(87, 87, 87)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxVisualizacionUsuarioGestionUnidades2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(comboBoxVisualizacionUsuarioGestionUnidades2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62)
+                                .addComponent(botonFiltrarAIG1)
+                                .addGap(50, 50, 50)
+                                .addComponent(botonEliminarRegistroAIG2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(312, 312, 312)
-                        .addComponent(jLabel34))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(441, 441, 441)
-                        .addComponent(botonEliminarAIG1)))
+                        .addComponent(jLabel34)))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(8, Short.MAX_VALUE)
                 .addComponent(jLabel34)
                 .addGap(18, 18, 18)
-                .addComponent(comboBoxVisualizacionUsuarioGestionUnidades2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxVisualizacionUsuarioGestionUnidades2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonFiltrarAIG1)
+                    .addComponent(botonEliminarRegistroAIG2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(botonEliminarAIG1))
+                .addGap(44, 44, 44))
         );
 
         jTabbedPane4.addTab("Visualización", jPanel8);
@@ -1554,24 +1571,68 @@ public class Modulossss extends javax.swing.JFrame {
     private void botonAgregarAIGes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAIGes1ActionPerformed
         String numeCedula = textCedulaArrendatario1.getText();
         String nombreUsuario = PestanaGestionInmuebles.BuscarPorCedula(numeCedula);
-        String diaSeleccionado = (String) comboBoxDiaSGR1.getSelectedItem();
-        String mesSeleccionado = (String) comboBoxMesSGR1.getSelectedItem();
-        String añoSeleccionado = (String) comboBoxAñoSGR1.getSelectedItem();
+        String diaSeleccionado1 = (String) comboBoxDiaSGR.getSelectedItem();
+        String mesSeleccionado1 = (String) comboBoxMesSGR.getSelectedItem();
+        String añoSeleccionado1 = (String) comboBoxAñoSGR.getSelectedItem();
+        
+        String diaSeleccionado2 = (String) comboBoxDiaSGR2.getSelectedItem();
+        String mesSeleccionado2 = (String) comboBoxMesSGR2.getSelectedItem();
+        String añoSeleccionado2 = (String) comboBoxAñoSGR2.getSelectedItem();
 
-        //System.out.println(diaSeleccionado);
-        //System.out.println(mesSeleccionado);
-        //System.out.println(añoSeleccionado);
-        //String fech = diaSeleccionado + "/"+ mesSeleccionado+ "/"+ añoSeleccionado ;
-        String Fecha = diaSeleccionado + "/"+ mesSeleccionado+ "/"+ añoSeleccionado ;
-        //String Unidad = textUnidadReserva1.getText();
+        
+        String Fecha_inicio = diaSeleccionado1 + "/"+ mesSeleccionado1+ "/"+ añoSeleccionado1 ;
+        String Fecha_fin = diaSeleccionado2 + "/"+ mesSeleccionado2+ "/"+ añoSeleccionado2 ;
+        
+        String Tipo = (String) comboBoxUnidadReserva.getSelectedItem();
+        
         String Observaciones = textObsAdicionales1.getText();
-        //PestanaGestionInmuebles.EnviarReserva(numeCedula, nombreUsuario, Fecha, Unidad, Observaciones);
+        
+        PestanaGestionInmuebles.EnviarReserva(numeCedula, nombreUsuario,Tipo,Fecha_inicio ,Fecha_fin , Observaciones);
         PestanaGestionInmuebles.TraertablaReserva(numeCedula, tablaGestionReserva1);
 
         //tablaGestionReserva1.setModel(model);
 
         //System.out.println(numeCedula);
     }//GEN-LAST:event_botonAgregarAIGes1ActionPerformed
+
+    private void botonFiltrarAIG1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonFiltrarAIG1ActionPerformed
+        String estado = (String) comboBoxVisualizacionUsuarioGestionUnidades2.getSelectedItem();
+        System.out.println(estado);
+        PestanaGestionInmuebles.TraertablaReservaEstado(estado, tablaVisualizacionUsuarioGestionUnidades1);
+    }//GEN-LAST:event_botonFiltrarAIG1ActionPerformed
+
+    private void botonEliminarRegistroAIG2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarRegistroAIG2ActionPerformed
+        // Obtener la fila seleccionada en la tabla
+        int filaSeleccionada = tablaVisualizacionUsuarioGestionUnidades1.getSelectedRow();
+        String estado = (String) comboBoxVisualizacionUsuarioGestionUnidades2.getSelectedItem();
+    
+    // Verificar si se ha seleccionado una fila
+        if (filaSeleccionada != -1) {
+        // Confirmar con el usuario si realmente desea eliminar el condominio
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar este condominio?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        
+            // Si el usuario confirma la eliminación
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                // Eliminar la fila del modelo de la tabla
+                DefaultTableModel modeloTabla = (DefaultTableModel) tablaVisualizacionUsuarioGestionUnidades1.getModel();
+                
+
+                if (filaSeleccionada != -1) { // Verifica si se ha seleccionado una fila
+                    int columnCount = modeloTabla.getColumnCount();
+                    String ID = (String) modeloTabla.getValueAt(filaSeleccionada, 0);
+                    int idEntero = Integer.parseInt(ID);
+                    System.out.println(idEntero);
+                    PestanaGestionInmuebles.eliminarRegistro(modeloTabla,idEntero);
+                    PestanaGestionInmuebles.TraertablaReservaEstado(estado, tablaVisualizacionUsuarioGestionUnidades1);
+                }
+                    
+                
+                //PestanaGestionInmuebles.eliminarRegistro(modeloTabla,"1234567890");
+            }
+        } else {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione un condominio para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botonEliminarRegistroAIG2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1634,17 +1695,18 @@ public class Modulossss extends javax.swing.JFrame {
     private javax.swing.JButton botonAgregarAIGes1;
     private javax.swing.JToggleButton botonAgregarCatalogo;
     private javax.swing.JToggleButton botonEditarCatalogo;
-    private javax.swing.JButton botonEliminarAIG1;
     private javax.swing.JToggleButton botonEliminarCatalogo;
+    private javax.swing.JButton botonEliminarRegistroAIG2;
+    private javax.swing.JButton botonFiltrarAIG1;
     private javax.swing.JButton btnConsultacliente;
     private javax.swing.JComboBox<String> comboBoxAñoReservaAgenda;
-    private javax.swing.JComboBox<String> comboBoxAñoSGR1;
+    private javax.swing.JComboBox<String> comboBoxAñoSGR;
     private javax.swing.JComboBox<String> comboBoxAñoSGR2;
     private javax.swing.JComboBox<String> comboBoxDiaReservaAgenda;
-    private javax.swing.JComboBox<String> comboBoxDiaSGR1;
+    private javax.swing.JComboBox<String> comboBoxDiaSGR;
     private javax.swing.JComboBox<String> comboBoxDiaSGR2;
     private javax.swing.JComboBox<String> comboBoxMesReservaAgenda;
-    private javax.swing.JComboBox<String> comboBoxMesSGR1;
+    private javax.swing.JComboBox<String> comboBoxMesSGR;
     private javax.swing.JComboBox<String> comboBoxMesSGR2;
     private javax.swing.JComboBox<String> comboBoxUnidadReserva;
     private javax.swing.JComboBox<String> comboBoxVisualizacionUsuarioGestionUnidades2;
