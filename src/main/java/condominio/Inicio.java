@@ -6,7 +6,7 @@ package condominio;
 
 
 import GestionUsuariosYAdministracion.InicioSesion;
-import G2_Usuarios.RegistroUsuario;
+//import G2_Usuarios.RegistroUsuario;
 
 /**
  *
@@ -84,7 +84,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        new RegistroUsuario().setVisible(true);
+        //new RegistroUsuario().setVisible(true);
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     /**

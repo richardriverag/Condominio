@@ -240,3 +240,29 @@ VALUES
 (3, 4, 2, '2024-02-17', 'Cierre temporal de parqueadero', 'Por motivos de mantenimiento, el parqueadero estará cerrado desde el lunes hasta el miércoles de la próxima semana.'),
 (4, 5, 4, '2024-02-17', 'Horario especial de atención', 'Durante la temporada navideña, la administración estará atendiendo en horario extendido.'),
 (5, 1, 1, '2024-02-17', 'Asamblea extraordinaria', 'Se convoca a todos los propietarios a una asamblea extraordinaria que se llevará a cabo el próximo domingo a las 10:00 a.m.');
+
+
+/*===============================================================================================*/
+/*=========================TABLAS USADAS POR MODULO INMUEBLES GRUPO 3=============================*/
+/*===============================================================================================*/
+
+DROP TABLE IF EXIST CLIENTE;
+DROP TABLE IF NO EXIST UNIDAD;
+
+/*=====================CLIENTE=====================*/
+CREATE TABLE CLIENTE (
+    CI VARCHAR (10),
+    NOMBRE VARCHAR(100),
+    FECHA_RESERVA_INMUEBLE DATE,
+    UNIDAD_RESERVADA VARCHAR(100),
+    OBSERVACION VARCHAR(100)
+);
+
+INSERT INTO CLIENTE (CI, NOMBRE, FECHA_RESERVA_INMUEBLE, UNIDAD_RESERVADA, OBSERVACION)
+VALUES
+('1234567890', 'Juan Pérez', '2024-02-12', 'Apartamento 101', 'Reserva confirmada'),
+('9876543210', 'Ana García', '2024-02-15', 'Casa 20', 'Pago pendiente'),
+('5678901234', 'Carlos Rodríguez', '2024-02-20', 'Oficina A3', 'Reserva temporal');
+
+--Insertar registros en la tabla cliente
+SELECT NOMBRE, FECHA_RESERVA_INMUEBLE, UNIDAD_RESERVADA, OBSERVACION FROM CLIENTE;

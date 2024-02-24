@@ -17,6 +17,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+    import java.sql.Connection;
+    import java.sql.DriverManager;
+    import java.sql.SQLException;
+
+
 /**
  *
  * @author dopar
@@ -1185,7 +1190,6 @@ public class Modulossss extends javax.swing.JFrame {
         jTabbedPane1.addTab("tab7", panelReportes);
 
         jButton2.setText("Agregar");
-        jButton2.setActionCommand("Agregar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -1457,7 +1461,7 @@ public class Modulossss extends javax.swing.JFrame {
         String Unidad = textUnidadReserva1.getText();
         String Observaciones = textObsAdicionales1.getText();
         PestanaGestionInmuebles.EnviarReserva(numeCedula, nombreUsuario, Fecha, Unidad, Observaciones);
-        
+        PestanaGestionInmuebles.TraertablaReserva(numeCedula, tablaGestionReserva1);
         
         
             
@@ -1542,6 +1546,8 @@ public class Modulossss extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1572,6 +1578,26 @@ public class Modulossss extends javax.swing.JFrame {
                 new Modulossss().setVisible(true);
             }
         });
+        String hostname = "localhost"; // Cambia esto por el nombre de tu servidor
+        String port = "1433"; // Si el puerto es diferente, cámbialo
+        String databaseName = "Condominio";
+        String username = "sa";
+        String password = "P@ssw0rd";
+
+        String url = "jdbc:sqlserver://" + hostname + ":" + port + ";databaseName=" + databaseName;
+
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Conexión establecida.");
+
+            // Aquí puedes realizar consultas, actualizaciones, etc.
+
+            conn.close();
+            System.out.println("Conexión cerrada.");
+        } catch (SQLException e) {
+            System.out.println("Error al conectar a la base de datos: " + e.getMessage());
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

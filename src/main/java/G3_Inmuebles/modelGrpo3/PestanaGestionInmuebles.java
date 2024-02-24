@@ -27,12 +27,12 @@ import java.sql.SQLException;
  */
 public class PestanaGestionInmuebles {
     
-    private static final String URL = "jdbc:mysql://localhost:3306/tu_base_de_datos";
-    private static final String USER = "nombreusuario";
-    private static final String PASSWORD = "contraseña";
+    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=Condominio;trustServerCertificate=true";
+    private static final String USER = "sa";
+    private static final String PASSWORD = "P@ssw0rd";
 
     public static String BuscarPorCedula(String numeCedula) {
-        String query = "SELECT * FROM clientes WHERE cedula = ?";
+        String query = "SELECT * FROM CLIENTE WHERE CI = ?";
         try (
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -64,7 +64,7 @@ public class PestanaGestionInmuebles {
         model.addColumn("Unidad");
         model.addColumn("Observaciones");
 
-        String query = "SELECT CI, Nombre, Fecha, Unidad, Observaciones FROM TablaReservas WHERE cedula_cliente = ?";
+        String query = "SELECT CI, NOMBRE, FECHA_RESERVA_INMUEBLE, UNIDAD_RESERVADA, OBSERVACION FROM CLIENTE WHERE CI = ?";
         try (
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -72,11 +72,11 @@ public class PestanaGestionInmuebles {
             statement.setString(1, numeCedula);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                String Cedula = resultSet.getString("Cedula");
-                String Nombre = resultSet.getString("Nombre");
-                String Fecha = resultSet.getString("Fecha");
-                String Unidad = resultSet.getString("Unidad");
-                String Observaciones = resultSet.getString("Observaciones");
+                String Cedula = resultSet.getString("CI");
+                String Nombre = resultSet.getString("NOMBRE");
+                String Fecha = resultSet.getString("FECHA_RESERVA_INMUEBLE");
+                String Unidad = resultSet.getString("UNIDAD_RESERVADA");
+                String Observaciones = resultSet.getString("OBSERVACION");
                 model.addRow(new Object[]{Cedula, Nombre, Fecha,Unidad,Observaciones});
                 tablaGestionReserva1.setModel(model);
             }
@@ -96,7 +96,7 @@ public class PestanaGestionInmuebles {
     }
 
     public static void EnviarReserva(String numeCedula, String nombreUsuario, String fecha, String unidad, String observaciones) {
-        String query = "INSERT INTO reserva (cedula_cliente, nombre_usuario, fecha, unidad, observaciones) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO CLIENTE (CI, NOMBRE, FECHA_RESERVA_INMUEBLE, UNIDAD_RESERVADA, OBSERVACION) VALUES (?, ?, ?, ?, ?)";
         try (
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             PreparedStatement statement = connection.prepareStatement(query);
