@@ -18,7 +18,7 @@ import model.Pago;
  * @author eddya
  */
 public class Metodos_Sql_Pago {
-    
+    /*
   public void desplegarIngresosEgresos(Connection cn, JTable jtable, boolean Ingreso, boolean Egreso){
         // Crear un modelo de tabla para el JTable
         DefaultTableModel modelo = new DefaultTableModel();
@@ -73,7 +73,7 @@ public class Metodos_Sql_Pago {
             JOptionPane.showMessageDialog(null, "Ocurrió un error al recuperar los datos");
         }
     }
-/*
+*/
 public void desplegarIngresosEgresos(Connection cn, JTable jtable, boolean Ingreso, boolean Egreso) {
     // Crear un modelo de tabla para el JTable
     DefaultTableModel modelo = new DefaultTableModel();
@@ -114,7 +114,6 @@ public void desplegarIngresosEgresos(Connection cn, JTable jtable, boolean Ingre
         JOptionPane.showMessageDialog(null, "Ocurrió un error al recuperar los datos");
     }
 }  
-*/
     public void desplegarSaldoPendienteDeUsuario(Connection cn, String idUsuario, JTable tabla) throws SQLException {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Usuario");

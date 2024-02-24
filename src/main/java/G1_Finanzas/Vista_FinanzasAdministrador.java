@@ -2,6 +2,7 @@
 package G1_Finanzas;
 
 
+import static G1_Finanzas.Metodo_ValidacionDatos.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
@@ -203,7 +204,6 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1920, 680));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -1440,12 +1440,24 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("AJUSTES TIPO DE PAGO", jPanel10);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1300, -1));
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MODULO FINANZAS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1300, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1300, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel1)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1621,15 +1633,15 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         }
         
         
-        metodosSQLCuota.agregarCuotas(cn,listaCuotas,numeroCuotas);    
-     // vaciarTablaCuotas();
+//        metodosSQLCuota.agregarCuotas(cn,listaCuotas,numeroCuotas);    
+//        vaciarTablaCuotas();
         //----------------Validacion
         
      if (Metodo_ValidacionDatos.validarCamposIngreso(jTFCodigoUsuarioRegistroIngreso, jTFValorRegistrarIngreso, jRBExtraordinario, jRBOrdinario)) {
             // Acciones después de la validación exitosa
             metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoIngreso, tipo, true, false);
             metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarIngreso, true, false);
-           // vaciarTablaCuotas();
+            vaciarTablaCuotas();
 
     }
                
@@ -1777,7 +1789,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     private void jTableRegistrarIngresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRegistrarIngresoMousePressed
         int fila = jTableRegistrarIngreso.getSelectedRow();
         String idIngreso = jTableRegistrarIngreso.getValueAt(fila, 0).toString();
-        JOptionPane.showMessageDialog(null, idIngreso, "alert", JOptionPane.ERROR_MESSAGE);
+        
         metodosSQLCuota.desplegarCuotasPagoEspecifico(cn, jTCuotasPago, idIngreso);
 
     }//GEN-LAST:event_jTableRegistrarIngresoMousePressed
@@ -1804,7 +1816,23 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
               
           
     }
-
+//        switch(campoAFiltrar){
+//            case ("condominio"):
+//                metodosSQLPago.desplegarIngresosEgresosCondominio(cn,jTableIngresos,true,false,this.jTFid_CondominioAFiltrar.getText());
+//                break;
+//            case ("unidad"):
+//                metodosSQLPago.desplegarIngresosEgresosDepartamento(cn,jTableIngresos,true,false,this.jTFid_DepartamentoAFiltrar.getText());
+//                break;
+//            case ("extraordinarios"):
+//                metodosSQLPago.desplegarIngresosExtraordinarios(cn, jTableIngresos);
+//                break;
+//            case ("extraordinariosYExtraordinarios"):
+//                metodosSQLPago.desplegarIngresosEgresos(cn, jTableIngresos, true, false);
+//                break;
+//            default:
+//                break;
+//                
+//        }
     }//GEN-LAST:event_jBFiltrarVisualizarIngresosActionPerformed
 
 
@@ -1821,14 +1849,14 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jRBFiltrarUnidadActionPerformed
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-        try {
+        /*try {
             conexion = new ConexionGrupo1();
             cn= conexion.conectar();
             metodosSQLPago = new Metodos_Sql_Pago();
             metodosSQLPago.desplegarCobranzas(cn, this.jTableCobranzas);
         } catch (SQLException ex) {
             Logger.getLogger(Vista_FinanzasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jTFValorRegistrarIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValorRegistrarIngresoActionPerformed
