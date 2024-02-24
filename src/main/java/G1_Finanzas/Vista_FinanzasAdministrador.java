@@ -1,6 +1,7 @@
 
 package G1_Finanzas;
 
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
@@ -60,19 +61,18 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         metodosSQLCuota = new Metodos_Sql_Cuotas();
         metodosSQLPago = new Metodos_Sql_Pago();
         metodosSQLTipoPago = new Metodos_Sql_TipoPago();
-        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableIngresos, true, false);
-        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableVisualizarEgresos, false, true);
+        //metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableIngresos, true, false);
+        //
         
         actualizarComboBoxMetodoPago();
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarIngreso, true, false);
-        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarEgreso, false, true);
-        metodosSQLTipoPago.desplegarTipoPagos(cn, this.jTTipoPago);
         
         this.jPDescripcion.setVisible(false);
         this.jTFid_CondominioAFiltrar.setEditable(false);
         this.jTFid_DepartamentoAFiltrar.setEditable(false);
-        //metodosSQLCuota.actualizarEstadoCuotaAPagada(cn, "12");
-        metodosSQLPago.desplegarInformacionPagosYCuotas(cn, this.jTableCobranzas);
+       // metodosSQLCuota.actualizarEstadoCuotaAPagada(cn, "1");
+       //metodosSQLCuota.actualizarEstadoCuotaAPagada(cn, "2");
+       
        
     }
 
@@ -117,7 +117,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jRBExtraordinario = new javax.swing.JRadioButton();
         jPDescripcion = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextAreaRegistroIngreso = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jLDescripcionRegistroIngreso = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -203,6 +203,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1920, 680));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -210,6 +211,11 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             }
         });
 
+        jTableRegistrarIngreso = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
         jTableRegistrarIngreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -221,6 +227,8 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableRegistrarIngreso.getTableHeader().setResizingAllowed(false);
+        jTableRegistrarIngreso.getTableHeader().setReorderingAllowed(false);
         jTableRegistrarIngreso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTableRegistrarIngresoMousePressed(evt);
@@ -230,6 +238,11 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         jLabel7.setText("Lista Ingresos");
 
+        jTCuotasPago = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
         jTCuotasPago.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -240,7 +253,15 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane7.setViewportView(jTCuotasPago);
 
         jLabel13.setText("Lista Cuotas ");
@@ -249,11 +270,22 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         jLabel20.setText("Codigo Usuario:");
 
+        jTFCodigoUsuarioRegistroIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCodigoUsuarioRegistroIngresoActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Valor:");
 
         jTFValorRegistrarIngreso.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTFValorRegistrarIngresoFocusLost(evt);
+            }
+        });
+        jTFValorRegistrarIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFValorRegistrarIngresoActionPerformed(evt);
             }
         });
         jTFValorRegistrarIngreso.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -369,9 +401,9 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             }
         });
 
-        jTextAreaRegistroIngreso.setColumns(20);
-        jTextAreaRegistroIngreso.setRows(5);
-        jScrollPane9.setViewportView(jTextAreaRegistroIngreso);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane9.setViewportView(txtDescripcion);
 
         jLDescripcionRegistroIngreso.setText("Descripción (Opcional):");
 
@@ -402,44 +434,42 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel14)
+                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTFValorRegistrarIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(jTFCodigoUsuarioRegistroIngreso)))
+                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel16Layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(jRBOrdinario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRBExtraordinario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(cmbPagoRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(69, 69, 69))
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(10, 10, 10)
                         .addComponent(jPDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(14, 14, 14)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(jBRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel14)
-                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTFValorRegistrarIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(jTFCodigoUsuarioRegistroIngreso)))
-                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel16Layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jRBOrdinario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jRBExtraordinario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cmbPagoRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(69, 69, 69))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                        .addComponent(jBRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(127, 127, 127))))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,11 +493,11 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                     .addComponent(jRBExtraordinario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jPDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(26, 26, 26))
         );
 
         jLabel32.setText("* Se debe seleccionar un pago de la lista de ingresos para ver las cuotas");
@@ -477,9 +507,9 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
+                .addContainerGap()
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -489,7 +519,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,12 +537,18 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addContainerGap()
                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28))
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Ingreso", jPanel4);
+
+        jPanel5.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                EgresoInComponentShown(evt);
+            }
+        });
 
         jTableRegistrarEgreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -558,14 +594,14 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel21)
                             .addComponent(jLabel9))
-                        .addGap(52, 52, 52)
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(cmbPagoRegistrarEgreso, javax.swing.GroupLayout.Alignment.LEADING, 0, 158, Short.MAX_VALUE)
                             .addComponent(jTFValorRegistrarEgreso, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTFCodigoUsuarioRegistroEgreso))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
+                .addContainerGap(62, Short.MAX_VALUE)
                 .addComponent(jBRegistrarEgreso, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(107, 107, 107))
         );
@@ -597,11 +633,11 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(11, 11, 11)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -611,9 +647,9 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
+                        .addGap(94, 94, 94)
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Egreso", jPanel5);
@@ -622,21 +658,26 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2)
-                .addContainerGap())
+            .addComponent(jTabbedPane2)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2)
-                .addContainerGap())
+            .addComponent(jTabbedPane2)
         );
 
         jTabbedPane1.addTab("REGISTRAR", jPanel3);
 
+        jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                IngresosComponentShown(evt);
+            }
+        });
+
+        jTableIngresos = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
         jTableIngresos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -647,7 +688,15 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableIngresos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTableIngresosMousePressed(evt);
@@ -813,18 +862,17 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(500, 500, 500)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(504, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(382, 382, 382)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 1197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -835,13 +883,24 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                 .addComponent(jLabel31)
                 .addGap(1, 1, 1)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
 
         jTabbedPane1.addTab("VISUALIZAR INGRESOS", jPanel1);
 
+        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel2ComponentShown(evt);
+            }
+        });
+
+        jTableVisualizarEgresos = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
         jTableVisualizarEgresos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -852,7 +911,15 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableVisualizarEgresos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTableVisualizarEgresosMousePressed(evt);
@@ -941,16 +1008,15 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1429, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(486, 486, 486)
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(350, 350, 350)
+                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -967,6 +1033,11 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("VISUALIZAR EGRESOS", jPanel2);
 
+        jTableSaldosCuenta = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
         jTableSaldosCuenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -977,7 +1048,15 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             new String [] {
                 "ID_CLIENTE", "ID_PAGO", "MONTO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(jTableSaldosCuenta);
 
         jLabel11.setText("Lista de saldos por cuenta");
@@ -1022,30 +1101,45 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(866, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1248, 1248, 1248))
+            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1453, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 941, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(34, 34, 34)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(56, 56, 56))
         );
 
         jTabbedPane1.addTab("SALDOS POR CUENTA", jPanel6);
 
+        jPanel8.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                CobranzasComponentShown(evt);
+            }
+        });
+
+        jTableCobranzas = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
         jTableCobranzas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -1056,27 +1150,41 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             new String [] {
                 "ID_CUOTA", "ID_CLIENTE", "FECHA VENCIMIENTO", "NUMERO DE CUOTAS", "MONTO/CUOTA", "CUOTAS PENDIENTES", "SALDO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(jTableCobranzas);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("COBRANZAS", jPanel8);
+
+        jPanel10.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                AjustesComponentShown(evt);
+            }
+        });
 
         jPanel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -1317,44 +1425,27 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(307, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(220, 220, 220)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(301, 301, 301))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(79, 79, 79)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("AJUSTES TIPO DE PAGO", jPanel10);
 
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1300, -1));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MODULO FINANZAS");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel1)
-                .addGap(0, 0, 0)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1372,11 +1463,13 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jRBFiltrarExtraordinariosActionPerformed
 
     private void jBRegistrarEgresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegistrarEgresoActionPerformed
-        if(!jTFCodigoUsuarioRegistroEgreso.getText().isEmpty()||!jTFValorRegistrarEgreso.getText().isEmpty()){
-         // boton de registrar 
+        
         String usuario1 = this.jTFCodigoUsuarioRegistroEgreso.getText();
         String formapago1 = this.cmbPagoRegistrarEgreso.getSelectedItem().toString();
         String valor1 = this.jTFValorRegistrarEgreso.getText();
+
+        if(Metodo_ValidacionDatos.validarCamposEgreso(jTFCodigoUsuarioRegistroEgreso, jTFValorRegistrarEgreso)){
+            
 
         String fecha1 = fechaActual.toString();
         //(String id_Pagos, String id_Usuario, Date fecha_Pago, String id_MetodoPago, float monto_Pago, TipoPago tipoPago_Pago, Date fechaVencimiento_Pago, String estado_Pago)
@@ -1384,10 +1477,12 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         Pago pagoEgreso = new Pago("",usuario1,fecha1,formapago1,Float.parseFloat(valor1),tipoPagoRegistrarEgreso,fecha1,"VIGENTE","EGRESO ORDINARIO");
         metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoEgreso, "EGRESO ORDINARIO", false, true);
         metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarEgreso, false, true);
-        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableVisualizarEgresos, false, true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Ingrese todos los campos", "alert", JOptionPane.ERROR_MESSAGE);
+            
         }
+        
+           
+         
+        
     }//GEN-LAST:event_jBRegistrarEgresoActionPerformed
 
     private void cmbPagoRegistrarIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagoRegistrarIngresoActionPerformed
@@ -1493,26 +1588,25 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
         String formapago1 = this.cmbPagoRegistrarIngreso.getSelectedItem().toString();
         montoPago = Float.parseFloat(this.jTFValorRegistrarIngreso.getText()); //utilizo el que esta en el evento
         //String fecha1 = fechaActualPago.toString();
-        
+        String description = "Pago";
         LocalDate fechaActualPago = LocalDate.now();
         // Sumar n meses (numeroCuotas) a la fecha actual
         LocalDate fechaVencimientoPago = fechaActualPago.plusMonths(numeroCuotas);
         String tipo="INGRESO ORDINARIO";
         if(bandera){
             tipo="INGRESO EXTRAORDINARIO";
-        }else{
-            tipo="INGRESO ORDINARIO";
+            description = this.txtDescripcion.getText();
         }
         
         /*--------------------------------------------*/
                
         TipoPago tipoPagoRegistrarIngreso = new TipoPago("",formapago1);
-        Pago pagoIngreso = new Pago("",usuario1,fechaActualPago.toString(),formapago1,montoPago,tipoPagoRegistrarIngreso,fechaVencimientoPago.toString(),"VIGENTE",tipo);
-        metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoIngreso,tipo, true, false);
-        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarIngreso, true, false);
-        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableIngresos, true, false);
-
-        
+        Pago pagoIngreso = new Pago("",usuario1,fechaActualPago.toString(),formapago1,montoPago,tipoPagoRegistrarIngreso,fechaVencimientoPago.toString(),"VIGENTE",description);
+//        metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoIngreso,tipo, true, false);
+//        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarIngreso, true, false);
+//        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableIngresos, true, false);
+//
+//        
         /*--------------------------------------------*/
         //---------------------Registrar cuotas-------------------
        
@@ -1526,8 +1620,19 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
             listaCuotas.add(cuota);
         }
         
+        
         metodosSQLCuota.agregarCuotas(cn,listaCuotas,numeroCuotas);    
-        vaciarTablaCuotas();
+     // vaciarTablaCuotas();
+        //----------------Validacion
+        
+     if (Metodo_ValidacionDatos.validarCamposIngreso(jTFCodigoUsuarioRegistroIngreso, jTFValorRegistrarIngreso, jRBExtraordinario, jRBOrdinario)) {
+            // Acciones después de la validación exitosa
+            metodosSQLPago.insertarPagoIngresoEgreso(cn, pagoIngreso, tipo, true, false);
+            metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarIngreso, true, false);
+           // vaciarTablaCuotas();
+
+    }
+               
     }//GEN-LAST:event_jBRegistrarIngresoActionPerformed
 
     private void jCBNumeroCuotasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBNumeroCuotasItemStateChanged
@@ -1582,26 +1687,31 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     private void jBAnularIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnularIngresoActionPerformed
         String botones[] = {"  Anular  ", " Cancelar "};
 
-        if (this.jTFId_Pago.getText().isEmpty() || this.jTF_Monto.getText().isEmpty() || this.jTF_EstadoPago.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese todos los campos", "Finzanzas Administrador", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (this.jTF_EstadoPago.getText().equals("VIGENTE")) { // Cambié contentEquals por equals para comparar cadenas
-                int op = JOptionPane.showOptionDialog(this, "¿Está seguro que desea anular el registro?", "Finzanzas Administrador", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, botones, botones[0]); // Cambié 0 por JOptionPane.DEFAULT_OPTION para utilizar la opción por defecto
-                if (op == JOptionPane.OK_OPTION) { // Cambié JOptionPane.YES_OPTION por JOptionPane.OK_OPTION ya que YES_OPTION es para cuadros de diálogo con botones de opción y OK_OPTION para cuadros de diálogo con botones de aceptar y cancelar
-                    metodosSQLPago.anularPago(cn, this.jTFId_Pago.getText());
-                    metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableIngresos, true, false); 
-                    metodosSQLCuota.eliminarCuotasPorIdPago(cn, this.jTFId_Pago.getText()); //quitar las cuotas del pago anulado
-                    metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarIngreso, true, false);
-                    this.jTFId_Pago.setText("");
-                    this.jTF_Monto.setText("");
-                    this.jTF_EstadoPago.setText("");                
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "El pago ya está ANULADO", "Finzanzas Administrador", JOptionPane.ERROR_MESSAGE); // Corregí ANULADO por "ANULADO" ya que parecía ser una cadena
+  if (this.jTableIngresos.getSelectedRow() == -1) {
+    JOptionPane.showMessageDialog(null, "Seleccione un dato de la tabla para continuar", "Finzanzas Administrador", JOptionPane.WARNING_MESSAGE);
+} else {
+    if (this.jTFId_Pago.getText().isEmpty() || this.jTF_Monto.getText().isEmpty() || this.jTF_EstadoPago.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ingrese todos los campos", "Finzanzas Administrador", JOptionPane.ERROR_MESSAGE);
+    } else {
+        if (this.jTF_EstadoPago.getText().equals("VIGENTE")) {
+            int op = JOptionPane.showOptionDialog(this, "¿Está seguro que desea anular el registro?", "Finzanzas Administrador", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, botones, botones[0]);
+            if (op == JOptionPane.OK_OPTION) {
+                metodosSQLPago.anularPago(cn, this.jTFId_Pago.getText());
+                metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableIngresos, true, false);
+                metodosSQLCuota.eliminarCuotasPorIdPago(cn, this.jTFId_Pago.getText());
+                metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarIngreso, true, false);
+                this.jTFId_Pago.setText("");
+                this.jTF_Monto.setText("");
+                this.jTF_EstadoPago.setText("");                
             }
-        } 
-        
-        vaciarTablaCuotas();
+        } else {
+            JOptionPane.showMessageDialog(null, "El pago ya está ANULADO", "Finzanzas Administrador", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    vaciarTablaCuotas();
+}
+
     }//GEN-LAST:event_jBAnularIngresoActionPerformed
 
     private void jBAnularEgresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnularEgresoActionPerformed
@@ -1667,12 +1777,14 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     private void jTableRegistrarIngresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRegistrarIngresoMousePressed
         int fila = jTableRegistrarIngreso.getSelectedRow();
         String idIngreso = jTableRegistrarIngreso.getValueAt(fila, 0).toString();
-        
+        JOptionPane.showMessageDialog(null, idIngreso, "alert", JOptionPane.ERROR_MESSAGE);
         metodosSQLCuota.desplegarCuotasPagoEspecifico(cn, jTCuotasPago, idIngreso);
 
     }//GEN-LAST:event_jTableRegistrarIngresoMousePressed
 
     private void jBFiltrarVisualizarIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFiltrarVisualizarIngresosActionPerformed
+       
+     if (Metodo_ValidacionDatos.validarDatosFiltro(jRFiltrarCondominio, jRBFiltrarUnidad, jRBFiltrarExtraordinarios, jRBFiltrarOrdinariosYExtraordinarios)) {
         switch(campoAFiltrar){
             case ("condominio"):
                 metodosSQLPago.desplegarIngresosEgresosCondominio(cn,jTableIngresos,true,false,this.jTFid_CondominioAFiltrar.getText());
@@ -1688,8 +1800,11 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
                 break;
             default:
                 break;
-                
-        }
+    }
+              
+          
+    }
+
     }//GEN-LAST:event_jBFiltrarVisualizarIngresosActionPerformed
 
 
@@ -1706,15 +1821,52 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jRBFiltrarUnidadActionPerformed
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-        /*try {
+        try {
             conexion = new ConexionGrupo1();
             cn= conexion.conectar();
             metodosSQLPago = new Metodos_Sql_Pago();
-            metodosSQLPago.desplegarInformacionPagosYCuotas(cn, this.jTableCobranzas);
+            metodosSQLPago.desplegarCobranzas(cn, this.jTableCobranzas);
         } catch (SQLException ex) {
             Logger.getLogger(Vista_FinanzasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jTFValorRegistrarIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValorRegistrarIngresoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFValorRegistrarIngresoActionPerformed
+
+    private void jTFCodigoUsuarioRegistroIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCodigoUsuarioRegistroIngresoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFCodigoUsuarioRegistroIngresoActionPerformed
+
+    private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
+        // TODO add your handling code here:
+        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableVisualizarEgresos, false, true);
+    }//GEN-LAST:event_jPanel2ComponentShown
+
+    private void IngresosComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_IngresosComponentShown
+        // TODO add your handling code here:
+        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableIngresos, true, false);
+    }//GEN-LAST:event_IngresosComponentShown
+
+    private void AjustesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AjustesComponentShown
+        // TODO add your handling code here:
+        metodosSQLTipoPago.desplegarTipoPagos(cn, this.jTTipoPago);
+    }//GEN-LAST:event_AjustesComponentShown
+
+    private void CobranzasComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_CobranzasComponentShown
+        try {
+            // TODO add your handling code here:
+            metodosSQLPago.desplegarCobranzas(cn, this.jTableCobranzas);
+        } catch (SQLException ex) {
+            Logger.getLogger(Vista_FinanzasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_CobranzasComponentShown
+
+    private void EgresoInComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_EgresoInComponentShown
+        // TODO add your handling code here:
+        metodosSQLPago.desplegarIngresosEgresos(cn, this.jTableRegistrarEgreso, false, true);
+    }//GEN-LAST:event_EgresoInComponentShown
     
     
     private void limpiarjTFTipoPagos(){
@@ -1920,7 +2072,7 @@ public class Vista_FinanzasAdministrador extends javax.swing.JFrame {
     private javax.swing.JTable jTableRegistrarIngreso;
     private javax.swing.JTable jTableSaldosCuenta;
     private javax.swing.JTable jTableVisualizarEgresos;
-    private javax.swing.JTextArea jTextAreaRegistroIngreso;
+    private javax.swing.JTextArea txtDescripcion;
     // End of variables declaration//GEN-END:variables
 
 }

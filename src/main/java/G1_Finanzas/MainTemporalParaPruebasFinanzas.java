@@ -18,5 +18,7 @@ public class MainTemporalParaPruebasFinanzas {
     public static void main(String[] args) throws SQLException {
         Vista_FinanzasAdministrador finAd = new Vista_FinanzasAdministrador();
         finAd.setVisible(true);
+   
+        
     }
 }

@@ -1,10 +1,22 @@
 
 package G1_Finanzas;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JTable;
 
 /**
  *
@@ -24,8 +36,9 @@ public class Vista_FinanzasCliente extends javax.swing.JFrame {
         cn = conexion.conectar();
         tabCuota = new Metodos_Sql_Cuotas();
         //recibir desde login
-        tabCuota.desplegarCuotasPendientesDeUsuario(cn, "1", jTablePagosPendientes);
-        tabCuota.desplegarCuotasPagadasDeUsuario(cn, "1", jTablaPagosRealizados);
+        tabCuota.desplegarCuotasPendientesDeUsuario(cn, "USR001", jTablePagosPendientes);
+        tabCuota.desplegarCuotasPagadasDeUsuario(cn, "USR001", jTablaPagosRealizados);
+        //Jtable table = new JTable()
         
     }
 
@@ -45,8 +58,8 @@ public class Vista_FinanzasCliente extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTablaPagosRealizados = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLListaPagos = new javax.swing.JLabel();
+        jBGenerarReportePagos = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -54,7 +67,6 @@ public class Vista_FinanzasCliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1920, 680));
         setSize(new java.awt.Dimension(900, 600));
 
         jTablaPagosRealizados.setModel(new javax.swing.table.DefaultTableModel(
@@ -67,12 +79,25 @@ public class Vista_FinanzasCliente extends javax.swing.JFrame {
             new String [] {
                 "NUMERO CUOTA", "MONTO", "FECHA VENCIMIENTO", "METODO DE PAGO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(jTablaPagosRealizados);
 
-        jLabel8.setText("Lista de pagos realizados");
+        jLListaPagos.setText("Lista de pagos realizados");
 
-        jButton1.setText("GENERAR REPORTE DE PAGOS");
+        jBGenerarReportePagos.setText("GENERAR REPORTE DE PAGOS");
+        jBGenerarReportePagos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGenerarReportePagosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,10 +109,10 @@ public class Vista_FinanzasCliente extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(117, 117, 117)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLListaPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jBGenerarReportePagos, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 457, Short.MAX_VALUE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -96,11 +121,11 @@ public class Vista_FinanzasCliente extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8)
+                .addComponent(jLListaPagos)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBGenerarReportePagos, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -118,7 +143,15 @@ public class Vista_FinanzasCliente extends javax.swing.JFrame {
             new String [] {
                 "NUMERO CUOTA", "MONTO", "FECHA VENCIMIENTO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(jTablePagosPendientes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -168,6 +201,82 @@ public class Vista_FinanzasCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBGenerarReportePagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGenerarReportePagosActionPerformed
+        generarPDF(jTablaPagosRealizados, jLListaPagos.getText());
+    }//GEN-LAST:event_jBGenerarReportePagosActionPerformed
+
+    private void generarPDF(JTable tabla, String texto){
+        Document document = new Document();
+        try {
+            // Creamos un JFileChooser
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar");
+
+            // Establecemos el filtro de archivo solo para archivos PDF
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos PDF (*.pdf)", "pdf");
+            fileChooser.setFileFilter(filter);
+
+            // Deshabilitamos la opción "Todos los tipos de archivo"
+            fileChooser.setAcceptAllFileFilterUsed(false);
+
+            // Creamos un nombre de archivo predeterminado con el formato "Reporte+fecha actual"
+            String defaultFileName = "Reporte_" + java.time.LocalDate.now() + ".pdf";
+            File defaultFile = new File(defaultFileName);
+
+            // Establecemos el archivo seleccionado inicialmente en el JFileChooser
+            fileChooser.setSelectedFile(defaultFile);
+
+            // Mostramos el diálogo de guardado de archivo
+            int seleccion = fileChooser.showSaveDialog(this);
+
+            // Si el usuario elige guardar
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                // Obtenemos el archivo seleccionado
+                File file = fileChooser.getSelectedFile();
+
+                // Si la extensión del archivo no es .pdf, la agregamos
+                if (!file.getName().toLowerCase().endsWith(".pdf")) {
+                    file = new File(file.getAbsolutePath() + ".pdf");
+                }
+
+                // Creamos una instancia de PdfWriter para escribir en el documento PDF
+                PdfWriter.getInstance(document, new FileOutputStream(file));
+ 
+                // Abrimos el documento
+                document.open();
+            
+                // Se agrega el texto al documento
+                document.add(new Paragraph(texto));
+                // Se agrega un párrafo vacío para crear un espacio
+                document.add(new Paragraph(" "));
+                
+                // Creamos un objeto PdfPTable con el mismo número de columnas que el JTable
+                PdfPTable pdfTable = new PdfPTable(tabla.getColumnCount());
+
+                // Agregamos las cabeceras de las columnas
+                for (int i = 0; i < tabla.getColumnCount(); i++) {
+                    pdfTable.addCell(tabla.getColumnName(i));
+                }
+
+                // Agregamos las filas de datos
+                for (int i = 0; i < tabla.getRowCount(); i++) {
+                    for (int j = 0; j < tabla.getColumnCount(); j++) {
+                        pdfTable.addCell(tabla.getValueAt(i, j).toString());
+                    }
+                }
+                // Agregamos la tabla al documento
+                document.add(pdfTable);
+                JOptionPane.showMessageDialog(this, "PDF generado exitosamente.");
+            }
+        } catch (DocumentException | FileNotFoundException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage());
+        } finally {
+            // Cerramos el documento
+            document.close();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -218,10 +327,10 @@ public class Vista_FinanzasCliente extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBGenerarReportePagos;
+    private javax.swing.JLabel jLListaPagos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
