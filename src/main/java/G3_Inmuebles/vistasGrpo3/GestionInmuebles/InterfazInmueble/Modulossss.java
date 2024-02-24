@@ -100,6 +100,10 @@ public class Modulossss extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
         btnConsultacliente = new javax.swing.JButton();
+        jLabel39 = new javax.swing.JLabel();
+        comboBoxDiaSGR2 = new javax.swing.JComboBox<>();
+        comboBoxMesSGR2 = new javax.swing.JComboBox<>();
+        comboBoxAñoSGR2 = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         tablaVisualizacionUsuarioGestionUnidades1 = new javax.swing.JTable();
@@ -469,7 +473,7 @@ public class Modulossss extends javax.swing.JFrame {
 
         jLabel28.setText("Nombre del arrendatario");
 
-        jLabel29.setText("Fecha de arrendatario");
+        jLabel29.setText("Fecha Inicio de arrendatario");
 
         jLabel30.setText("Unidad a reservar");
 
@@ -480,13 +484,13 @@ public class Modulossss extends javax.swing.JFrame {
 
         tablaGestionReserva1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "CI", "Nombre ", "Fecha", "Unidad", "Observacion"
+                "CI", "Nombre ", "Tipo", "Estado", "Fecha Inicio", "Fecha Fin", "Observacion"
             }
         ));
         jScrollPane9.setViewportView(tablaGestionReserva1);
@@ -532,6 +536,14 @@ public class Modulossss extends javax.swing.JFrame {
             }
         });
 
+        jLabel39.setText("Fecha Fin de arrendatario");
+
+        comboBoxDiaSGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        comboBoxMesSGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+
+        comboBoxAñoSGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -542,27 +554,35 @@ public class Modulossss extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(154, 154, 154)
+                                .addComponent(btnConsultacliente))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel28)
                                     .addComponent(jLabel29)
                                     .addComponent(jLabel30)
                                     .addComponent(jLabel31)
-                                    .addComponent(jLabel33))
+                                    .addComponent(jLabel33)
+                                    .addComponent(jLabel39))
                                 .addGap(106, 106, 106)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textCedulaArrendatario1)
-                                    .addComponent(textUnidadReserva1)
-                                    .addComponent(textObsAdicionales1)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel7Layout.createSequentialGroup()
                                         .addComponent(comboBoxDiaSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(comboBoxMesSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(comboBoxAñoSGR1, 0, 71, Short.MAX_VALUE))
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGap(154, 154, 154)
-                                .addComponent(btnConsultacliente)))
+                                        .addComponent(comboBoxAñoSGR2, 0, 71, Short.MAX_VALUE))
+                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(textCedulaArrendatario1)
+                                        .addComponent(textUnidadReserva1)
+                                        .addComponent(textObsAdicionales1)
+                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                            .addComponent(comboBoxDiaSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(comboBoxMesSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(comboBoxAñoSGR1, 0, 71, Short.MAX_VALUE))
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -571,7 +591,7 @@ public class Modulossss extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGap(91, 91, 91)
                                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 35, Short.MAX_VALUE))))
+                                .addGap(0, 28, Short.MAX_VALUE))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel35)
@@ -603,21 +623,27 @@ public class Modulossss extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel28)
                             .addComponent(jLabel1))
-                        .addGap(68, 68, 68)
+                        .addGap(55, 55, 55)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29)
+                            .addComponent(comboBoxAñoSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxDiaSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxMesSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel39)
                             .addComponent(comboBoxDiaSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboBoxMesSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxAñoSGR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(comboBoxAñoSGR2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textUnidadReserva1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel30))
+                            .addComponent(jLabel30)
+                            .addComponent(textUnidadReserva1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textObsAdicionales1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel31))
-                        .addGap(69, 69, 69)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel35)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -645,13 +671,13 @@ public class Modulossss extends javax.swing.JFrame {
 
         tablaVisualizacionUsuarioGestionUnidades1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cédula", "Nombre", "Tipo", "Estado", "Fecha Inicio", "Fecha Fin"
+                "Cédula", "Nombre", "Tipo", "Estado", "Fecha Inicio", "Fecha Fin", "Observacion"
             }
         ));
         jScrollPane10.setViewportView(tablaVisualizacionUsuarioGestionUnidades1);
@@ -1609,10 +1635,13 @@ public class Modulossss extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultacliente;
     private javax.swing.JComboBox<String> comboBoxAñoReservaAgenda;
     private javax.swing.JComboBox<String> comboBoxAñoSGR1;
+    private javax.swing.JComboBox<String> comboBoxAñoSGR2;
     private javax.swing.JComboBox<String> comboBoxDiaReservaAgenda;
     private javax.swing.JComboBox<String> comboBoxDiaSGR1;
+    private javax.swing.JComboBox<String> comboBoxDiaSGR2;
     private javax.swing.JComboBox<String> comboBoxMesReservaAgenda;
     private javax.swing.JComboBox<String> comboBoxMesSGR1;
+    private javax.swing.JComboBox<String> comboBoxMesSGR2;
     private javax.swing.JComboBox<String> comboBoxVisualizacionUsuarioGestionUnidades2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1648,6 +1677,7 @@ public class Modulossss extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
