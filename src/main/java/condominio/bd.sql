@@ -266,3 +266,25 @@ VALUES
 
 --Insertar registros en la tabla cliente
 SELECT NOMBRE, FECHA_RESERVA_INMUEBLE, UNIDAD_RESERVADA, OBSERVACION FROM CLIENTE;
+
+
+/*=====================RESERVA=====================*/
+DROP TABLE IF EXISTS RESERVA;
+
+CREATE TABLE RESERVA (
+    Cedula VARCHAR(10),
+    Nombre VARCHAR(100),
+    Tipo VARCHAR(100),
+    Estado VARCHAR(20),
+    Fecha_Inicio DATE,
+    Fecha_Fin DATE
+);
+
+INSERT INTO RESERVA(Cedula, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin)
+VALUES
+('1234567890', 'Juan Pérez', 'Apartamento', 'Reservado', '2024-02-12', '2024-02-15'),
+('9876543210', 'Ana García', 'Casa', 'No Reservado', '2024-02-15', '2024-02-29'),
+('5678901234', 'Carlos Rodríguez', 'Oficina', 'Reservado', '2024-02-20', '2024-02-25');
+
+
+SELECT Cedula, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin FROM RESERVA;
