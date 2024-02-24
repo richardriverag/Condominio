@@ -1669,25 +1669,7 @@ public class Modulossss extends javax.swing.JFrame {
                 new Modulossss().setVisible(true);
             }
         });
-        String hostname = "localhost"; // Cambia esto por el nombre de tu servidor
-        String port = "1433"; // Si el puerto es diferente, cámbialo
-        String databaseName = "Condominio";
-        String username = "sa";
-        String password = "P@ssw0rd";
-
-        String url = "jdbc:sqlserver://" + hostname + ":" + port + ";databaseName=" + databaseName;
-
-        try {
-            Connection conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Conexión establecida.");
-
-            // Aquí puedes realizar consultas, actualizaciones, etc.
-
-            conn.close();
-            System.out.println("Conexión cerrada.");
-        } catch (SQLException e) {
-            System.out.println("Error al conectar a la base de datos: " + e.getMessage());
-        }
+        
         
     }
 
