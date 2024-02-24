@@ -475,27 +475,35 @@
                                                   <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="comboBoxDiaSGR1" min="-2" pref="45" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="comboBoxMesSGR1" min="-2" pref="45" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="comboBoxAñoSGR2" pref="71" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="textCedulaArrendatario1" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="textUnidadReserva1" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="textObsAdicionales1" alignment="0" max="32767" attributes="0"/>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="comboBoxDiaSGR2" min="-2" pref="45" max="-2" attributes="0"/>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="comboBoxMesSGR2" min="-2" pref="45" max="-2" attributes="0"/>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="comboBoxAñoSGR1" pref="71" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="textCedulaArrendatario1" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="textUnidadReserva1" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="textObsAdicionales1" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="jLabel1" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
                                                       </Group>
-                                                      <Component id="jLabel1" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Group type="103" groupAlignment="1" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <Component id="comboBoxDiaSGR2" min="-2" pref="56" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Component id="comboBoxMesSGR2" min="-2" pref="59" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" alignment="1" attributes="0">
+                                                              <Component id="comboBoxDiaSGR1" min="-2" pref="55" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Component id="comboBoxMesSGR1" min="-2" pref="61" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="comboBoxAñoSGR2" pref="71" max="32767" attributes="0"/>
+                                                  <Component id="comboBoxAñoSGR1" pref="71" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -508,7 +516,7 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                                               <Component id="jScrollPane9" min="-2" pref="386" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
