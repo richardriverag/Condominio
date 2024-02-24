@@ -251,21 +251,21 @@ DROP TABLE IF NO EXIST UNIDAD;
 
 /*=====================CLIENTE=====================*/
 CREATE TABLE CLIENTE (
-    CI VARCHAR (10),
-    NOMBRE VARCHAR(100),
-    FECHA_RESERVA_INMUEBLE DATE,
-    UNIDAD_RESERVADA VARCHAR(100),
-    OBSERVACION VARCHAR(100)
+    CI VARCHAR(10),
+    Nombre VARCHAR(100),
+    Tipo VARCHAR(100),
+    Estado VARCHAR(20),
+    Fecha_Inicio DATE,
+    Fecha_Fin DATE,
+    Observaciones VARCHAR(255)
 );
 
-INSERT INTO CLIENTE (CI, NOMBRE, FECHA_RESERVA_INMUEBLE, UNIDAD_RESERVADA, OBSERVACION)
+INSERT INTO CLIENTE (CI, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin, Observaciones)
 VALUES
-('1234567890', 'Juan Pérez', '2024-02-12', 'Apartamento 101', 'Reserva confirmada'),
-('9876543210', 'Ana García', '2024-02-15', 'Casa 20', 'Pago pendiente'),
-('5678901234', 'Carlos Rodríguez', '2024-02-20', 'Oficina A3', 'Reserva temporal');
+('1234567890', 'Juan Pérez', 'Apartamento', 'Reservado', '2024-02-12', '2024-02-15', 'Reserva confirmada'),
+('9876543210', 'Ana García', 'Casa', 'No Reservado', '2024-02-15', '2024-02-29', 'Pago pendiente'),
+('5678901234', 'Carlos Rodríguez', 'Oficina', 'Reservado', '2024-02-20', '2024-02-25', 'Reserva temporal');
 
---Insertar registros en la tabla cliente
-SELECT NOMBRE, FECHA_RESERVA_INMUEBLE, UNIDAD_RESERVADA, OBSERVACION FROM CLIENTE;
 
 
 /*=====================RESERVA=====================*/
@@ -277,14 +277,13 @@ CREATE TABLE RESERVA (
     Tipo VARCHAR(100),
     Estado VARCHAR(20),
     Fecha_Inicio DATE,
-    Fecha_Fin DATE
+    Fecha_Fin DATE,
+    Observaciones VARCHAR(255)
 );
 
-INSERT INTO RESERVA(Cedula, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin)
+INSERT INTO RESERVA (Cedula, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin, Observaciones)
 VALUES
-('1234567890', 'Juan Pérez', 'Apartamento', 'Reservado', '2024-02-12', '2024-02-15'),
-('9876543210', 'Ana García', 'Casa', 'No Reservado', '2024-02-15', '2024-02-29'),
-('5678901234', 'Carlos Rodríguez', 'Oficina', 'Reservado', '2024-02-20', '2024-02-25');
+('1234567890', 'Juan Pérez', 'Apartamento', 'Reservado', '2024-02-12', '2024-02-15', 'Reserva confirmada'),
+('9876543210', 'Ana García', 'Casa', 'No Reservado', '2024-02-15', '2024-02-29', 'Pago pendiente'),
+('5678901234', 'Carlos Rodríguez', 'Oficina', 'Reservado', '2024-02-20', '2024-02-25', 'Reserva temporal');
 
-
-SELECT Cedula, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin FROM RESERVA;
