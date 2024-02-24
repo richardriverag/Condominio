@@ -52,4 +52,6 @@ public class BusquedaPropiedades {
             e.printStackTrace();
         }
     }
+
+    
 }
