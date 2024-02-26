@@ -5,6 +5,7 @@ import java.sql.Time;
 
 public class Reserva {
     int idReserva;
+    String usuarioReserva;
     String area;
     Date fechaDeReserva;
     Time horaDeReserva;
@@ -12,9 +13,20 @@ public class Reserva {
     String estadoDeReserva;
     boolean cancelado; 
 
-    public Reserva(int idReserva, String area, Date fechaDeReserva, Time horaDeReserva, int duracion, String estadoDeReserva, boolean cancelado) {
+    public Reserva(int idReserva, String area, String usuarioReserva, Date fechaDeReserva, Time horaDeReserva, int duracion, String estadoDeReserva, boolean cancelado) {
         this.idReserva = idReserva;
         this.area = area;
+        this.usuarioReserva = usuarioReserva;
+        this.fechaDeReserva = fechaDeReserva;
+        this.horaDeReserva = horaDeReserva;
+        this.duracion = duracion;
+        this.estadoDeReserva = estadoDeReserva;
+        this.cancelado = cancelado;
+    }
+    
+    public Reserva(String area, String usuarioReserva, Date fechaDeReserva, Time horaDeReserva, int duracion, String estadoDeReserva, boolean cancelado) {
+        this.area = area;
+        this.usuarioReserva = usuarioReserva;
         this.fechaDeReserva = fechaDeReserva;
         this.horaDeReserva = horaDeReserva;
         this.duracion = duracion;
@@ -37,6 +49,16 @@ public class Reserva {
     public void setArea(String area) {
         this.area = area;
     }
+
+    public String getUsuarioReserva() {
+        return usuarioReserva;
+    }
+
+    public void setUsuarioReserva(String usuarioReserva) {
+        this.usuarioReserva = usuarioReserva;
+    }
+    
+    
 
     public Date getFechaDeReserva() {
         return fechaDeReserva;
