@@ -13,9 +13,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -26,69 +29,24 @@ import javax.swing.JTextField;
  */
 public class RegistroUsuario extends javax.swing.JFrame {
 
-     public JTextField[] textFields;
-    public int currentTextFieldIndex = 0;
-    public final int MAX_TEXTFIELDS = 6;
-    public final Toolkit toolkit = Toolkit.getDefaultToolkit();
-   // public final Sound sound = new Sound();
-    String nombreUsuarioInput = "usuario"; // Obtenerlo desde JTextField
-    String ciInput = "2350207219"; // Obtenerlo desde JTextField
-    String pinInput = "123456";
-    
-    
-    //Validar
-    ValidarLogin validar;
     
     
     
     
     
     public RegistroUsuario() {
-        validar = new ValidarLogin(nombreUsuarioInput,ciInput,pinInput,  "contraseña");
         initComponents();
         setLocationRelativeTo(null);
+      
    
-        
+        setVisible(true);
         setResizable(false);//no miximizar
         
-        //mensajes 
-        jLNC.setVisible(false);
-        jLNC1.setVisible(false);
-        jLNC2.setVisible(false);
         jLNC3.setVisible(false);
-        jLNC4.setVisible(false);
         jLNC5.setVisible(false);
 
 
-
-
-
-
-        
-        CheckBoxButtonExample(jCheckBox1,jButton1 ); 
-        
-        
-        
-        
       
-        //para el ping 
-        DigitTextFieldDemo();
-        
-        
-        
-        
-        
-        
-        //parra regresar a la normalidad 
-        if(jTFContraseñaUsuario.equals("")){
-        jLNC4.setText("*Por favor, ingresa una contraseña (12+carácteres especiales)");
-        jLNC4.setForeground(java.awt.Color.orange);//color de letras
-        }
-        
-        if(jTFContraseñaUsuario1.equals("")){
-        jLNC5.setText("*Por favor, ingresa una contraseña (12+carácteres especiales)");
-        jLNC5.setForeground(java.awt.Color.orange);//color de letras
-        }
     }
     
     
@@ -122,11 +80,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTFContraseñaUsuario = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
-        jLNC = new javax.swing.JLabel();
-        jLNC1 = new javax.swing.JLabel();
-        jLNC2 = new javax.swing.JLabel();
         jLNC3 = new javax.swing.JLabel();
-        jLNC4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -338,20 +292,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         jLabel1.setText("Registrar Usuario");
 
-        jLNC.setForeground(new java.awt.Color(255, 102, 0));
-        jLNC.setText("*Por favor, ingresa tus nombres completos");
-
-        jLNC1.setForeground(new java.awt.Color(255, 102, 0));
-        jLNC1.setText("*Por favor, ingresa tus apellidos completos");
-
-        jLNC2.setForeground(new java.awt.Color(255, 102, 0));
-        jLNC2.setText("*Por favor, ingresa tu cédula de identidad");
-
         jLNC3.setForeground(new java.awt.Color(255, 102, 0));
         jLNC3.setText("*Por favor, ingresa un nombre de usuario");
-
-        jLNC4.setForeground(new java.awt.Color(255, 102, 0));
-        jLNC4.setText("*Por favor, ingresa una contraseña (12+carácteres especiales)");
 
         jButton1.setText("Registrar Usuario");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -411,7 +353,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jLabel9.setFocusCycleRoot(true);
         jLabel9.setFocusTraversalPolicyProvider(true);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar rol", "Guardia", "Visita", "Residente", "Administrador" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guardia", "Visita", "Residente", "Administrador" }));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Rol");
@@ -429,14 +371,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLNC2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLNC, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
@@ -445,10 +381,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jTFNomCUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
                                         .addComponent(jTFEmailUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLNC1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                             .addGap(2, 2, 2)
                                             .addComponent(jTFApeCUsuario)))
@@ -458,10 +391,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLNC5, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jTFContraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLNC4, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel7)
@@ -476,7 +406,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(205, 205, 205)
                         .addComponent(jLabel1)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,21 +414,15 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLNC))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFNomCUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLNC1))
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFApeCUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLNC2))
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFEmailUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -512,9 +436,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLNC4))
+                .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(jTFContraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -563,57 +485,102 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private void jTFContraseñaUsuario1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1MouseClicked
         jLNC5.setVisible(true);
         
-         String cedula= jTFEmailUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFEmailUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
+       
     }//GEN-LAST:event_jTFContraseñaUsuario1MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
- String cedula= jTFEmailUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFEmailUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
 
+        
+// Verificar si se aceptaron los términos y condiciones
+if (!jButton1.isEnabled()) {
+    JOptionPane.showMessageDialog(null,
+        "Debe aceptar los términos y condiciones para continuar",
+        "Error",
+        JOptionPane.INFORMATION_MESSAGE);
+} else {
+    // Obtener los datos del nuevo usuario desde los campos de texto y el JComboBox
+    String nuevoUsuario = jTFNomCUsuario.getText();
+    String nuevaContraseña = jTFUsuario.getText();
+    String nombre = jTFNomCUsuario.getText();
+    String apellido = jTFApeCUsuario.getText();
+    String email = jTFEmailUsuario.getText();
+    int selectedIndex = jComboBox1.getSelectedIndex();
+    int tipoUsuario = 11; // Valor por defecto
+    switch (selectedIndex) {
+        case 0:
+            tipoUsuario = 1; // Guardia
+            break;
+        case 1:
+            tipoUsuario = 2; // Visita
+            break;
+        case 2:
+            tipoUsuario = 3; // Residente
+            break;
+        case 3:
+            tipoUsuario = 4; // Administrador
+            break;
+    }
 
-        if (!jButton1.isEnabled()) {
-            JOptionPane.showMessageDialog(null,
-                "Debe aceptar los términos y condiciones para continuar",
-                "Error",
-                JOptionPane.INFORMATION_MESSAGE);
-        }if (jButton1.isEnabled()) {
-            Login frame= new Login();
-            frame.setVisible(true);
-            //Login
-            setVisible(false);}
+    // Crear una nueva variable para almacenar el ID del usuario
+    int idUsuario = 0;
+
+    Connection connection = null;
+    try {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pruebita", "root", "");
+
+        // Verificar si el usuario ya existe en la base de datos
+        String selectQuery = "SELECT * FROM usuarios WHERE usuario = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+        preparedStatement.setString(1, nuevoUsuario);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            JOptionPane.showMessageDialog(null, "El usuario ya existe en la base de datos.");
+        } else {
+            // Obtener el nuevo ID de usuario
+            selectQuery = "SELECT MAX(id_usuario) FROM usuarios"; // Obtener el máximo ID actual
+            preparedStatement = connection.prepareStatement(selectQuery);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                idUsuario = resultSet.getInt(1) + 1; // Incrementar el ID máximo encontrado
+            } else {
+                idUsuario = 1; // Si no hay usuarios en la base de datos, empezar desde 1
+            }
+
+            // Insertar el nuevo usuario en la base de datos
+            String insertQuery = "INSERT INTO usuarios (id_usuario, usuario, contrasenia, nombre, apellido, email, tipoUsuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(insertQuery);
+            preparedStatement.setInt(1, idUsuario);
+            preparedStatement.setString(2, nuevoUsuario);
+            preparedStatement.setString(3, nuevaContraseña);
+            preparedStatement.setString(4, nombre);
+            preparedStatement.setString(5, apellido);
+            preparedStatement.setString(6, email);
+            preparedStatement.setInt(7, tipoUsuario);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo registrar el usuario.");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Manejar la excepción de manera adecuada, por ejemplo, mostrando un mensaje de error al usuario
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+           
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jTFContraseñaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioActionPerformed
@@ -622,48 +589,18 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void jTFContraseñaUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseExited
         setCursor(Cursor.getDefaultCursor());
-        jLNC4.setVisible(false);
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseExited
 
     private void jTFContraseñaUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseEntered
  //parra regresar a la normalidad 
-        if(jTFContraseñaUsuario.equals(null)){
-        jLNC4.setText("*Por favor, ingresa una contraseña (12+carácteres especiales)");
-        jLNC4.setForeground(java.awt.Color.orange);//color de letras
-        }
-        setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+        
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseEntered
 
     private void jTFContraseñaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseClicked
  //parra regresar a la normalidad 
-        if(jTFContraseñaUsuario.equals("")){
-        jLNC4.setText("*Por favor, ingresa una contraseña (12+carácteres especiales)");
-        jLNC4.setForeground(java.awt.Color.orange);//color de letras
-        }
-
-
-        jLNC4.setVisible(true);
         
         
-        
-         String cedula= jTFEmailUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFEmailUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
+       
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseClicked
 
     private void jTFUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFUsuarioActionPerformed
@@ -680,25 +617,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void jTFUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFUsuarioMouseClicked
         jLNC3.setVisible(true);
-        String cedula= jTFEmailUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFEmailUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
-        
+   
         
         
         
@@ -709,7 +628,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFEmailUsuarioActionPerformed
 
     private void jTFEmailUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioMouseExited
-        jLNC2.setVisible(false);
+       
     }//GEN-LAST:event_jTFEmailUsuarioMouseExited
 
     private void jTFEmailUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioMouseEntered
@@ -717,11 +636,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFEmailUsuarioMouseEntered
 
     private void jTFEmailUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioMouseClicked
-        jLNC2.setVisible(true);
-        if(jTFEmailUsuario.equals("")){
-        jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
+       
     }//GEN-LAST:event_jTFEmailUsuarioMouseClicked
 
     private void jTFNomCUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioActionPerformed
@@ -729,7 +644,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFNomCUsuarioActionPerformed
 
     private void jTFNomCUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioMouseExited
-        jLNC.setVisible(false);
+   
     }//GEN-LAST:event_jTFNomCUsuarioMouseExited
 
     private void jTFNomCUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioMouseEntered
@@ -738,28 +653,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void jTFNomCUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioMouseClicked
 
-        jLNC.setVisible(true);
-        
-        
-        
-         String cedula= jTFEmailUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFEmailUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
     }//GEN-LAST:event_jTFNomCUsuarioMouseClicked
 
     private void jTFApeCUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioActionPerformed
@@ -768,7 +661,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void jTFApeCUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioMouseExited
         setCursor(Cursor.getDefaultCursor());
-        jLNC1.setVisible(false);
+     
     }//GEN-LAST:event_jTFApeCUsuarioMouseExited
 
     private void jTFApeCUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioMouseEntered
@@ -776,84 +669,17 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFApeCUsuarioMouseEntered
 
     private void jTFApeCUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioMouseClicked
-        jLNC1.setVisible(true);
-         String cedula= jTFEmailUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFEmailUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
-        
+   
         
     }//GEN-LAST:event_jTFApeCUsuarioMouseClicked
 
     private void jTFContraseñaUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyPressed
- //parra regresar a la normalidad 
-        if(jTFContraseñaUsuario.equals("")){
-        jLNC4.setText("*Por favor, ingresa una contraseña (12+carácteres especiales)");
-        jLNC4.setForeground(java.awt.Color.orange);//color de letras
-        }
+ 
 
-
-
-        validar.PasswordStrengthVerifier(jTFContraseñaUsuario, jLNC4);
-    jTFContraseñaUsuario.addKeyListener(new KeyAdapter() {
-   
-        public void keyTyped(KeyEvent e) {
-        char c = e.getKeyChar();
-        if (!Character.isLetter(c) && !Character.isDigit(c)&& c != '.' && c != '-' && c != '*' && c != '/' && c != '_'  && c != 'ñ' && c != 'Ñ' ) {
-            Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
-            e.consume();
-             //parra regresar a la normalidad 
-        if(jTFContraseñaUsuario.equals("")){
-        jLNC4.setText("*Por favor, ingresa una contraseña (12+carácteres especiales)");
-        jLNC4.setForeground(java.awt.Color.orange);//color de letras
-        }
-        }
-    }
-
-          
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == KeyEvent.VK_SPACE) {
-            Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
-            e.consume();
-        }
-    }
-});
     }//GEN-LAST:event_jTFContraseñaUsuarioKeyPressed
 
     private void jTFContraseñaUsuario1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1KeyPressed
-       validar.PasswordStrengthVerifier(jTFContraseñaUsuario1, jLNC4);
-    jTFContraseñaUsuario1.addKeyListener(new KeyAdapter() {
-   
-        public void keyTyped(KeyEvent e) {
-        char c = e.getKeyChar();
-        if (!Character.isLetter(c) && c != '.'&& !Character.isDigit(c) && c != '-' && c != '*' && c != '/' && c != '_'  && c != 'ñ' && c != 'Ñ' ) {
-            Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
-            e.consume();
-        }
-    }
-
-          
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == KeyEvent.VK_SPACE) {
-            Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
-            e.consume();
-        }
-    }
-});
+       
     }//GEN-LAST:event_jTFContraseñaUsuario1KeyPressed
 
     private void jTFNomCUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioKeyPressed
@@ -893,36 +719,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFApeCUsuarioKeyPressed
 
     private void jTFEmailUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioKeyPressed
- jTFEmailUsuario.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                String cedula = jTFEmailUsuario.getText();
 
-                /*if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (!cedula.equals("")) {
-                        if (!validar.validateCedula(cedula)) {
-                            jTFEmailUsuario.setText("");
-                            jLNC2.setVisible(true);
-                            jLNC2.setText("*Cédula de Identidad Inválida");
-                            jLNC2.setForeground(java.awt.Color.RED);
-                        } else {
-                            jLNC2.setText("*Cédula de Identidad Válida");
-                            jLNC2.setForeground(java.awt.Color.GREEN);
-                        }
-                    } else {
-                        jLNC2.setVisible(false);
-                    }
-                }*/
-            }
-        });
     }//GEN-LAST:event_jTFEmailUsuarioKeyPressed
 
     private void jTFContraseñaUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyTyped
-       //parra regresar a la normalidad 
-        if(jTFContraseñaUsuario.equals("")){
-        jLNC4.setText("*Por favor, ingresa una contraseña (12+carácteres especiales)");
-        jLNC4.setForeground(java.awt.Color.orange);//color de letras
-        }
+       
     }//GEN-LAST:event_jTFContraseñaUsuarioKeyTyped
 
     private void jTFUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyPressed
@@ -949,228 +750,24 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFUsuarioKeyTyped
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-         String cedula= jTFEmailUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFEmailUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
+      
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
-         String cedula= jTFEmailUsuario.getText();
-        validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFEmailUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }
+     
+      
     }//GEN-LAST:event_jTextArea1MouseClicked
 
     private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
-         String cedula= jTFEmailUsuario.getText();
-        /*validar.validateCedula(cedula);
-        if(!cedula.equals("")){
-        if(!validar.validateCedula(cedula)){
-                jTFEmailUsuario.setText("");
-                jLNC2.setVisible(true);
-                jLNC2.setText("*Cédula de Identidad Inválida");
-            jLNC2.setForeground(java.awt.Color.red);//color de letras
-        }if(validar.validateCedula(cedula)){
-               
-                jLNC2.setText("*Cédula de Identidad Válida");
-            jLNC2.setForeground(java.awt.Color.green);//color de letras
-        }
-        }if(validar.validateCedula(cedula)){
-               jLNC2.setVisible(false);
-                jLNC2.setText("**Por favor, ingresa tu cédula de identidad");
-            jLNC2.setForeground(java.awt.Color.ORANGE);//color de letras
-        }*/
+      
+       
     }//GEN-LAST:event_jCheckBox1MouseClicked
 
     private void jTFEmailUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioKeyTyped
-jTFEmailUsuario.addKeyListener(new KeyAdapter() {
-    public void keyTyped(KeyEvent e) {
-        /*char c = e.getKeyChar();
-        if (!Character.isDigit(c)) {
-            Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
-            e.consume();
-        }*/
-    }
-});        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTFEmailUsuarioKeyTyped
 
- public void CheckBoxButtonExample(JCheckBox  checkBox, JButton button  ) {
-         button.setEnabled(false);
-       
-
-        checkBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(checkBox.isSelected()){
-                button.setEnabled(checkBox.isSelected()); // Habilitar el botón si el checkbox está seleccionado
-                 jCheckBox1.setForeground(java.awt.Color.ORANGE);//color de letras
-                }else{
-                jCheckBox1.setForeground(java.awt.Color.white);//color de letras
-                }
-                
-            }
-        });
-
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (checkBox.isSelected()) {
-                    // Lógica para lo que sucede cuando se presiona el botón
-                    JOptionPane.showMessageDialog(null, 
-                            "Registro Exitoso",
-                            "Mensaje",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    if (jButton1.isEnabled()) {
-                        Login frame= new Login();
-                         frame.setVisible(true);
-                            //Login
-                            setVisible(false);}
-                    
-                    
-                    
-                } else {
-                    // Mostrar mensaje si el checkbox no está seleccionado
-                    JOptionPane.showMessageDialog(null,
-                            "Debe aceptar los términos y condiciones para continuar",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-        setVisible(true);
-    }
-    
  
- 
- 
- 
- public void DigitTextFieldDemo() {
-        /*textFields = new JTextField[MAX_TEXTFIELDS];
-        textFields[0] = jTPin1;
-        textFields[1] = jTPin2;
-        textFields[2] = jTPin3;
-        textFields[3] = jTPin4;
-        textFields[4] = jTPin5;
-        textFields[5] = jTPin6;
-        
-        // Aquí debes asignar tus JTextField previamente creados
-        // por ejemplo: textFields[0] = jTextField1;
-        //              textFields[1] = jTextField2;
-        //              ... y así sucesivamente
-
-        setupTextField(textFields[0]);
-        setupTextField(textFields[1]);
-        setupTextField(textFields[2]);
-        setupTextField(textFields[3]);
-        setupTextField(textFields[4]);
-        setupTextField(textFields[5]);
-        setupTextField(textFields[6]);
-         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new FlowLayout());
-        pack();
-        setVisible(true);*/
-    }
-
-
-   ///aqui valida lo de que haya solo un caracter ingresado en cada textfield e ingrese el siguiente valor en el proximo jtextfield
-  private void setupTextField(JTextField textField) {
-        textField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if (!Character.isDigit(c)) {
-                    e.consume();
-                } else {
-                    textField.setText(String.valueOf(c));
-                    moveToNextTextField(textField);
-                    e.consume();
-                }
-            }
-        });
-    }
-
-    private void moveToNextTextField(JTextField currentTextField) {
-        int currentIndex = -1;
-        for (int i = 0; i < MAX_TEXTFIELDS; i++) {
-            if (textFields[i] == currentTextField) {
-                currentIndex = i;
-                break;
-            }
-        }
-
-        if (currentIndex == MAX_TEXTFIELDS - 1) {
-            textFields[0].requestFocus();
-        } else if (currentIndex + 1 < MAX_TEXTFIELDS) {
-            textFields[currentIndex + 1].requestFocus();
-        }
-    }
-
- 
-   
-    
-    //Aqui recopila todo el contenido de todos los jtextfield para el ping de seguridad 
-    public String gatherTextFieldsContent() {
-        StringBuilder content = new StringBuilder();
-
-        for (JTextField textField : textFields) {
-            content.append(textField.getText());
-        }
-
-        return content.toString();
-    }
-    
-    
-    
-    
-    
-  
-    
-    
-    //valida solo ingreso de letras
-    private boolean isAlphabeticString(String str) {
-    // Check if the string is at most 50 characters long.
-    if (str.length() > 50) {
-        return false;
-    }
-
-    // Check if the string contains only letters and special characters.
-    if (!str.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
-        return false;
-    }
-
-    // The string is valid.
-    return true;
-}
     
     
     
@@ -1196,10 +793,6 @@ jTFEmailUsuario.addKeyListener(new KeyAdapter() {
     
     
     
-    
-    
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -1207,11 +800,7 @@ jTFEmailUsuario.addKeyListener(new KeyAdapter() {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
-    private javax.swing.JLabel jLNC;
-    private javax.swing.JLabel jLNC1;
-    private javax.swing.JLabel jLNC2;
     private javax.swing.JLabel jLNC3;
-    private javax.swing.JLabel jLNC4;
     private javax.swing.JLabel jLNC5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

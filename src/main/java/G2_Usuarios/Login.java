@@ -3,26 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package G2_Usuarios;
-
 import condominio.Conexion;
+import condominio.Principal;
 import java.awt.Cursor;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.imageio.ImageIO;
 /**
  *
  * @author JoisH
@@ -37,10 +29,6 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login1
      */
     public Login() {
-        connection.getCon();
-        //camb = new CambiarContraseña();
-        //this.validar = new ValidarLogin(nombreUsuarioInput, ciInput, pinInput, contraseña );
-        
         initComponents();
         setLocationRelativeTo(null);
        
@@ -327,11 +315,8 @@ public class Login extends javax.swing.JFrame {
 // Establece la conexión a la base de datos
 Connection connection = null;
 
-/*
-Modulos frame = new Modulos();
-        frame.setVisible(true);
-        setVisible(false);
-*/
+
+
 
 
 if(jTFUsuario.getText().equals("")|| jTFContraseñaUsuario.getText().equals(""))
@@ -341,12 +326,14 @@ if(jTFUsuario.getText().equals("")|| jTFContraseñaUsuario.getText().equals(""))
 
 
 try {
+    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pruebita", "root", "");
+
     // Obtén los valores del usuario y la contraseña ingresados
     String usuario = jTFUsuario.getText();
     String contraseña = jTFContraseñaUsuario.getText();
 
     // Consulta SQL para verificar las credenciales
-    String selectQuery = "SELECT * FROM login WHERE NombreUsuario = ? AND Contrasena = ?";
+    String selectQuery = "SELECT * FROM usuarios WHERE usuario = ? AND contrasenia = ?";
     PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
     preparedStatement.setString(1, usuario);
     preparedStatement.setString(2, contraseña);
@@ -355,13 +342,14 @@ try {
 
     if (resultSet.next()) {
         // Las credenciales son correctas, bienvenido al sistema
-        JOptionPane.showMessageDialog(null, "Bienvenido al sistema ");
-        // Modulos
         
-        //AQUI VA LA VISTA GENERAL 
-        //Modulossss frame = new Modulossss();
-        //frame.setVisible(true);
+        JOptionPane.showMessageDialog(null, "Bienvenido al sistema ");
         setVisible(false);
+        // Modulos
+        Principal frame = new Principal();
+        frame.setVisible(true);
+        
+
     } else {
         // Las credenciales son incorrectas
         intentosFallidos++;
@@ -440,7 +428,7 @@ try {
 
     private void jTFUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFUsuarioActionPerformed
 
-        habilitarOcultarTextField(jTFUsuario, jTFContraseñaUsuario);
+       
         
     }//GEN-LAST:event_jTFUsuarioActionPerformed
 
@@ -481,7 +469,6 @@ try {
     private void jTFContraseñaUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyPressed
         //parra regresar a la normalidad
 
-        
         jTFContraseñaUsuario.addKeyListener(new KeyAdapter() {
 
             public void keyTyped(KeyEvent e) {
@@ -520,70 +507,7 @@ try {
 
 
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseClicked
-public void resizeImageExample() {
-        try {
-            // Cargar la imagen original desde un archivo (1920x1080)
-            BufferedImage originalImage = ImageIO.read(new File("C:\\Users\\JoisH\\Documents\\NetBeansProjects\\Interfaces\\src\\main\\java\\Imagenes\\Login.picture.png")); // Reemplaza con la ruta de tu imagen
 
-            // Redimensionar la imagen utilizando ImageIO
-            int newWidth = 192; // Nuevo ancho deseado
-            int newHeight = 108; // Nuevo alto deseado
-            BufferedImage resizedImage = resizeImageWithImageIO(originalImage, newWidth, newHeight);
-
-            // Crear un nuevo ImageIcon con la imagen redimensionada
-            ImageIcon resizedIcon = new ImageIcon(resizedImage);
-
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private BufferedImage resizeImageWithImageIO(BufferedImage originalImage, int targetWidth, int targetHeight) {
-        Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
-
-        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = resizedImage.createGraphics();
-        g2d.drawImage(resultingImage, 0, 0, null);
-        g2d.dispose();
-
-        return resizedImage;
-    }
-    
-    private void habilitarOcultarTextField(JTextField textField1, JTextField textField2) {
-        
-        if (textField1.getText().isEmpty()) {
-            textField2.setEnabled(false);
-        } else {
-            textField2.setEnabled(true);
-        }
-    }
-    
-    public static boolean validarContraseña(String usuario, String contraseñaIngresada) {
-        String url = "jdbc:mysql://localhost:3306/sgcpvcplevnajuv";
-        String user = "root";
-        String password = "";
-
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "SELECT Contrasena FROM login WHERE 'NombreUsuario' = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, usuario);
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    if (resultSet.next()) {
-                        String contraseñaAlmacenada = resultSet.getString("Contrasena");
-                        return contraseñaIngresada.equals(contraseñaAlmacenada);
-                    } else {
-                        // El usuario no existe en la base de datos
-                        return false;
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
  private void bloquearSistemaPorMinuto() {
     BloqueoVentana bloqueoVentana = new BloqueoVentana(this); // "this" es la instancia de tu JFrame principal
     bloqueoVentana.setVisible(true); // Muestra la ventana de bloqueo

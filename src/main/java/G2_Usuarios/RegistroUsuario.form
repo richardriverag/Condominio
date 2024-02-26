@@ -85,16 +85,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel6" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLNC2" min="-2" pref="336" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel3" min="-2" pref="129" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLNC" min="-2" pref="240" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel6" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" alignment="0" min="-2" pref="445" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -103,11 +95,7 @@
                                           <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jTFNomCUsuario" alignment="0" pref="445" max="32767" attributes="0"/>
                                           <Component id="jTFEmailUsuario" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel4" min="-2" pref="131" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLNC1" min="-2" pref="263" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="jLabel4" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                               <Component id="jTFApeCUsuario" max="32767" attributes="0"/>
@@ -120,11 +108,7 @@
                                           <Component id="jLNC5" min="-2" pref="272" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jTFContraseñaUsuario" alignment="0" min="-2" pref="445" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel8" min="-2" pref="72" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLNC4" min="-2" pref="334" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jLabel8" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                                       <Component id="jTFUsuario" alignment="0" min="-2" pref="445" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -148,7 +132,7 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="49" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -158,24 +142,15 @@
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" max="32767" attributes="0"/>
-                      <Component id="jLNC" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel3" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTFNomCUsuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLNC1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel4" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTFApeCUsuario" min="-2" pref="16" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" max="32767" attributes="0"/>
-                      <Component id="jLNC2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel6" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTFEmailUsuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -190,10 +165,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jTFUsuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLNC4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jTFContraseñaUsuario" min="-2" pref="19" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -369,44 +341,12 @@
             <Property name="text" type="java.lang.String" value="Registrar Usuario"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLNC">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="66" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="*Por favor, ingresa tus nombres completos"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLNC1">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="66" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="*Por favor, ingresa tus apellidos completos"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLNC2">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="66" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="*Por favor, ingresa tu c&#xe9;dula de identidad"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLNC3">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="66" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="*Por favor, ingresa un nombre de usuario"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLNC4">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="66" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="*Por favor, ingresa una contrase&#xf1;a (12+car&#xe1;cteres especiales)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
@@ -484,12 +424,11 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Seleccionar rol"/>
-                <StringItem index="1" value="Guardia"/>
-                <StringItem index="2" value="Visita"/>
-                <StringItem index="3" value="Residente"/>
-                <StringItem index="4" value="Administrador"/>
+              <StringArray count="4">
+                <StringItem index="0" value="Guardia"/>
+                <StringItem index="1" value="Visita"/>
+                <StringItem index="2" value="Residente"/>
+                <StringItem index="3" value="Administrador"/>
               </StringArray>
             </Property>
           </Properties>

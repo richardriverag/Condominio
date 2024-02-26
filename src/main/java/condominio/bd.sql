@@ -15,7 +15,7 @@ CREATE TABLE Usuario (
   contrasenia varchar(50) NOT NULL,
   nombre varchar(10) NOT NULL,
   apellido varchar(100) NOT NULL,
-  email varchar(10) NOT NULL,
+  email varchar(100) NOT NULL,
   tipoUsuario int DEFAULT NULL,
   PRIMARY KEY (id_usuario)
 );
