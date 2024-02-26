@@ -4,6 +4,10 @@
  */
 package G3_Inmuebles;
 
+import G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble.AgregarDepartamentoCondominio;
+import G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble.Modulossss;
+import G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble.AgregarDepartamentoCondominio;
+
 /**
  *
  * @author joel.piuri
@@ -15,6 +19,14 @@ public class NewMain {
      */
     public static void main(String[] args) {
         System.out.println("Hoaaaa");
+        
+        Modulossss mod = new Modulossss();
+        mod.setVisible(true);
+        
+       AgregarDepartamentoCondominio ventana = new AgregarDepartamentoCondominio();
+       ventana.setVisible(true);
+        
+        
     }
     
 }

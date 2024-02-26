@@ -184,17 +184,19 @@ public class PestanaGestionInmuebles {
 
     public static void TraertablaReservaEstado(String estado, JTable tablaVisualizacionUsuarioGestionUnidades1) {
         
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("CI");
+        model.addColumn("Nombre");
+        model.addColumn("Tipo");
+        model.addColumn("Estado");
+        model.addColumn("Fecha_Inicio");
+        model.addColumn("Fecha_Fin");
+        model.addColumn("Observaciones");
+        
         if(estado == "Todos los inmuebles"){
             
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("ID");
-            model.addColumn("CI");
-            model.addColumn("Nombre");
-            model.addColumn("Tipo");
-            model.addColumn("Estado");
-            model.addColumn("Fecha_Inicio");
-            model.addColumn("Fecha_Fin");
-            model.addColumn("Observaciones");
+            
 
             String query = "SELECT ID, CI, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin, Observaciones FROM CLIENTE";
             try (
@@ -224,18 +226,7 @@ public class PestanaGestionInmuebles {
             }
             
         }else{
-            DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("CI");
-        model.addColumn("Nombre");
-        model.addColumn("Tipo");
-        model.addColumn("Estado");
-        model.addColumn("Fecha_Inicio");
-        model.addColumn("Fecha_Fin");
-        model.addColumn("Observaciones");
-        
-        System.out.println(model);
-
+   
         String query = "SELECT ID, CI, Nombre, Tipo, Estado, Fecha_Inicio,Fecha_Fin,Observaciones FROM CLIENTE WHERE Estado = ?";
         try (
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
