@@ -287,3 +287,81 @@ VALUES
 ('9876543210', 'Ana García', 'Casa', 'No Reservado', '2024-02-15', '2024-02-29', 'Pago pendiente'),
 ('5678901234', 'Carlos Rodríguez', 'Oficina', 'Reservado', '2024-02-20', '2024-02-25', 'Reserva temporal');
 
+
+/*===============================================================================================*/
+/*=========================TABLAS USADAS POR MODULO CHECK IN GRUPO 5=============================*/
+/*===============================================================================================*/
+
+drop table visitante ;
+create table Visitante(
+	idVisitante VARCHAR(20) NOT NULL,
+	id_usuario VARCHAR(20) NOT NULL,
+	nombreVisitante varchar(50) not null,
+	motivoVisita varchar(50) not null,
+	fecha varchar(50) not null,
+	hora varchar(20) not null,
+	vehiculo varchar(20) not null,
+	tipoUsuario VARCHAR(20),
+	PRIMARY KEY (idVisitante), 
+	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);         
+
+INSERT INTO Visitante (idVisitante, id_usuario, nombreVisitante, motivoVisita, fecha, hora, vehiculo, tipoUsuario)
+VALUES 
+('VS001', 'USR005', 'Juan Perez', 'Entrevista de trabajo', '2024-02-26', '09:00', 'Si', 'Visitante'),
+('VS002', 'USR006', 'María López', 'Entrega de documentos', '2024-02-26', '10:30', 'No', 'Visitante'),
+('VS003', 'USR007', 'Carlos Martinez', 'Visita familiar', '2024-02-27', '03:00', 'No', 'Visitante'),
+('VS004', 'USR008', 'Ana González', 'Reunión de negocios', '2024-02-27', '11:00', 'Si', 'Visitante'),
+('VS005', 'USR009', 'Pedro Ramirez', 'Visita médica', '2024-02-28', '02:00', 'Si', 'Visitante');
+
+
+ select * from visitante;
+
+drop table IngresoResidente;
+Create Table IngresoResidente(
+	id_usuario VARCHAR(20) NOT NULL,
+	fecha varchar(50) not null,
+	hora varchar(20) not null,
+	PRIMARY KEY (id_usuario,fecha), 
+	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+); 
+
+
+INSERT INTO IngresoResidente (id_usuario, fecha, hora)
+VALUES 
+('USR005', '2002-02-25', '08:00'),
+('USR006', '2002-02-25', '17:30'),
+('USR007', '2002-02-25', '10:15'),
+('USR008', '2002-02-25', '23:45'),
+('USR009', '2002-02-25', '01:00');
+
+select * from IngresoResidente;
+
+
+drop view historialIngresosCondominio;
+CREATE VIEW historialIngresosCondominio AS
+SELECT 'Visitante' AS TipoUsuario, nombreVisitante AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
+FROM Visitante
+UNION 
+SELECT 'Residente' AS TipoUsuario, CONCAT(Usuario.nombre_usuario, ' ', Usuario.apellido_usuario) AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
+FROM Usuario
+JOIN IngresoResidente ON Usuario.id_usuario = IngresoResidente.id_usuario 
+ORDER BY "Hora de Ingreso" ASC,"Fecha de Ingreso" ASC;
+
+select * from  historialIngresosCondominio;
+
+
+DROP TABLE ParqueaderoVisita;
+create table ParqueaderoVisita(
+	idParqueadero int not null,
+	estado varchar(20) not null
+);
+
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (1, 'Disponible');
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (2, 'Ocupado');
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (3, 'Reservado');
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (4, 'Disponible');
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (5, 'Ocupado');
+
+ select * from ParqueaderoVisita
+
