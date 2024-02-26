@@ -15,7 +15,7 @@ CREATE TABLE Usuario (
   contrasenia varchar(50) NOT NULL,
   nombre varchar(10) NOT NULL,
   apellido varchar(100) NOT NULL,
-  email varchar(10) NOT NULL,
+  email varchar(100) NOT NULL,
   tipoUsuario int DEFAULT NULL,
   PRIMARY KEY (id_usuario)
 );
@@ -23,41 +23,13 @@ CREATE TABLE Usuario (
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO FINANZAS GRUPO 1=============================*/
 /*===============================================================================================*/
-DROP TABLE IF EXISTS CUOTA;
-DROP TABLE IF EXISTS METODOPAGO;
-DROP TABLE IF EXISTS PAGO;
-DROP TABLE IF EXISTS USUARIO;
-
-/*==============================================================*/
-/* Table: METODOPAGO                                            */
-/*==============================================================*/
 CREATE TABLE METODOPAGO
 (
    ID_METODOPAGO        INT NOT NULL AUTO_INCREMENT,
    NOMBRE_METODOPAGO    VARCHAR(20) NOT NULL,
    PRIMARY KEY (ID_METODOPAGO)
-);
+); 
 
-/*==============================================================*/
-/* Table: USUARIO                                               */
-/*==============================================================*/
-CREATE TABLE USUARIO/***************************************************************************TABLA PRUEBA USUARIO************/
-(
-   ID_USUARIO           VARCHAR(20) NOT NULL,
-   NOMBRE_USUARIO       VARCHAR(20),
-   APELLIDO_USUARIO     VARCHAR(20),
-   DIRECCION_USUARIO    VARCHAR(20),
-   CORREOELECTRONICO_USUARIO VARCHAR(100),
-   TELEFONO_USUARIO     VARCHAR(20),
-   IDCONDOMINIO_USUARIO VARCHAR(20),
-   IDUNIDAD_USUARIO     VARCHAR(20),
-   TIPO_USUARIO         VARCHAR(20),
-   PRIMARY KEY (ID_USUARIO)
-);
-
-/*==============================================================*/
-/* Table: PAGO                                                  */
-/*==============================================================*/
 CREATE TABLE PAGO
 (
    ID_PAGOS             INT NOT NULL AUTO_INCREMENT,
@@ -65,57 +37,43 @@ CREATE TABLE PAGO
    ID_USUARIO           VARCHAR(20) NOT NULL,
    FECHA_PAGO           DATE NOT NULL,
    MONTO_PAGO           FLOAT(10,2) NOT NULL,
-   TIPO_PAGO            VARCHAR(10) NOT NULL,
+   TIPO_PAGO            VARCHAR(60) NOT NULL,				 	/*--3 TIPOS DE INGRESO: EGRESO ORDINARIO, INGRESO EXTRAORDINARIO, INGRESO ORDINARIO*/
    FECHAVENCIMIENTO_PAGO DATE NOT NULL,
-   ESTADO_PAGO          VARCHAR(10) NOT NULL,
-   PRIMARY KEY (ID_PAGOS)
+   ESTADO_PAGO          VARCHAR(10) NOT NULL,		 			/*2 ESTADOS: VIGENTE, ANULADO*/
+   DESCRIPCION			VARCHAR(200) default 'ORDINARIO',		/*SOLO EXTRAORDINARIOS DEBEN ESPECIFICAR*/
+   PRIMARY KEY (ID_PAGOS),
+   FOREIGN KEY (ID_METODOPAGO) REFERENCES METODOPAGO(ID_METODOPAGO),
+   /*FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO)*/			/*Descomentar cuando Grupo 3 añada sus tablas*/				
 );
-ALTER TABLE PAGO ADD CONSTRAINT FK_RELATIONSHIP_1 FOREIGN KEY (ID_METODOPAGO)
-      REFERENCES METODOPAGO (ID_METODOPAGO);
-ALTER TABLE PAGO ADD CONSTRAINT FK_RELATIONSHIP_4 FOREIGN KEY (ID_USUARIO)
-      REFERENCES USUARIO (ID_USUARIO);
 
-/*==============================================================*/
-/* Table: CUOTA                                                 */
-/*==============================================================*/
-CREATE TABLE CUOTA
+CREATE TABLE CUOTA 								/*SI UN PAGO SE ANULA LAS CUOTAS SE ELIMINAN*/
 (
    ID_PAGOS             INT NOT NULL,
    ID_CUOTA             INT NOT NULL AUTO_INCREMENT,
    NUM_CUOTA            INT NOT NULL,
    MONTO_CUOTA          FLOAT(10,2) NOT NULL,
    FECHAV_CUOTA         DATE NOT NULL,
-   ESTADO_CUOTA         CHAR(20) NOT NULL,
-   PRIMARY KEY (ID_CUOTA)
+   ESTADO_CUOTA         CHAR(20) NOT NULL,  					/*2 ESTADOS: PENDIENTE O PAGADO*/
+   PRIMARY KEY (ID_CUOTA),
+   FOREIGN KEY (ID_PAGOS) REFERENCES PAGO(ID_PAGOS)
 );
-ALTER TABLE CUOTA ADD CONSTRAINT FK_RELATIONSHIP_2 FOREIGN KEY (ID_PAGOS)
-      REFERENCES PAGO (ID_PAGOS);
 
-
-INSERT INTO METODOPAGO ( NOMBRE_METODOPAGO) VALUES
+-- Insertar registros en la tabla METODOPAGO
+INSERT INTO METODOPAGO (NOMBRE_METODOPAGO) VALUES
+('Efectivo'),
+('Tarjeta de crédito'),
 ('Transferencia'),
-('Tarjeta'),
-('Efectivo');
+('PayPal'),
+('Cheque'),
+('Criptomoneda'),
+('Pago móvil'),
+('Vale de comida'),
+('Cuenta corriente'),
+('Tarjeta de débito');
 
-select * from metodoPago;
-
-INSERT INTO USUARIO (ID_USUARIO, NOMBRE_USUARIO, APELLIDO_USUARIO, DIRECCION_USUARIO, CORREOELECTRONICO_USUARIO, TELEFONO_USUARIO, IDCONDOMINIO_USUARIO, IDUNIDAD_USUARIO, TIPO_USUARIO) VALUES
-('U01', 'Juan', 'Pérez', 'Calle Falsa 123', 'juan.perez@example.com', '123456789', 'C01', 'U01', 'Propietario'),
-('U02', 'Ana', 'Gómez', 'Avenida', 'ana.gomez@example.com', '987654321', 'C02', 'U02', 'Propietario');
-
-select * from usuario;
-
-INSERT INTO PAGO (ID_METODOPAGO, ID_USUARIO, FECHA_PAGO, MONTO_PAGO, TIPO_PAGO, FECHAVENCIMIENTO_PAGO, ESTADO_PAGO) VALUES
-('1', 'U01', '2023-01-10', 100.00, 'Ingreso', '2023-02-01', 'Pagado'),
-('2', 'U02', '2023-01-15', 150.00, 'Egreso', '2023-02-01', 'Pendiente');
-
-select * from PAGO;
-
-INSERT INTO CUOTA (ID_PAGOS,  NUM_CUOTA, MONTO_CUOTA, FECHAV_CUOTA, ESTADO_CUOTA) VALUES
-(2, 1, 100.00, '2023-02-01', 'Pagado'),
-(1, 2, 150.00, '2023-02-01', 'Pendiente');
-
-select * FROM CUOTA
+SELECT * FROM CUOTA;
+SELECT * FROM PAGO;
+SELECT * FROM METODOPAGO;
 
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO RESERVAS GRUPO 4=============================*/
@@ -159,3 +117,178 @@ VALUES
 
 SELECT * FROM AREACOMUN;
 SELECT * FROM RESERVA;
+
+/*===============================================================================================*/
+/*=========================TABLAS USADAS POR MODULO RESERVAS GRUPO 6=============================*/
+/*===============================================================================================*/
+
+-- Drop tables if they already exist
+/*DROP TABLE IF EXISTS Comunicado;*/
+/*DROP TABLE IF EXISTS Anuncios_Generales;*/
+
+-- Creating table Anuncios_Generales
+CREATE TABLE Anuncios_Generales (
+    ID_AnunciosGenerales INT PRIMARY KEY,
+    ID_Administrador INT,
+    ID_Usuario INT,
+    Fecha_Anuncio DATE,
+    Titulo_Anuncio VARCHAR(50),
+    Descripcion_Anuncio VARCHAR(150),
+    FOREIGN KEY (ID_Administrador) REFERENCES Administrador(ID_Administrador),
+    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
+);
+
+-- Creating table Comunicado
+CREATE TABLE Comunicado (
+    ID_Comunicado INT PRIMARY KEY,
+    ID_Administrador INT,
+    ID_Usuario INT,
+    Fecha_Comunicado DATE,
+    Titulo_Comunicado VARCHAR(50),
+    Descripcion_Comunicado VARCHAR(150),
+    FOREIGN KEY (ID_Administrador) REFERENCES Administrador(ID_Administrador),
+    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
+);
+
+-- Generar e insertar datos aleatorios para la tabla Anuncios_Generales
+INSERT INTO Anuncios_Generales (ID_AnunciosGenerales, ID_Administrador, ID_Usuario, Fecha_Anuncio, Titulo_Anuncio, Descripcion_Anuncio)
+VALUES 
+(1, 1, 2, '2024-02-17', 'Nuevo horario de atención', 'Se informa a todos los usuarios que a partir del día de mañana el horario de atención será de 8:00 a.m. a 5:00 p.m.'),
+(2, 2, 4, '2024-02-17', 'Cambio de ubicación de la oficina', 'Por motivos de remodelación, la oficina se trasladará temporalmente a la siguiente dirección: Calle Principal #123.'),
+(3, 3, 1, '2024-02-17', 'Suspensión de servicio de agua', 'Se comunica a los usuarios que el servicio de agua estará suspendido el próximo sábado debido a trabajos de mantenimiento.'),
+(4, 4, 3, '2024-02-17', 'Reunión de condominio', 'Recordatorio: La reunión de condominio se llevará a cabo el próximo viernes a las 7:00 p.m. en el salón comunal.'),
+(5, 5, 5, '2024-02-17', 'Nueva política de seguridad', 'A partir del mes próximo, se implementará una nueva política de seguridad en el edificio. Se solicita la cooperación de todos los residentes.');
+
+-- Generar e insertar datos aleatorios para la tabla Comunicado
+INSERT INTO Comunicado (ID_Comunicado, ID_Administrador, ID_Usuario, Fecha_Comunicado, Titulo_Comunicado, Descripcion_Comunicado)
+VALUES 
+(1, 2, 3, '2024-02-17', 'Recordatorio de pago de expensas', 'Se recuerda a todos los residentes que el plazo para el pago de expensas vence el próximo viernes.'),
+(2, 3, 5, '2024-02-17', 'Fiesta de fin de año', 'Estimados residentes, les informamos que la fiesta de fin de año se llevará a cabo el sábado 20 de diciembre en la terraza del edificio.'),
+(3, 4, 2, '2024-02-17', 'Cierre temporal de parqueadero', 'Por motivos de mantenimiento, el parqueadero estará cerrado desde el lunes hasta el miércoles de la próxima semana.'),
+(4, 5, 4, '2024-02-17', 'Horario especial de atención', 'Durante la temporada navideña, la administración estará atendiendo en horario extendido.'),
+(5, 1, 1, '2024-02-17', 'Asamblea extraordinaria', 'Se convoca a todos los propietarios a una asamblea extraordinaria que se llevará a cabo el próximo domingo a las 10:00 a.m.');
+
+
+/*===============================================================================================*/
+/*=========================TABLAS USADAS POR MODULO INMUEBLES GRUPO 3=============================*/
+/*===============================================================================================*/
+
+DROP TABLE IF EXIST CLIENTE;
+DROP TABLE IF NO EXIST UNIDAD;
+
+/*=====================CLIENTE=====================*/
+CREATE TABLE CLIENTE (
+    CI VARCHAR(10),
+    Nombre VARCHAR(100),
+    Tipo VARCHAR(100),
+    Estado VARCHAR(20),
+    Fecha_Inicio DATE,
+    Fecha_Fin DATE,
+    Observaciones VARCHAR(255)
+);
+
+INSERT INTO CLIENTE (CI, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin, Observaciones)
+VALUES
+('1234567890', 'Juan Pérez', 'Apartamento', 'Reservado', '2024-02-12', '2024-02-15', 'Reserva confirmada'),
+('9876543210', 'Ana García', 'Casa', 'No Reservado', '2024-02-15', '2024-02-29', 'Pago pendiente'),
+('5678901234', 'Carlos Rodríguez', 'Oficina', 'Reservado', '2024-02-20', '2024-02-25', 'Reserva temporal');
+
+
+
+/*=====================RESERVA=====================*/
+DROP TABLE IF EXISTS RESERVA;
+
+CREATE TABLE RESERVA (
+    Cedula VARCHAR(10),
+    Nombre VARCHAR(100),
+    Tipo VARCHAR(100),
+    Estado VARCHAR(20),
+    Fecha_Inicio DATE,
+    Fecha_Fin DATE,
+    Observaciones VARCHAR(255)
+);
+
+INSERT INTO RESERVA (Cedula, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin, Observaciones)
+VALUES
+('1234567890', 'Juan Pérez', 'Apartamento', 'Reservado', '2024-02-12', '2024-02-15', 'Reserva confirmada'),
+('9876543210', 'Ana García', 'Casa', 'No Reservado', '2024-02-15', '2024-02-29', 'Pago pendiente'),
+('5678901234', 'Carlos Rodríguez', 'Oficina', 'Reservado', '2024-02-20', '2024-02-25', 'Reserva temporal');
+
+
+/*===============================================================================================*/
+/*=========================TABLAS USADAS POR MODULO CHECK IN GRUPO 5=============================*/
+/*===============================================================================================*/
+
+drop table visitante ;
+create table Visitante(
+	idVisitante VARCHAR(20) NOT NULL,
+	id_usuario VARCHAR(20) NOT NULL,
+	nombreVisitante varchar(50) not null,
+	motivoVisita varchar(50) not null,
+	fecha varchar(50) not null,
+	hora varchar(20) not null,
+	vehiculo varchar(20) not null,
+	tipoUsuario VARCHAR(20),
+	PRIMARY KEY (idVisitante), 
+	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);         
+
+INSERT INTO Visitante (idVisitante, id_usuario, nombreVisitante, motivoVisita, fecha, hora, vehiculo, tipoUsuario)
+VALUES 
+('VS001', 'USR005', 'Juan Perez', 'Entrevista de trabajo', '2024-02-26', '09:00', 'Si', 'Visitante'),
+('VS002', 'USR006', 'María López', 'Entrega de documentos', '2024-02-26', '10:30', 'No', 'Visitante'),
+('VS003', 'USR007', 'Carlos Martinez', 'Visita familiar', '2024-02-27', '03:00', 'No', 'Visitante'),
+('VS004', 'USR008', 'Ana González', 'Reunión de negocios', '2024-02-27', '11:00', 'Si', 'Visitante'),
+('VS005', 'USR009', 'Pedro Ramirez', 'Visita médica', '2024-02-28', '02:00', 'Si', 'Visitante');
+
+
+ select * from visitante;
+
+drop table IngresoResidente;
+Create Table IngresoResidente(
+	id_usuario VARCHAR(20) NOT NULL,
+	fecha varchar(50) not null,
+	hora varchar(20) not null,
+	PRIMARY KEY (id_usuario,fecha), 
+	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+); 
+
+
+INSERT INTO IngresoResidente (id_usuario, fecha, hora)
+VALUES 
+('USR005', '2002-02-25', '08:00'),
+('USR006', '2002-02-25', '17:30'),
+('USR007', '2002-02-25', '10:15'),
+('USR008', '2002-02-25', '23:45'),
+('USR009', '2002-02-25', '01:00');
+
+select * from IngresoResidente;
+
+
+drop view historialIngresosCondominio;
+CREATE VIEW historialIngresosCondominio AS
+SELECT 'Visitante' AS TipoUsuario, nombreVisitante AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
+FROM Visitante
+UNION 
+SELECT 'Residente' AS TipoUsuario, CONCAT(Usuario.nombre_usuario, ' ', Usuario.apellido_usuario) AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
+FROM Usuario
+JOIN IngresoResidente ON Usuario.id_usuario = IngresoResidente.id_usuario 
+ORDER BY "Hora de Ingreso" ASC,"Fecha de Ingreso" ASC;
+
+select * from  historialIngresosCondominio;
+
+
+DROP TABLE ParqueaderoVisita;
+create table ParqueaderoVisita(
+	idParqueadero int not null,
+	estado varchar(20) not null
+);
+
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (1, 'Disponible');
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (2, 'Ocupado');
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (3, 'Reservado');
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (4, 'Disponible');
+INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (5, 'Ocupado');
+
+ select * from ParqueaderoVisita
+

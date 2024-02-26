@@ -21,7 +21,7 @@ public class ParqueaderoVisita extends javax.swing.JFrame {
  //conexion
     Conexion con = new Conexion();
     Connection cn = con.getCon();
-    
+   String[] informacion = new String[6];
     //varaibles globales
     int parqueadero = 0;
      
@@ -41,6 +41,18 @@ public class ParqueaderoVisita extends javax.swing.JFrame {
         JTableParqueadero.setModel(modelo);
         
         cargarTabla(modelo, JTableParqueadero, nombreTabla, Titulos, idTabla);
+    }
+
+ 
+    /**
+     * Creates new form ParqueaderoVisita
+     */
+    
+     public ParqueaderoVisita(String[] info) {
+        initComponents();
+        this.setLocationRelativeTo(this);
+        informacion = info;
+       
     }
 
     /**
@@ -133,11 +145,13 @@ public class ParqueaderoVisita extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         estado = "Ocupado";
-        String sql = "Update ParqueaderoVisita SET estado = '"+estado+"' WHERE idParqueadero ="+parqueadero;
-        ejecutar(sql);
+       // String sql = "Update ParqueaderoVisita SET estado = '"+estado+"' WHERE idParqueadero ="+parqueadero;
+       // ejecutar(sql);
         
-        CheckIn ck = new CheckIn(String.valueOf(parqueadero));
+        CheckIn_Nw ck = new CheckIn_Nw(String.valueOf(parqueadero),informacion);
+        //jframe.setVisible(true);
         ck.setVisible(true);
+        //Co
         this.setVisible(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed

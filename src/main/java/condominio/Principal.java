@@ -4,7 +4,14 @@
  */
 package condominio;
 
+import G1_Finanzas.Vista_FinanzasAdministrador;
+import G1_Finanzas.Vista_FinanzasCliente;
 import G4_Reservas.AreasComunesUsuarios;
+import G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble.Modulossss;
+import G6_Comunicacion.GUI_Comunicacion;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -158,11 +165,30 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar1ActionPerformed
-        // TODO add your handling code here:
+        
+        //AQUI SE DEBE REDIGIR A LA VISTA CORRESPONDIENTE 
+        //SEGUN EL TIPO DE USUARIO LOGEADO ACTUAL
+        
+        
+        //YA QUE NO SE TIENE ACCESO A LA INFORMACION MODULO DE USUARIOS SE FUERZA ENTRAR A LA VISTA DEL ADMINISTRADOR
+        
+        boolean esAdministrador = true;
+        //SE COMPRUEBA SI EL QUE ESTA EN EL SISTEMA ES EL CLIENTE O ADMINISTRADOR
+        try {
+            if(esAdministrador){
+                Vista_FinanzasAdministrador vfa = new Vista_FinanzasAdministrador();
+                vfa.setVisible(true);          
+            }else{
+                Vista_FinanzasCliente vfc = new Vista_FinanzasCliente();
+                vfc.setVisible(true);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnIniciar1ActionPerformed
 
     private void btnIniciar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar2ActionPerformed
-        // TODO add your handling code here:
+        new GUI_Comunicacion().setVisible(true);
     }//GEN-LAST:event_btnIniciar2ActionPerformed
 
     private void btnIniciar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar3ActionPerformed
@@ -175,6 +201,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnIniciar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar5ActionPerformed
         // TODO add your handling code here:
+        new Modulossss().setVisible(true);
+        
     }//GEN-LAST:event_btnIniciar5ActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed

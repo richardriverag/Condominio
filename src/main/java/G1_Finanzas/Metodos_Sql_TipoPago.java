@@ -1,20 +1,18 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package G1_Finanzas;
 
-import G1_Finanzas.FinanzasAdministrador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import model.Pago;
 import model.TipoPago;
 
 /**
@@ -96,5 +94,20 @@ public class Metodos_Sql_TipoPago {
            JOptionPane.showMessageDialog(null,"Ocurrio un error al eliminar los datos");
        }
     }
-
+    
+        // Método para desplegar los nombres de los métodos de pago en un JComboBox
+    public void llenarComboBoxMetodoPago(Connection cn, JComboBox<String> comboBox) {
+        String sql = "SELECT NOMBRE_METODOPAGO FROM METODOPAGO"; // Consulta para obtener los nombres
+        try {
+            pps = cn.prepareStatement(sql);
+            ResultSet rs = pps.executeQuery();
+            comboBox.removeAllItems(); // Remueve los ítems existentes para evitar duplicados
+            while (rs.next()) {
+                String nombre = rs.getString("NOMBRE_METODOPAGO"); // Obtiene el nombre del método de pago
+                comboBox.addItem(nombre); // Agrega el nombre al JComboBox
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al recuperar los nombres de los métodos de pago");
+        }
+    }
 }
