@@ -30,37 +30,6 @@ CREATE TABLE METODOPAGO
    PRIMARY KEY (ID_METODOPAGO)
 ); 
 
-CREATE TABLE USUARIO
-(
-   ID_USUARIO           VARCHAR(20) NOT NULL,
-   NOMBRE_USUARIO       VARCHAR(20),
-   APELLIDO_USUARIO     VARCHAR(20),
-   DIRECCION_USUARIO    VARCHAR(20),
-   CORREOELECTRONICO_USUARIO VARCHAR(100),
-   TELEFONO_USUARIO     VARCHAR(20),
-   TIPO_USUARIO         VARCHAR(20),
-   PRIMARY KEY (ID_USUARIO)
-); 
-
-CREATE TABLE CONDOMINIO_F
-(
-   ID_CONDOMINIO_F        INT NOT NULL AUTO_INCREMENT,
-   NOMBRE_CONDOMINIO_F    VARCHAR(50) NOT NULL,
-   PRIMARY KEY (ID_CONDOMINIO_F)
-);
-
-CREATE TABLE DEPARTAMENTO_F
-(
-   ID_DEPARTAMENTO_F      INT NOT NULL AUTO_INCREMENT,
-   NUMERO_DEPARTAMENTO_F  VARCHAR(20) NOT NULL,
-   ID_USUARIO           VARCHAR(20) NOT NULL,
-   ID_CONDOMINIO_F        INT NOT NULL,
-   PRIMARY KEY (ID_DEPARTAMENTO_F),
-   FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO),
-   FOREIGN KEY (ID_CONDOMINIO_F) REFERENCES CONDOMINIO_F(ID_CONDOMINIO_F)
-);
-
-
 CREATE TABLE PAGO
 (
    ID_PAGOS             INT NOT NULL AUTO_INCREMENT,
@@ -74,10 +43,10 @@ CREATE TABLE PAGO
    DESCRIPCION			VARCHAR(200) default 'ORDINARIO',		/*SOLO EXTRAORDINARIOS DEBEN ESPECIFICAR*/
    PRIMARY KEY (ID_PAGOS),
    FOREIGN KEY (ID_METODOPAGO) REFERENCES METODOPAGO(ID_METODOPAGO),
-   FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO)
+   /*FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO)*/			/*Descomentar cuando Grupo 3 añada sus tablas*/				
 );
 
-CREATE TABLE CUOTA 												/*SI UN PAGO SE ANULA LAS CUOTAS SE ELIMINAN*/
+CREATE TABLE CUOTA 								/*SI UN PAGO SE ANULA LAS CUOTAS SE ELIMINAN*/
 (
    ID_PAGOS             INT NOT NULL,
    ID_CUOTA             INT NOT NULL AUTO_INCREMENT,
@@ -88,7 +57,6 @@ CREATE TABLE CUOTA 												/*SI UN PAGO SE ANULA LAS CUOTAS SE ELIMINAN*/
    PRIMARY KEY (ID_CUOTA),
    FOREIGN KEY (ID_PAGOS) REFERENCES PAGO(ID_PAGOS)
 );
-
 
 -- Insertar registros en la tabla METODOPAGO
 INSERT INTO METODOPAGO (NOMBRE_METODOPAGO) VALUES
@@ -103,51 +71,10 @@ INSERT INTO METODOPAGO (NOMBRE_METODOPAGO) VALUES
 ('Cuenta corriente'),
 ('Tarjeta de débito');
 
--- Insertar registros en la tabla USUARIO
-INSERT INTO USUARIO (ID_USUARIO, NOMBRE_USUARIO, APELLIDO_USUARIO, DIRECCION_USUARIO, CORREOELECTRONICO_USUARIO, TELEFONO_USUARIO, TIPO_USUARIO) VALUES
-('USR001', 'Juan', 'Perez', 'Calle 123', 'juan@example.com', '123456789', 'PROPIETARIO'),
-('USR002', 'Maria', 'Lopez', 'Avenida 456', 'maria@example.com', '987654321', 'INQUILINO'),
-('USR003', 'Pedro', 'Garcia', 'Plaza Principal', 'pedro@example.com', '456789123', 'PROPIETARIO'),
-('USR004', 'Ana', 'Martinez', 'Calle 789', 'ana@example.com', '741852963', 'INQUILINO'),
-('USR005', 'Carlos', 'Sanchez', 'Avenida Central', 'carlos@example.com', '159263478', 'PROPIETARIO'),
-('USR006', 'Laura', 'Rodriguez', 'Carrera 10', 'laura@example.com', '369852147', 'INQUILINO'),
-('USR007', 'Diego', 'Gomez', 'Calle 246', 'diego@example.com', '258741369', 'PROPIETARIO'),
-('USR008', 'Sofia', 'Diaz', 'Avenida Norte', 'sofia@example.com', '147258369', 'INQUILINO'),
-('USR009', 'Alejandro', 'Hernandez', 'Calle Sur', 'alejandro@example.com', '123789456', 'PROPIETARIO'),
-('USR010', 'Fernanda', 'Torres', 'Avenida Este', 'fernanda@example.com', '987654321', 'INQUILINO');
-
--- Insertar registros en la tabla CONDOMINIO_F
-INSERT INTO CONDOMINIO_F (NOMBRE_CONDOMINIO_F) VALUES
-('Edificio A'),
-('Conjunto Residencial B'),
-('Torres del Parque'),
-('Residencial La Floresta'),
-('CONDOMINIO_F El Bosque'),
-('Urbanización El Recreo'),
-('Complejo Los Pinos'),
-('Conjunto Vista Hermosa'),
-('Residencial Los Alamos'),
-('CONDOMINIO_F Las Palmas');
-
--- Insertar registros en la tabla DEPARTAMENTO_F
--- Se asumirá que ID_USUARIO y ID_CONDOMINIO_F se asignan aleatoriamente de los datos disponibles en las tablas correspondientes.
-INSERT INTO DEPARTAMENTO_F (NUMERO_DEPARTAMENTO_F, ID_USUARIO, ID_CONDOMINIO_F) VALUES
-('101', 'USR001', 1),
-('202', 'USR002', 2),
-('303', 'USR003', 3),
-('404', 'USR004', 4),
-('505', 'USR005', 5),
-('606', 'USR006', 6),
-('707', 'USR007', 7),
-('808', 'USR008', 8),
-('909', 'USR009', 9),
-('1010', 'USR010', 10);
-
-SELECT * FROM USUARIO;
 SELECT * FROM CUOTA;
 SELECT * FROM PAGO;
-SELECT * FROM DEPARTAMENTO_F;
-SELECT * FROM CONDOMINIO_F;
+SELECT * FROM METODOPAGO;
+
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO RESERVAS GRUPO 4=============================*/
 /*===============================================================================================*/
