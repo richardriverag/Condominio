@@ -8,6 +8,7 @@ import G1_Finanzas.Vista_FinanzasAdministrador;
 import G1_Finanzas.Vista_FinanzasCliente;
 import G4_Reservas.AreasComunesUsuarios;
 import G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble.Modulossss;
+import G6_Comunicacion.GUI_Comunicacion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -187,7 +188,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciar1ActionPerformed
 
     private void btnIniciar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar2ActionPerformed
-        // TODO add your handling code here:
+        new GUI_Comunicacion().setVisible(true);
     }//GEN-LAST:event_btnIniciar2ActionPerformed
 
     private void btnIniciar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar3ActionPerformed
