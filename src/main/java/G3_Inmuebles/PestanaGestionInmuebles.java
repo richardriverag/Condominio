@@ -4,17 +4,10 @@
 
 
  */
-package G3_Inmuebles.modelGrpo3;
+package G3_Inmuebles;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JTable;
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,6 +24,7 @@ public class PestanaGestionInmuebles {
     private static final String USER = "root";
     private static final String PASSWORD = "123456";
 
+    //Si se Usa
     public static String BuscarPorCedula(String numeCedula) {
         String query = "SELECT * FROM CLIENTE WHERE CI = ?";
         try (
@@ -55,7 +49,8 @@ public class PestanaGestionInmuebles {
         }
         //return null;
     }
-
+    
+    //Si se usa
     public static void TraertablaReserva(String numeCedula, JTable tablaGestionReserva1) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("CI");
@@ -99,6 +94,8 @@ public class PestanaGestionInmuebles {
         
     }
 
+    
+    //Si se usa
     public static void EnviarReserva(String numeCedula, String nombreUsuario, String tipo, String fecha_inicio, String fecha_fin, String Observaciones) {
         String query = "INSERT INTO CLIENTE (CI, NOMBRE, Tipo, Estado, Fecha_Inicio, Fecha_Fin, Observaciones) VALUES (?, ?, ?, ?, ?, ?, ?)";
         
@@ -123,6 +120,7 @@ public class PestanaGestionInmuebles {
         }
     }
 
+    /*
     public static void buscarTodasReservas(String estadoReserva, JTable tablaVisualizacionUsuarioGestionUnidades1) {
         
         DefaultTableModel model = new DefaultTableModel();
@@ -163,25 +161,9 @@ public class PestanaGestionInmuebles {
         
     
     }
+*/
 
-    public static void AcualizarGeneral(String numeCedula, String nombreUsuario, String Unidad, String Fecha_inicio, String Fecha_fin) {
-        
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Cedula");
-        model.addColumn("Nombre");
-        model.addColumn("Tipo");
-        model.addColumn("Estado");
-        model.addColumn("Fecha_Inicio");
-        model.addColumn("Fecha_Fin");
-        
-        
-        String query = "INSERT INTO RESERVA(Cedula, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin)\n" +
-                        "VALUES\n" +
-                        "('1234567890', 'Juan Pérez', 'Apartamento', 'Reservado', '2024-02-12', '2024-02-15'),";
-        
-        
-    }
-
+    //Si se usa
     public static void TraertablaReservaEstado(String estado, JTable tablaVisualizacionUsuarioGestionUnidades1) {
         
         DefaultTableModel model = new DefaultTableModel();
@@ -261,6 +243,8 @@ public class PestanaGestionInmuebles {
         
     }
 
+    
+    //Si se usa
     public static void eliminarRegistro(DefaultTableModel modeloTabla, int id) {
         String sql = "DELETE FROM CLIENTE WHERE ID = ?";
         
@@ -281,7 +265,8 @@ public class PestanaGestionInmuebles {
             System.out.println("Error al eliminar el registro: " + e.getMessage());
         }
     }
-
+    
+    
     private static int obtenerIndice(DefaultTableModel modeloTabla, int id) {
         for (int i = 0; i < modeloTabla.getRowCount(); i++) {
             if (Integer.parseInt(modeloTabla.getValueAt(i, 0).toString()) == id) {

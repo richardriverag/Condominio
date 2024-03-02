@@ -172,49 +172,117 @@ VALUES
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO INMUEBLES GRUPO 3=============================*/
 /*===============================================================================================*/
-
-DROP TABLE IF EXIST CLIENTE;
-DROP TABLE IF NO EXIST UNIDAD;
-
-/*=====================CLIENTE=====================*/
-CREATE TABLE CLIENTE (
-    CI VARCHAR(10),
-    Nombre VARCHAR(100),
-    Tipo VARCHAR(100),
-    Estado VARCHAR(20),
-    Fecha_Inicio DATE,
-    Fecha_Fin DATE,
-    Observaciones VARCHAR(255)
+/*=====================CATALOGO_FORMULARIO=====================*/
+Drop table if EXISTS CATALOGO_FORMULARIO 
+CREATE TABLE CATALOGO_FORMULARIO(
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    num_bloque VARCHAR(100),
+    nombre_administrador VARCHAR(100),
+    departamentos_grandes INT,
+    departamentos_medianos INT,
+    departamentos_pequenos INT,
+    suits INT,
+    servicios VARCHAR(100),
+    normas VARCHAR(100)
 );
 
-INSERT INTO CLIENTE (CI, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin, Observaciones)
-VALUES
-('1234567890', 'Juan Pérez', 'Apartamento', 'Reservado', '2024-02-12', '2024-02-15', 'Reserva confirmada'),
-('9876543210', 'Ana García', 'Casa', 'No Reservado', '2024-02-15', '2024-02-29', 'Pago pendiente'),
-('5678901234', 'Carlos Rodríguez', 'Oficina', 'Reservado', '2024-02-20', '2024-02-25', 'Reserva temporal');
+
+/*=====================TRIGGER trg_CrearTablaDepartamentos=====================*/
+Drop trigger if exists trg_CrearTablaDepartamentos;
+CREATE TRIGGER trg_CrearTablaDepartamentos
+ON CATALOGO_FORMULARIO
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @numBloque VARCHAR(100)
+    DECLARE @departamentos_grandes INT
+    DECLARE @departamentos_medianos INT
+    DECLARE @departamentos_pequenos INT
+    DECLARE @suits INT
+
+    SELECT @numBloque = num_bloque,
+           @departamentos_grandes = departamentos_grandes,
+           @departamentos_medianos = departamentos_medianos,
+           @departamentos_pequenos = departamentos_pequenos,
+           @suits = suits
+    FROM inserted
+
+    DECLARE @sql NVARCHAR(MAX)
+
+    SET @sql = '
+    CREATE TABLE ' + QUOTENAME(@numBloque) + ' (
+        ID INT IDENTITY(1,1) PRIMARY KEY,
+        numBloque VARCHAR(100),
+        Nombre_Administrador VARCHAR(100),
+        Tipo VARCHAR(20),
+        Servicios VARCHAR(100),
+        Normas VARCHAR(100),
+        Estado VARCHAR(20) DEFAULT ''No arrendado''
+    );
+
+    INSERT INTO ' + QUOTENAME(@numBloque) + '
+                (numBloque, Nombre_Administrador, Tipo, Servicios, Normas)
+    VALUES '
+
+    DECLARE @i INT = 1
+    WHILE @i <= @departamentos_grandes
+    BEGIN
+        SET @sql = @sql + '(''' + @numBloque + ''', ''' + (SELECT nombre_administrador FROM inserted) + ''', ''Grande'', ''' + (SELECT servicios FROM inserted) + ''', ''' + (SELECT normas FROM inserted) + '''),'
+        SET @i = @i + 1
+    END
+
+    SET @i = 1
+    WHILE @i <= @departamentos_medianos
+    BEGIN
+        SET @sql = @sql + '(''' + @numBloque + ''', ''' + (SELECT nombre_administrador FROM inserted) + ''', ''Mediano'', ''' + (SELECT servicios FROM inserted) + ''', ''' + (SELECT normas FROM inserted) + '''),'
+        SET @i = @i + 1
+    END
+
+    SET @i = 1
+    WHILE @i <= @departamentos_pequenos
+    BEGIN
+        SET @sql = @sql + '(''' + @numBloque + ''', ''' + (SELECT nombre_administrador FROM inserted) + ''', ''Pequeño'', ''' + (SELECT servicios FROM inserted) + ''', ''' + (SELECT normas FROM inserted) + '''),'
+        SET @i = @i + 1
+    END
+
+    SET @i = 1
+    WHILE @i <= @suits
+    BEGIN
+        SET @sql = @sql + '(''' + @numBloque + ''', ''' + (SELECT nombre_administrador FROM inserted) + ''', ''Suit'', ''' + (SELECT servicios FROM inserted) + ''', ''' + (SELECT normas FROM inserted) + '''),'
+        SET @i = @i + 1
+    END
+
+    SET @sql = LEFT(@sql, LEN(@sql) - 1) -- Eliminar la última coma
+
+    EXEC sp_executesql @sql
+END;
 
 
-
-/*=====================RESERVA=====================*/
-DROP TABLE IF EXISTS RESERVA;
-
-CREATE TABLE RESERVA (
-    Cedula VARCHAR(10),
-    Nombre VARCHAR(100),
-    Tipo VARCHAR(100),
-    Estado VARCHAR(20),
-    Fecha_Inicio DATE,
-    Fecha_Fin DATE,
-    Observaciones VARCHAR(255)
+/*=====================GESTION_PROPIEDADES=====================*/
+drop table if exists GESTION_PROPIEDADES
+CREATE TABLE GESTION_PROPIEDADES (
+	id INT IDENTITY(1,1) PRIMARY KEY,
+    CEDULA VARCHAR(100),
+    NOMBRE VARCHAR(100),
+    NUM_BLOQUE VARCHAR(100),
+    TIPO_PISO VARCHAR(20),
+    NUM_DEPARTAMENTO INT
 );
 
-INSERT INTO RESERVA (Cedula, Nombre, Tipo, Estado, Fecha_Inicio, Fecha_Fin, Observaciones)
-VALUES
-('1234567890', 'Juan Pérez', 'Apartamento', 'Reservado', '2024-02-12', '2024-02-15', 'Reserva confirmada'),
-('9876543210', 'Ana García', 'Casa', 'No Reservado', '2024-02-15', '2024-02-29', 'Pago pendiente'),
-('5678901234', 'Carlos Rodríguez', 'Oficina', 'Reservado', '2024-02-20', '2024-02-25', 'Reserva temporal');
-
-
+/*=====================TablaObservaciones=====================*/
+drop table if exists TablaObservaciones
+CREATE TABLE TablaObservaciones (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    Cedula VARCHAR(100),
+	Nombre VARCHAR(100),
+    BloqueAnterior VARCHAR(100),
+    BloqueActual VARCHAR(100),
+    NumDepAnterior INT,
+    NumDepActual INT,
+    TipoDepartamentoAnterior VARCHAR(100),
+    TipoDepartamentoActual VARCHAR(100),
+    Observaciones VARCHAR(MAX)
+);
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO CHECK IN GRUPO 5=============================*/
 /*===============================================================================================*/
@@ -291,4 +359,6 @@ INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (4, 'Disponible');
 INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (5, 'Ocupado');
 
  select * from ParqueaderoVisita
+
+
 

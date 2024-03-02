@@ -6,12 +6,17 @@ package condominio;
 
 import G1_Finanzas.Vista_FinanzasAdministrador;
 import G1_Finanzas.Vista_FinanzasCliente;
+import G3_Inmuebles.ModuloInmuebles;
 import G4_Reservas.AreasComunesUsuarios;
-import G3_Inmuebles.vistasGrpo3.GestionInmuebles.InterfazInmueble.Modulossss;
 import G6_Comunicacion.GUI_Comunicacion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
+
+
+
 
 /**
  *
@@ -201,7 +206,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnIniciar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar5ActionPerformed
         // TODO add your handling code here:
-        new Modulossss().setVisible(true);
+        new ModuloInmuebles().setVisible(true);
         
     }//GEN-LAST:event_btnIniciar5ActionPerformed
 
