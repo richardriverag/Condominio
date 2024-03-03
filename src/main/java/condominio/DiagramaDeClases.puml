@@ -26,7 +26,21 @@ class Residente
 class Guardia
 class Condominio
 {
-    int NumParqueaderosVisitas
+    
+    String nombre
+    int numBloque
+    String Dimensiones
+    int numHabitaciones
+    List<Unidad> unidades
+    List<Reserva> reservas
+    List<RegistroPropiedad> registrosPropiedad
+    List<ReporteEstadoInmueble> reportesEstadoInmueble
+    
+    {method} agregarUnidad(Unidad unidad)
+    {method} agregarAreaComun(AreaComun areaComun)
+    {method} agregarReserva(Reserva reserva)
+    {method} agregarRegistroPropiedad(RegistroPropiedad registroPropiedad)
+    {method} generarReporteEstadoInmueble()
 }
 class Unidad
 {
