@@ -3,14 +3,8 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1024, 768]"/>
-    </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1024, 768]"/>
-    </Property>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[800, 600]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -44,7 +38,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnIniciar4" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnIniciar3" min="-2" pref="142" max="-2" attributes="0"/>
+                      <Component id="btnCheckIn" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnIniciar2" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -65,7 +59,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnIniciar1" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="btnIniciar2" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
-                      <Component id="btnIniciar3" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
+                      <Component id="btnCheckIn" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="btnIniciar4" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="btnIniciar5" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="btnUsuarios" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
@@ -119,7 +113,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciar2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnIniciar3">
+    <Component class="javax.swing.JButton" name="btnCheckIn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="3"/>
@@ -135,7 +129,7 @@
         <Property name="name" type="java.lang.String" value="btnIniciar" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciar3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheckInActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnIniciar4">

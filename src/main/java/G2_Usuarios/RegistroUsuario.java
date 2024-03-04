@@ -4,7 +4,6 @@
  */
 package G2_Usuarios;
 
-
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
@@ -18,6 +17,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,32 +30,21 @@ import javax.swing.JTextField;
  */
 public class RegistroUsuario extends javax.swing.JFrame {
 
-    
-    
-    
-    
-    
+  
+
     public RegistroUsuario() {
         initComponents();
         setLocationRelativeTo(null);
-      
-   
+
         setVisible(true);
         setResizable(false);//no miximizar
-        
+
         jLNC3.setVisible(false);
         jLNC5.setVisible(false);
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
-      
     }
-    
-    
-    
-    
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -353,7 +343,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jLabel9.setFocusCycleRoot(true);
         jLabel9.setFocusTraversalPolicyProvider(true);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guardia", "Visita", "Residente", "Administrador" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Usuario" }));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Rol");
@@ -442,8 +432,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNC5)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTFContraseñaUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -462,7 +452,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -474,8 +464,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void jTFContraseñaUsuario1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1MouseExited
         //
-        
-         jLNC5.setVisible(false);
+
+        jLNC5.setVisible(false);
     }//GEN-LAST:event_jTFContraseñaUsuario1MouseExited
 
     private void jTFContraseñaUsuario1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1MouseEntered
@@ -484,103 +474,134 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void jTFContraseñaUsuario1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1MouseClicked
         jLNC5.setVisible(true);
-        
-       
+
+
     }//GEN-LAST:event_jTFContraseñaUsuario1MouseClicked
+    private boolean usuarioExistente(String usuario) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
-        
-// Verificar si se aceptaron los términos y condiciones
-if (!jButton1.isEnabled()) {
-    JOptionPane.showMessageDialog(null,
-        "Debe aceptar los términos y condiciones para continuar",
-        "Error",
-        JOptionPane.INFORMATION_MESSAGE);
-} else {
-    // Obtener los datos del nuevo usuario desde los campos de texto y el JComboBox
-    String nuevoUsuario = jTFNomCUsuario.getText();
-    String nuevaContraseña = jTFUsuario.getText();
-    String nombre = jTFNomCUsuario.getText();
-    String apellido = jTFApeCUsuario.getText();
-    String email = jTFEmailUsuario.getText();
-    int selectedIndex = jComboBox1.getSelectedIndex();
-    int tipoUsuario = 11; // Valor por defecto
-    switch (selectedIndex) {
-        case 0:
-            tipoUsuario = 1; // Guardia
-            break;
-        case 1:
-            tipoUsuario = 2; // Visita
-            break;
-        case 2:
-            tipoUsuario = 3; // Residente
-            break;
-        case 3:
-            tipoUsuario = 4; // Administrador
-            break;
-    }
-
-    // Crear una nueva variable para almacenar el ID del usuario
-    int idUsuario = 0;
-
-    Connection connection = null;
-    try {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pruebita", "root", "");
-
-        // Verificar si el usuario ya existe en la base de datos
-        String selectQuery = "SELECT * FROM usuarios WHERE usuario = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
-        preparedStatement.setString(1, nuevoUsuario);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            JOptionPane.showMessageDialog(null, "El usuario ya existe en la base de datos.");
-        } else {
-            // Obtener el nuevo ID de usuario
-            selectQuery = "SELECT MAX(id_usuario) FROM usuarios"; // Obtener el máximo ID actual
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "");
+            String selectQuery = "SELECT usuario FROM Usuario WHERE usuario = ?";
             preparedStatement = connection.prepareStatement(selectQuery);
+            preparedStatement.setString(1, usuario);
             resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                idUsuario = resultSet.getInt(1) + 1; // Incrementar el ID máximo encontrado
-            } else {
-                idUsuario = 1; // Si no hay usuarios en la base de datos, empezar desde 1
+            // Si encuentra algún resultado, significa que el usuario ya existe
+            return resultSet.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarPerfilAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+            return false; // En caso de error, se considera que el usuario no existe
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-            // Insertar el nuevo usuario en la base de datos
-            String insertQuery = "INSERT INTO usuarios (id_usuario, usuario, contrasenia, nombre, apellido, email, tipoUsuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setInt(1, idUsuario);
-            preparedStatement.setString(2, nuevoUsuario);
-            preparedStatement.setString(3, nuevaContraseña);
-            preparedStatement.setString(4, nombre);
-            preparedStatement.setString(5, apellido);
-            preparedStatement.setString(6, email);
-            preparedStatement.setInt(7, tipoUsuario);
-
-            int rowsInserted = preparedStatement.executeUpdate();
-
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo registrar el usuario.");
-            }
-        }
-    } catch (SQLException e) {
-        e.printStackTrace(); // Manejar la excepción de manera adecuada, por ejemplo, mostrando un mensaje de error al usuario
-    } finally {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
-}
-           
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+        // Verificar si se aceptaron los términos y condiciones
+        if (!jCheckBox1.isSelected()) {
+            JOptionPane.showMessageDialog(null,
+                    "Debe aceptar los términos y condiciones para continuar",
+                    "Error",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Obtener los datos del nuevo usuario desde los campos de texto y el JComboBox
+            String nuevoUsuario = jTFUsuario.getText();
+            String nuevaContraseña = new String(jTFContraseñaUsuario.getPassword());
+            String nombre = jTFNomCUsuario.getText();
+            String apellido = jTFApeCUsuario.getText();
+            String email = jTFEmailUsuario.getText();
+            int selectedIndex = jComboBox1.getSelectedIndex();
+            int tipoUsuario = 0; // Valor por defecto
+            switch (selectedIndex) {
+                case 0:
+                    tipoUsuario = 1; // Administrador
+                    break;
+                case 1:
+                    tipoUsuario = 2; // Usuario
+                    break;
+            }
+            //Verificar que el usuario no existe en la base de datos.
+
+            if (usuarioExistente(nuevoUsuario)) {
+                JOptionPane.showMessageDialog(rootPane, "El usuario ya existe. Por favor, elija otro nombre de usuario.");
+                return;
+            }
+
+            // Crear una nueva variable para almacenar el ID del usuario
+            int idUsuario = 0;
+
+            Connection connection = null;
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "");
+
+                // Verificar si el usuario ya existe en la base de datos
+                String selectQuery = "SELECT * FROM usuario WHERE usuario = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+                preparedStatement.setString(1, nuevoUsuario);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    JOptionPane.showMessageDialog(null, "El usuario ya existe en la base de datos.");
+                } else {
+                    // Obtener el nuevo ID de usuario
+                    selectQuery = "SELECT MAX(id_usuario) FROM usuario"; // Obtener el máximo ID actual
+                    preparedStatement = connection.prepareStatement(selectQuery);
+                    resultSet = preparedStatement.executeQuery();
+
+                    if (resultSet.next()) {
+                        idUsuario = resultSet.getInt(1) + 1; // Incrementar el ID máximo encontrado
+                    } else {
+                        idUsuario = 1; // Si no hay usuarios en la base de datos, empezar desde 1
+                    }
+
+                    // Insertar el nuevo usuario en la base de datos
+                    String insertQuery = "INSERT INTO usuario (id_usuario, usuario, contrasenia, nombre, apellido, email, tipoUsuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    preparedStatement = connection.prepareStatement(insertQuery);
+                    preparedStatement.setInt(1, idUsuario);
+                    preparedStatement.setString(2, nuevoUsuario);
+                    preparedStatement.setString(3, nuevaContraseña);
+                    preparedStatement.setString(4, nombre);
+                    preparedStatement.setString(5, apellido);
+                    preparedStatement.setString(6, email);
+                    preparedStatement.setInt(7, tipoUsuario);
+
+                    int rowsInserted = preparedStatement.executeUpdate();
+
+                    if (rowsInserted > 0) {
+                        JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se pudo registrar el usuario.");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Manejar la excepción de manera adecuada, por ejemplo, mostrando un mensaje de error al usuario
+            } finally {
+                try {
+                    if (connection != null) {
+                        connection.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jTFContraseñaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioActionPerformed
@@ -592,15 +613,14 @@ if (!jButton1.isEnabled()) {
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseExited
 
     private void jTFContraseñaUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseEntered
- //parra regresar a la normalidad 
-        
+        //parra regresar a la normalidad 
+
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseEntered
 
     private void jTFContraseñaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseClicked
- //parra regresar a la normalidad 
-        
-        
-       
+        //parra regresar a la normalidad 
+
+
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseClicked
 
     private void jTFUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFUsuarioActionPerformed
@@ -617,10 +637,8 @@ if (!jButton1.isEnabled()) {
 
     private void jTFUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFUsuarioMouseClicked
         jLNC3.setVisible(true);
-   
-        
-        
-        
+
+
     }//GEN-LAST:event_jTFUsuarioMouseClicked
 
     private void jTFEmailUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioActionPerformed
@@ -628,7 +646,7 @@ if (!jButton1.isEnabled()) {
     }//GEN-LAST:event_jTFEmailUsuarioActionPerformed
 
     private void jTFEmailUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioMouseExited
-       
+
     }//GEN-LAST:event_jTFEmailUsuarioMouseExited
 
     private void jTFEmailUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioMouseEntered
@@ -636,7 +654,7 @@ if (!jButton1.isEnabled()) {
     }//GEN-LAST:event_jTFEmailUsuarioMouseEntered
 
     private void jTFEmailUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioMouseClicked
-       
+
     }//GEN-LAST:event_jTFEmailUsuarioMouseClicked
 
     private void jTFNomCUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioActionPerformed
@@ -644,7 +662,7 @@ if (!jButton1.isEnabled()) {
     }//GEN-LAST:event_jTFNomCUsuarioActionPerformed
 
     private void jTFNomCUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioMouseExited
-   
+
     }//GEN-LAST:event_jTFNomCUsuarioMouseExited
 
     private void jTFNomCUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioMouseEntered
@@ -661,7 +679,7 @@ if (!jButton1.isEnabled()) {
 
     private void jTFApeCUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioMouseExited
         setCursor(Cursor.getDefaultCursor());
-     
+
     }//GEN-LAST:event_jTFApeCUsuarioMouseExited
 
     private void jTFApeCUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioMouseEntered
@@ -669,53 +687,53 @@ if (!jButton1.isEnabled()) {
     }//GEN-LAST:event_jTFApeCUsuarioMouseEntered
 
     private void jTFApeCUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioMouseClicked
-   
-        
+
+
     }//GEN-LAST:event_jTFApeCUsuarioMouseClicked
 
     private void jTFContraseñaUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyPressed
- 
+
 
     }//GEN-LAST:event_jTFContraseñaUsuarioKeyPressed
 
     private void jTFContraseñaUsuario1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1KeyPressed
-       
+
     }//GEN-LAST:event_jTFContraseñaUsuario1KeyPressed
 
     private void jTFNomCUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNomCUsuarioKeyPressed
-          jTFNomCUsuario.addKeyListener(new KeyAdapter() {
-    public void keyTyped(KeyEvent e) {
-        char c = e.getKeyChar();
-       if (!Character.isLetter(c) && c != 'á' && c != 'é' && c != 'í' && c != 'ó' && c != 'ú' && c != 'Á' && c != 'É' && c != 'Í' && c != 'Ó' && c != 'Ú' && c != 'ñ' && c != 'Ñ' && c != ' ') {
-            Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
-            e.consume();
-        }
-    }
-});
+        jTFNomCUsuario.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isLetter(c) && c != 'á' && c != 'é' && c != 'í' && c != 'ó' && c != 'ú' && c != 'Á' && c != 'É' && c != 'Í' && c != 'Ó' && c != 'Ú' && c != 'ñ' && c != 'Ñ' && c != ' ') {
+                    Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
+                    e.consume();
+                }
+            }
+        });
     }//GEN-LAST:event_jTFNomCUsuarioKeyPressed
 
     private void jTFApeCUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioKeyTyped
-         jTFApeCUsuario.addKeyListener(new KeyAdapter() {
-    public void keyTyped(KeyEvent e) {
-        char c = e.getKeyChar();
-       if (!Character.isLetter(c) && c != 'á' && c != 'é' && c != 'í' && c != 'ó' && c != 'ú' && c != 'Á' && c != 'É' && c != 'Í' && c != 'Ó' && c != 'Ú' && c != 'ñ' && c != 'Ñ' && c != ' ') {
-            Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
-            e.consume();
-        }
-    }
-});
+        jTFApeCUsuario.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isLetter(c) && c != 'á' && c != 'é' && c != 'í' && c != 'ó' && c != 'ú' && c != 'Á' && c != 'É' && c != 'Í' && c != 'Ó' && c != 'Ú' && c != 'ñ' && c != 'Ñ' && c != ' ') {
+                    Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
+                    e.consume();
+                }
+            }
+        });
     }//GEN-LAST:event_jTFApeCUsuarioKeyTyped
 
     private void jTFApeCUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFApeCUsuarioKeyPressed
-           jTFApeCUsuario.addKeyListener(new KeyAdapter() {
-    public void keyTyped(KeyEvent e) {
-        char c = e.getKeyChar();
-       if (!Character.isLetter(c) && c != 'á' && c != 'é' && c != 'í' && c != 'ó' && c != 'ú' && c != 'Á' && c != 'É' && c != 'Í' && c != 'Ó' && c != 'Ú' && c != 'ñ' && c != 'Ñ' && c != ' ') {
-            Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
-            e.consume();
-        }
-    }
-});
+        jTFApeCUsuario.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isLetter(c) && c != 'á' && c != 'é' && c != 'í' && c != 'ó' && c != 'ú' && c != 'Á' && c != 'É' && c != 'Í' && c != 'Ó' && c != 'Ú' && c != 'ñ' && c != 'Ñ' && c != ' ') {
+                    Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
+                    e.consume();
+                }
+            }
+        });
     }//GEN-LAST:event_jTFApeCUsuarioKeyPressed
 
     private void jTFEmailUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioKeyPressed
@@ -723,18 +741,18 @@ if (!jButton1.isEnabled()) {
     }//GEN-LAST:event_jTFEmailUsuarioKeyPressed
 
     private void jTFContraseñaUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyTyped
-       
+
     }//GEN-LAST:event_jTFContraseñaUsuarioKeyTyped
 
     private void jTFUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyPressed
-  
+
     }//GEN-LAST:event_jTFUsuarioKeyPressed
 
     private void jTFUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyTyped
-    jTFUsuario.addKeyListener(new KeyAdapter() {
+        jTFUsuario.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isLetter(c) && !Character.isDigit(c)  && c != 'ñ' && c != 'Ñ' && c != '_'&& c != '.'&&  c==' ') {
+                if (!Character.isLetter(c) && !Character.isDigit(c) && c != 'ñ' && c != 'Ñ' && c != '_' && c != '.' && c == ' ') {
                     Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
                     e.consume();
                 }
@@ -750,31 +768,23 @@ if (!jButton1.isEnabled()) {
     }//GEN-LAST:event_jTFUsuarioKeyTyped
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-      
+
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
-     
-      
+
+
     }//GEN-LAST:event_jTextArea1MouseClicked
 
     private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
-      
-       
+
+
     }//GEN-LAST:event_jCheckBox1MouseClicked
 
     private void jTFEmailUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEmailUsuarioKeyTyped
 
     }//GEN-LAST:event_jTFEmailUsuarioKeyTyped
 
- 
-    
-    
-    
-    
-    
-     
-    
     public static void main(String args[]) {
         //Getting started--FlatLaf - Flat Look and Feel
 
@@ -782,17 +792,11 @@ if (!jButton1.isEnabled()) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistroUsuario().setVisible(true);
-                 
+
             }
         });
     }
-    
-    
-    
-    
-    
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

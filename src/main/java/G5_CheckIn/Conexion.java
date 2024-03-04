@@ -10,8 +10,6 @@ package G5_CheckIn;
  */
 import java.sql.*;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 
 public class Conexion {
@@ -26,7 +24,7 @@ public class Conexion {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Nos conectamos a la base de datos
             
-            con= (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "Hidalgo.2212");
+            con= (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio?serverTimezone=UTC", "root", "Hidalgo.2212");
             if(con !=null){
                // JOptionPane.showMessageDialog(null, "Conexion existosa", "alert", JOptionPane.ERROR_MESSAGE);
             }else{

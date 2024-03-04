@@ -43,11 +43,6 @@ public class ParqueaderoVisita extends javax.swing.JFrame {
         cargarTabla(modelo, JTableParqueadero, nombreTabla, Titulos, idTabla);
     }
 
- 
-    /**
-     * Creates new form ParqueaderoVisita
-     */
-    
      public ParqueaderoVisita(String[] info) {
         initComponents();
         this.setLocationRelativeTo(this);
