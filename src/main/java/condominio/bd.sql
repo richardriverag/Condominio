@@ -20,6 +20,7 @@ CREATE TABLE Usuario (
   PRIMARY KEY (id_usuario)
 );
 
+
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO FINANZAS GRUPO 1=============================*/
 /*===============================================================================================*/
@@ -43,8 +44,7 @@ CREATE TABLE PAGO
    ESTADO_PAGO          VARCHAR(10) NOT NULL,		 			/*2 ESTADOS: VIGENTE, ANULADO*/
    DESCRIPCION			VARCHAR(200) default 'ORDINARIO',		/*SOLO EXTRAORDINARIOS DEBEN ESPECIFICAR*/
    PRIMARY KEY (ID_PAGOS),
-   FOREIGN KEY (ID_METODOPAGO) REFERENCES METODOPAGO(ID_METODOPAGO),
-   /*FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO)*/			/*Descomentar cuando Grupo 3 añada sus tablas*/				
+   FOREIGN KEY (ID_METODOPAGO) REFERENCES METODOPAGO(ID_METODOPAGO)
 );
 
 CREATE TABLE CUOTA 								/*SI UN PAGO SE ANULA LAS CUOTAS SE ELIMINAN*/
@@ -98,7 +98,6 @@ CREATE TABLE DEPARTAMENTO_F
    ID_USUARIO           VARCHAR(20) NOT NULL,
    ID_CONDOMINIO_F        INT NOT NULL,
    PRIMARY KEY (ID_DEPARTAMENTO_F),
-   FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO),
    FOREIGN KEY (ID_CONDOMINIO_F) REFERENCES CONDOMINIO_F(ID_CONDOMINIO_F)
 );
 
@@ -140,8 +139,7 @@ INSERT INTO DEPARTAMENTO_F (NUMERO_DEPARTAMENTO_F, ID_USUARIO, ID_CONDOMINIO_F) 
 ('707', 'USR007', 7),
 ('808', 'USR008', 8),
 ('909', 'USR009', 9),
-('1010', 'USR010', 10);
-/*===============================================================================================*/
+('1010', 'USR010', 10);/*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO RESERVAS GRUPO 4=============================*/
 /*===============================================================================================*/
 DROP TABLE IF EXISTS RESERVA;
