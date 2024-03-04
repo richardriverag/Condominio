@@ -4,8 +4,13 @@
  */
 package condominio;
 
+import G1_Finanzas.Vista_FinanzasAdministrador;
+import G1_Finanzas.Vista_FinanzasCliente;
 import G3_Inmuebles.ModuloInmuebles;
 import G4_Reservas.AreasComunesUsuarios;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -144,7 +149,25 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar1ActionPerformed
-        // TODO add your handling code here:
+        
+        //verificar si el usuario logeado es admin
+        boolean esAdmin = true;
+        try {
+            if(esAdmin){
+            
+                Vista_FinanzasAdministrador vf = new Vista_FinanzasAdministrador();
+                vf.setVisible(true);
+            
+        }else{
+                //se deberia enviar el id_usuario a la vista para que se muestre la inf
+                // del cliente en cuestion
+            Vista_FinanzasCliente vc = new Vista_FinanzasCliente();
+            vc.setVisible(true);
+        }
+            } catch (SQLException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
     }//GEN-LAST:event_btnIniciar1ActionPerformed
 
     private void btnIniciar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar2ActionPerformed
