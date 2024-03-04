@@ -107,7 +107,7 @@ public class Metodos_Sql_Cuotas {
     }
 
     
-      public void desplegarCuotas(Connection cn, JTable jtable){
+      public void desplegarCuotas(Connection cn, JTable jtable, boolean pendiente){
         // Crear un modelo de tabla para el JTable
         DefaultTableModel modelo = new DefaultTableModel();
         jtable.setModel(modelo);
@@ -121,7 +121,12 @@ public class Metodos_Sql_Cuotas {
         modelo.addColumn("Estado Cuota");
 
         // Consulta SQL para seleccionar los ingresos
-        String sql = "SELECT * FROM CUOTA";
+        String sql = "";
+        if(pendiente){
+            sql = "SELECT * FROM CUOTA WHERE ESTADO_CUOTA = 'Pendiente'";    
+        }else{
+            sql = "SELECT * FROM CUOTA";                
+        }
 
         try{
            PreparedStatement  pps = cn.prepareStatement(sql);
@@ -144,8 +149,9 @@ public class Metodos_Sql_Cuotas {
         }
     }
       
-    public void desplegarCuotasPagoEspecifico(Connection cn, JTable jtable, String idPago){
-        // Crear un modelo de tabla para el JTable
+    public void desplegarCuotasPagoEspecifico(Connection cn, JTable jtable, String idPago, boolean pendiente){
+
+    // Crear un modelo de tabla para el JTable
         DefaultTableModel modelo = new DefaultTableModel();
         jtable.setModel(modelo);
 
@@ -157,8 +163,15 @@ public class Metodos_Sql_Cuotas {
         modelo.addColumn("Fecha de Vencimiento");
         modelo.addColumn("Estado Cuota");
 
+         String sql = "";
         // Consulta SQL para seleccionar los ingresos
-        String sql = "SELECT * FROM CUOTA WHERE ID_PAGOS = "+idPago;
+        if(pendiente){
+             sql = "SELECT * FROM CUOTA WHERE ID_PAGOS = "+idPago+" AND ESTADO_CUOTA = 'Pendiente'";
+        }else{
+             sql = "SELECT * FROM CUOTA WHERE ID_PAGOS = "+idPago;        
+        }        
+        
+                System.out.println(sql);        
 
         try{
            PreparedStatement  pps = cn.prepareStatement(sql);
@@ -231,5 +244,44 @@ public class Metodos_Sql_Cuotas {
     }
     
     
-    
+     public void desplegarCuotasUsuarioEspecificoPendiente(Connection cn, JTable jtable, String idUsuario){
+        // Crear un modelo de tabla para el JTable
+        DefaultTableModel modelo = new DefaultTableModel();
+        jtable.setModel(modelo);
+
+        // Agregar columnas al modelo de la tabla
+        modelo.addColumn("ID Pago");
+        modelo.addColumn("ID Cuota");
+        modelo.addColumn("Número de Cuota");
+        modelo.addColumn("Monto de Cuota");
+        modelo.addColumn("Fecha de Vencimiento");
+        modelo.addColumn("Estado Cuota");
+
+        // Consulta SQL para seleccionar las cuotas pendientes de un usuario específico
+        String sql = "SELECT CUOTA.ID_PAGOS, CUOTA.ID_CUOTA, CUOTA.NUM_CUOTA, CUOTA.MONTO_CUOTA, CUOTA.FECHAV_CUOTA, CUOTA.ESTADO_CUOTA " +
+                     "FROM CUOTA " +
+                     "INNER JOIN PAGO ON CUOTA.ID_PAGOS = PAGO.ID_PAGOS " +
+                     "WHERE PAGO.ID_USUARIO = ? AND CUOTA.ESTADO_CUOTA = 'Pendiente'";
+
+        try{
+            PreparedStatement pps = cn.prepareStatement(sql);
+            pps.setString(1, idUsuario); // Establecer el ID de usuario como parámetro en la consulta
+            ResultSet rs = pps.executeQuery();
+
+            // Leer los resultados de la consulta y agregarlos al modelo de la tabla
+            while(rs.next()){
+                Object[] fila = new Object[6]; // Crear un array de objetos para la fila
+                fila[0] = rs.getString("ID_PAGOS");
+                fila[1] = rs.getString("ID_CUOTA");
+                fila[2] = rs.getString("NUM_CUOTA");
+                fila[3] = rs.getString("MONTO_CUOTA");
+                fila[4] = rs.getString("FECHAV_CUOTA");
+                fila[5] = rs.getString("ESTADO_CUOTA");
+                modelo.addRow(fila); // Agregar la fila al modelo de la tabla
+            }
+        } catch(SQLException ex){
+            //Logger.getLogger(Pago.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al recuperar los datos");
+        }
+    }
 }
