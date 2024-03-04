@@ -44,16 +44,14 @@ public class Principal extends javax.swing.JFrame {
         btnIniciar1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         btnIniciar2 = new javax.swing.JButton();
-        btnIniciar3 = new javax.swing.JButton();
+        btnCheckIn = new javax.swing.JButton();
         btnIniciar4 = new javax.swing.JButton();
         btnIniciar5 = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1024, 768));
         setMinimumSize(new java.awt.Dimension(1024, 768));
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         btnIniciar1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnIniciar1.setText("Finanzas");
@@ -75,13 +73,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnIniciar3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        btnIniciar3.setText("Check-In");
-        btnIniciar3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 102, 255), null));
-        btnIniciar3.setName("btnIniciar"); // NOI18N
-        btnIniciar3.addActionListener(new java.awt.event.ActionListener() {
+        btnCheckIn.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btnCheckIn.setText("Check-In");
+        btnCheckIn.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 102, 255), null));
+        btnCheckIn.setName("btnIniciar"); // NOI18N
+        btnCheckIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciar3ActionPerformed(evt);
+                btnCheckInActionPerformed(evt);
             }
         });
 
@@ -141,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnIniciar4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnIniciar3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnIniciar2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -158,7 +156,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnIniciar1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnIniciar2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnIniciar3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnIniciar4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnIniciar5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -197,9 +195,9 @@ public class Principal extends javax.swing.JFrame {
         new GUI_Comunicacion().setVisible(true);
     }//GEN-LAST:event_btnIniciar2ActionPerformed
 
-    private void btnIniciar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar3ActionPerformed
+    private void btnCheckInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckInActionPerformed
        new CheckIn_Nw().setVisible(true);
-    }//GEN-LAST:event_btnIniciar3ActionPerformed
+    }//GEN-LAST:event_btnCheckInActionPerformed
 
     private void btnIniciar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar4ActionPerformed
         new AreasComunesUsuarios().setVisible(true);
@@ -255,9 +253,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCheckIn;
     private javax.swing.JButton btnIniciar1;
     private javax.swing.JButton btnIniciar2;
-    private javax.swing.JButton btnIniciar3;
     private javax.swing.JButton btnIniciar4;
     private javax.swing.JButton btnIniciar5;
     private javax.swing.JButton btnSalir;
