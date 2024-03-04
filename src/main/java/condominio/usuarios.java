@@ -4,6 +4,7 @@
  */
 package condominio;
 
+import G1_Finanzas.ConexionGrupo1;
 import G2_Usuarios.EditarPerfil;
 import G2_Usuarios.EditarPerfilAdministrador;
 import G2_Usuarios.RegistroUsuario;
@@ -150,7 +151,7 @@ public class usuarios extends javax.swing.JFrame {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "123456");
             String usuario = SessionManager.getUsuario();
             String selectQuery = "SELECT * FROM Usuario WHERE usuario = ?";
             preparedStatement = connection.prepareStatement(selectQuery);
@@ -191,6 +192,64 @@ public class usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_beditarusuarioMouseClicked
 
+    public String getTipoUsuario(String usuario) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    String tipoUsuario = null;
+
+    try {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "");
+        //lo de abajo lo use porque no me funciono su forma de hacer conexion
+//        ConexionGrupo1 cg1 = new ConexionGrupo1();
+//        connection = cg1.conectar();
+        String selectQuery = "SELECT tipoUsuario FROM Usuario WHERE usuario = ?";
+        preparedStatement = connection.prepareStatement(selectQuery);
+        preparedStatement.setString(1, usuario);
+        resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            // Retrieve the tipoUsuario value
+            int tipoUsuarioValue = resultSet.getInt("tipoUsuario");
+
+            // Map the tipoUsuario value to a string (modify as needed)
+            tipoUsuario = mapTipoUsuarioToString(tipoUsuarioValue);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(EditarPerfilAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    return tipoUsuario;
+}
+
+private String mapTipoUsuarioToString(int tipoUsuarioValue) {
+    // Modify this method to map integer tipoUsuario values to corresponding strings
+    // For example, you can use a switch statement or if-else conditions
+    switch (tipoUsuarioValue) {
+        case 1:
+            return "Tipo 1";
+        case 2:
+            return "Tipo 2";
+        // Add more cases as needed
+        default:
+            return "Unknown Type";
+    }
+}
+
     private void bresetearusuario1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bresetearusuario1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_bresetearusuario1MouseClicked
@@ -205,7 +264,7 @@ public class usuarios extends javax.swing.JFrame {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "123456");
             String usuario = SessionManager.getUsuario();
             String selectQuery = "SELECT * FROM Usuario WHERE usuario = ?";
             preparedStatement = connection.prepareStatement(selectQuery);

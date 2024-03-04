@@ -6,6 +6,7 @@ package condominio;
 
 import G1_Finanzas.Vista_FinanzasAdministrador;
 import G1_Finanzas.Vista_FinanzasCliente;
+import G2_Usuarios.SessionManager;
 import G3_Inmuebles.ModuloInmuebles;
 import G4_Reservas.AreasComunesUsuarios;
 import java.sql.SQLException;
@@ -149,9 +150,13 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar1ActionPerformed
-        
-        //verificar si el usuario logeado es admin
-        boolean esAdmin = true;
+        String usuario = SessionManager.getUsuario();
+        usuarios usuario2 = new usuarios();
+        String tipo = usuario2.getTipoUsuario(usuario);
+        boolean esAdmin=false;
+        if(tipo.equalsIgnoreCase("Tipo 1")){
+            esAdmin = true;
+        }
         try {
             if(esAdmin){
             
@@ -159,8 +164,6 @@ public class Principal extends javax.swing.JFrame {
                 vf.setVisible(true);
             
         }else{
-                //se deberia enviar el id_usuario a la vista para que se muestre la inf
-                // del cliente en cuestion
             Vista_FinanzasCliente vc = new Vista_FinanzasCliente();
             vc.setVisible(true);
         }
