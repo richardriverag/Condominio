@@ -23,6 +23,7 @@ CREATE TABLE Usuario (
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO FINANZAS GRUPO 1=============================*/
 /*===============================================================================================*/
+
 CREATE TABLE METODOPAGO
 (
    ID_METODOPAGO        INT NOT NULL AUTO_INCREMENT,
@@ -75,6 +76,71 @@ SELECT * FROM CUOTA;
 SELECT * FROM PAGO;
 SELECT * FROM METODOPAGO;
 
+/*===============================================NOTA======================================================================================================*/
+/*=========================================================================================================================================================*/
+/*=============DEBIDO A QUE A FECHA 3/3/2024 A LAS 19:05 NO SE HA ENCONTRADO LAS TABLAS,“CONDOMINIO” Y “DEPARTAMENTO”  ====================================*/
+/*===========================SE OPTO POR CREAR TABLAS TEMPORALES CONTINUAR CON EL DESARROLLO===============================================================*/
+/*===========================LAS TABLAS TEMPORALES SON: CONDOMINIO_F, DEPARTAMENTO_F ======================================================================*/
+/*=========================================================================================================================================================*/
+
+
+CREATE TABLE CONDOMINIO_F
+(
+   ID_CONDOMINIO_F        INT NOT NULL AUTO_INCREMENT,
+   NOMBRE_CONDOMINIO_F    VARCHAR(50) NOT NULL,
+   PRIMARY KEY (ID_CONDOMINIO_F)
+);
+
+CREATE TABLE DEPARTAMENTO_F
+(
+   ID_DEPARTAMENTO_F      INT NOT NULL AUTO_INCREMENT,
+   NUMERO_DEPARTAMENTO_F  VARCHAR(20) NOT NULL,
+   ID_USUARIO           VARCHAR(20) NOT NULL,
+   ID_CONDOMINIO_F        INT NOT NULL,
+   PRIMARY KEY (ID_DEPARTAMENTO_F),
+   FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO),
+   FOREIGN KEY (ID_CONDOMINIO_F) REFERENCES CONDOMINIO_F(ID_CONDOMINIO_F)
+);
+
+-- Insertar registros en la tabla Usuario
+INSERT INTO Usuario (id_usuario, usuario, contrasenia, nombre, apellido, email, tipoUsuario) VALUES
+(1, 'Juan', 'Contraseña1', 'Juan', 'Perez', 'juan@example.com', 1),
+(2, 'Maria', 'Contraseña2', 'Maria', 'Lopez', 'maria@example.com', 2),
+(3, 'Pedro', 'Contraseña3', 'Pedro', 'Garcia', 'pedro@example.com', 1),
+(4, 'Ana', 'Contraseña4', 'Ana', 'Martinez', 'ana@example.com', 1),
+(5, 'Carlos', 'Contraseña5', 'Carlos', 'Sanchez', 'carlos@example.com', 1),
+(6, 'Laura', 'Contraseña6', 'Laura', 'Rodriguez', 'laura@example.com', 2),
+(7, 'Diego', 'Contraseña7', 'Diego', 'Gomez', 'diego@example.com', 2),
+(8, 'Sofia', 'Contraseña8', 'Sofia', 'Diaz', 'sofia@example.com', 2),
+(9, 'Alejandro', 'Contraseña9', 'Alejandro', 'Hernandez', 'alejandro@example.com', 2),
+(10, 'Fernanda', 'Contraseña10', 'Fernanda', 'Torres', 'fernanda@example.com', 2);
+
+-- Insertar registros en la tabla CONDOMINIO_F
+INSERT INTO CONDOMINIO_F (NOMBRE_CONDOMINIO_F) VALUES
+('Edificio A'),
+('Conjunto Residencial B'),
+('Torres del Parque'),
+('Residencial La Floresta'),
+('CONDOMINIO_F El Bosque'),
+('Urbanización El Recreo'),
+('Complejo Los Pinos'),
+('Conjunto Vista Hermosa'),
+('Residencial Los Alamos'),
+('CONDOMINIO_F Las Palmas');
+
+-- Insertar registros en la tabla DEPARTAMENTO_F
+-- Se asumirá que ID_USUARIO y ID_CONDOMINIO_F se asignan aleatoriamente de los datos disponibles en las tablas correspondientes.
+INSERT INTO DEPARTAMENTO_F (NUMERO_DEPARTAMENTO_F, ID_USUARIO, ID_CONDOMINIO_F) VALUES
+('101', 'USR001', 1),
+('202', 'USR002', 2),
+('303', 'USR003', 3),
+('404', 'USR004', 4),
+('505', 'USR005', 5),
+('606', 'USR006', 6),
+('707', 'USR007', 7),
+('808', 'USR008', 8),
+('909', 'USR009', 9),
+('1010', 'USR010', 10);
 /*===============================================================================================*/
 /*=========================TABLAS USADAS POR MODULO RESERVAS GRUPO 4=============================*/
 /*===============================================================================================*/
