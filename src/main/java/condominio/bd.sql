@@ -353,30 +353,36 @@ CREATE TABLE TablaObservaciones (
 /*=========================TABLAS USADAS POR MODULO CHECK IN GRUPO 5=============================*/
 /*===============================================================================================*/
 
+/*========se hace uso de la tablas temporales del grupo 1==========*/
 drop table visitante ;
-create table Visitante(
-	idVisitante VARCHAR(20) NOT NULL,
-	id_usuario VARCHAR(20) NOT NULL,
-	nombreVisitante varchar(50) not null,
-	motivoVisita varchar(50) not null,
-	fecha varchar(50) not null,
-	hora varchar(20) not null,
-	vehiculo varchar(20) not null,
-	tipoUsuario VARCHAR(20),
-	PRIMARY KEY (idVisitante), 
-	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-);         
+/*nuevaa*/
+CREATE TABLE Visitante(
+    idVisitante int auto_increment NOT NULL,
+    id_usuario VARCHAR(20),
+    nombreVisitante VARCHAR(50) NOT NULL,
+    motivoVisita VARCHAR(50) NOT NULL,
+    fecha VARCHAR(50) NOT NULL,
+    hora VARCHAR(20) NOT NULL,
+    vehiculo VARCHAR(20) NOT NULL,
+    tipoUsuario VARCHAR(20) DEFAULT 'Visitante',
+    PRIMARY KEY (idVisitante), 
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario) ON DELETE SET NULL -- Permitir que id_usuario sea nulo
+);
+/*insertar visitantes*/
+INSERT INTO Visitante (id_usuario, nombreVisitante, motivoVisita, fecha, hora, vehiculo, tipoUsuario) VALUES 
+('USR005', 'Ana Lopez', 'Instalacion de Internet', '2024-03-07', '19:00', 'No', 'Visitante'),
+('USR001', 'Gonzalo Vera', 'Instalacion de Internet', '2024-05-07', '09:00', 'No', 'Visitante'),
+('USR004', 'Valentina Lopez', 'Jardineria', '2024-03-10', '20:00', 'No', 'Visitante'),
+('USR007', 'Carlos Martinez', 'Visita familiar', '2024-02-27', '03:00', 'No', 'Visitante'),
+('USR008', 'Ana González', 'Reunión de negocios', '2024-02-27', '11:00', 'Si', 'Visitante'),
+('USR009', 'Pedro Ramirez', 'Visita médica', '2024-02-28', '12:00', 'Si', 'Visitante'),
+('USR010', 'Yolanda Ramirez', 'Visita familiar', '2024-02-28', '02:00', 'No', 'Visitante');
 
-INSERT INTO Visitante (idVisitante, id_usuario, nombreVisitante, motivoVisita, fecha, hora, vehiculo, tipoUsuario)
-VALUES 
-('VS001', 'USR005', 'Juan Perez', 'Entrevista de trabajo', '2024-02-26', '09:00', 'Si', 'Visitante'),
-('VS002', 'USR006', 'María López', 'Entrega de documentos', '2024-02-26', '10:30', 'No', 'Visitante'),
-('VS003', 'USR007', 'Carlos Martinez', 'Visita familiar', '2024-02-27', '03:00', 'No', 'Visitante'),
-('VS004', 'USR008', 'Ana González', 'Reunión de negocios', '2024-02-27', '11:00', 'Si', 'Visitante'),
-('VS005', 'USR009', 'Pedro Ramirez', 'Visita médica', '2024-02-28', '02:00', 'Si', 'Visitante');
+/*insertar proveedores*/
+INSERT INTO Visitante (nombreVisitante, motivoVisita, fecha, hora, vehiculo, tipoUsuario) VALUES 
+('María López', 'Entrega de documentos', '2024-02-26', '10:30', 'No', 'Proveedor');
 
-
- select * from visitante;
+select * from Visitante;
 
 drop table IngresoResidente;
 Create Table IngresoResidente(
@@ -387,44 +393,82 @@ Create Table IngresoResidente(
 	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 ); 
 
-
-INSERT INTO IngresoResidente (id_usuario, fecha, hora)
-VALUES 
-('USR005', '2002-02-25', '08:00'),
-('USR006', '2002-02-25', '17:30'),
-('USR007', '2002-02-25', '10:15'),
-('USR008', '2002-02-25', '23:45'),
-('USR009', '2002-02-25', '01:00');
+INSERT INTO IngresoResidente (id_usuario, fecha, hora) VALUES 
+('USR005', '2002-02-22', '08:00'),
+('USR006', '2002-02-23', '17:30'),
+('USR007', '2002-02-21', '10:15'),
+('USR008', '2002-02-21', '23:45'),
+('USR009', '2002-02-21', '01:00');
 
 select * from IngresoResidente;
 
-
 drop view historialIngresosCondominio;
-CREATE VIEW historialIngresosCondominio AS
-SELECT 'Visitante' AS TipoUsuario, nombreVisitante AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
-FROM Visitante
+CREATE VIEW historialIngresosCondominio_v AS
+SELECT 'Visitante' AS TipoUsuario, nombreVisitante AS Nombre, fecha AS FechaIngreso, hora AS HoraIngreso
+FROM visitante
+WHERE tipoUsuario = 'Visitante' AND STR_TO_DATE(fecha, '%Y-%m-%d') <= CURDATE()
 UNION 
-SELECT 'Residente' AS TipoUsuario, CONCAT(Usuario.nombre_usuario, ' ', Usuario.apellido_usuario) AS Nombre, fecha AS "Fecha de Ingreso", hora AS "Hora de Ingreso"
-FROM Usuario
-JOIN IngresoResidente ON Usuario.id_usuario = IngresoResidente.id_usuario 
-ORDER BY "Hora de Ingreso" ASC,"Fecha de Ingreso" ASC;
+SELECT 'Proveedor' AS TipoUsuario, nombreVisitante AS Nombre, fecha AS FechaIngreso, hora AS HoraIngreso
+FROM visitante
+WHERE tipoUsuario = 'Proveedor' AND STR_TO_DATE(fecha, '%Y-%m-%d') <= CURDATE()
+UNION
+SELECT 'Residente' AS TipoUsuario, CONCAT(usuario.nombre_usuario, ' ', usuario.apellido_usuario) AS Nombre, fecha AS FechaIngreso, hora AS HoraIngreso
+FROM usuario
+JOIN ingresoresidente ON usuario.id_usuario = ingresoresidente.id_usuario 
+WHERE STR_TO_DATE(fecha, '%Y-%m-%d') <= CURDATE();
 
-select * from  historialIngresosCondominio;
+SELECT * FROM historialIngresosCondominio;
 
+CREATE VIEW VisitasProximas_v AS
+SELECT 
+    v.nombreVisitante AS NombreVisita,
+    v.fecha AS Fecha,
+    v.hora AS Hora,
+	df.NUMERO_DEPARTAMENTO_F AS ResidenteAVisitar,
+    v.motivoVisita AS Motivo
+FROM 
+    Visitante v
+JOIN 
+    USUARIO u ON v.id_usuario = u.ID_USUARIO
+JOIN
+    DEPARTAMENTO_F df ON u.ID_USUARIO = df.ID_USUARIO
+WHERE 
+    v.fecha > CURRENT_DATE() OR v.fecha = '2024-03-04';
+
+select * from VisitasProximas_v;
 
 DROP TABLE ParqueaderoVisita;
 create table ParqueaderoVisita(
 	idParqueadero int not null,
-	estado varchar(20) not null
+	estado varchar(20) not null,
+    ID_CONDOMINIO_F        INT NOT NULL,
+	FOREIGN KEY (ID_CONDOMINIO_F) REFERENCES CONDOMINIO_F(ID_CONDOMINIO_F)
 );
 
-INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (1, 'Disponible');
-INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (2, 'Ocupado');
-INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (3, 'Reservado');
-INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (4, 'Disponible');
-INSERT INTO ParqueaderoVisita (idParqueadero, estado) VALUES (5, 'Ocupado');
+INSERT INTO ParqueaderoVisita (idParqueadero, estado, ID_CONDOMINIO_F) VALUES (1, 'Disponible',1);
+INSERT INTO ParqueaderoVisita (idParqueadero, estado,ID_CONDOMINIO_F)  VALUES (2, 'Disponible',1);
+INSERT INTO ParqueaderoVisita (idParqueadero, estado,ID_CONDOMINIO_F)  VALUES (3, 'Disponible',1);
+INSERT INTO ParqueaderoVisita (idParqueadero, estado,ID_CONDOMINIO_F)  VALUES (4, 'Disponible',2);
+INSERT INTO ParqueaderoVisita (idParqueadero, estado,ID_CONDOMINIO_F)  VALUES (5, 'Disponible',2);
+INSERT INTO ParqueaderoVisita (idParqueadero, estado,ID_CONDOMINIO_F)  VALUES (6, 'Disponible',2);
+INSERT INTO ParqueaderoVisita (idParqueadero, estado,ID_CONDOMINIO_F)  VALUES (7, 'Disponible',3);
+INSERT INTO ParqueaderoVisita (idParqueadero, estado,ID_CONDOMINIO_F)  VALUES (5, 'Disponible',3);
+INSERT INTO ParqueaderoVisita (idParqueadero, estado,ID_CONDOMINIO_F)  VALUES (6, 'Disponible',3);
 
- select * from ParqueaderoVisita
+select * from ParqueaderoVisita;
+drop view ParquederosLibres;
 
+CREATE VIEW ParquederosLibres_v AS
+SELECT *
+FROM ParqueaderoVisita;
 
+select * from departamento_f;
+
+select * from ingresoresidente;
+select * from Visitante;
+select * from ParqueaderoVisita;
+/*vistas*/
+select * from historialIngresoscondominio_v;
+select * from parquederoslibres_v;
+select * from visitasproximas_v;
 
