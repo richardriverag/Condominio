@@ -3,14 +3,14 @@ package model;
 import G5_CheckIn.G5_GestionDB;
 
 public class Visita {
-    
-    private Usuario usuario;
-    private String nombreVisitante;
-    private String motivoVisita;
-    private String fecha;
-    private String hora;
-    private String vehiculo;
-    private String tipoUsuario = "Visita";
+   
+    Usuario usuario;
+    String nombreVisitante;
+    String motivoVisita;
+    String fecha;
+    String hora;
+    String vehiculo;
+    String tipoUsuario = "Visita";
     G5_GestionDB c;
 
     public Visita() {
