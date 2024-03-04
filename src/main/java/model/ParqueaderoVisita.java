@@ -3,7 +3,6 @@ package model;
 import G5_CheckIn.G5_GestionDB;
 
 public class ParqueaderoVisita {
-
     int numeroParqueadero;
     String estado;
     G5_GestionDB c;
