@@ -59,7 +59,18 @@ class Reserva{
     {method} Listar()
 }
 class AreaComun
-class Visita
+class Visita{
+    {field} Usuario usuario
+    {field} String nombreVisitante
+    {field} String motivoVisita
+    {field} Date fecha
+    {field} String hora
+    {field} String vehiculo
+    {field} String tipoUsuario
+
+   {method} registrarProveedor(nombre,motivo,fecha,hora,vehiculo)
+   {method} registrarVisita(Usuario,nombre,motivo,fecha,hora,vehiculo)
+}
 note bottom: "la visita puede no visitar a un \n residente como el caso de proveedores"
 
 class Pago
@@ -107,9 +118,10 @@ class metodoPago{
 
 class ParqueaderoVisita
 {
-    {field} numero
-    {field} estado
-    ' enumeración de estados: disponible u ocupado
+    {field} int numero
+    {field} String estado
+
+    {method} cambiarEstadoParqueadero(numero,nuevoEstado) 
 }
 
 class Comunicacion
