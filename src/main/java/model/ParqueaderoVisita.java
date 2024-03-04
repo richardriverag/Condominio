@@ -3,7 +3,8 @@ package model;
 import G5_CheckIn.G5_GestionDB;
 
 public class ParqueaderoVisita {
-     int numeroParqueadero;
+
+    int numeroParqueadero;
     String estado;
     G5_GestionDB c;
 
@@ -32,11 +33,11 @@ public class ParqueaderoVisita {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
     // Método para cambiar el estado del parqueadero utilizando el número de parqueadero
     public void cambiarEstadoParqueadero(int numero, String nuevoEstado) {
-            String queryParqueadero = "UPDATE ParqueaderoVisita SET estado = '"+nuevoEstado+"' WHERE idParqueadero = "+numero;
-            c.ejecutar(queryParqueadero);
-            this.estado = nuevoEstado;
+        String queryParqueadero = "UPDATE ParqueaderoVisita SET estado = '" + nuevoEstado + "' WHERE idParqueadero = " + numero;
+        c.ejecutar(queryParqueadero);
+        this.estado = nuevoEstado;
     }
 }
