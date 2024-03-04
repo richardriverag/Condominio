@@ -11,8 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import model.Visita;
 
 /**
  *
@@ -20,30 +18,11 @@ import model.Visita;
  */
 public class CheckIn_Nw extends javax.swing.JFrame {
 
-    //clases
-    model.ParqueaderoVisita pv;
-    Visita v;
-    G5_GestionDB c = new G5_GestionDB();
-    
-    //variables globales
     String VehiculoParqueadero = "";
     int parqueaderoID = 0;
-    int aux=8;
+    int aux=5;
+    G5_GestionDB c = new G5_GestionDB();
     String[] arrayInfo = new String[6];
-    boolean proveedor = false;
-    String estadoParqueadero="";
-    
-    //tablahistorial
-    DefaultTableModel modeloHistorial;
-    int idAux;
-    int idTablaHistorial=4;
-       String[] TitulosHistorial={"TipoUsuario","Nombre","FechaIngreso","HoraIngreso"};
-       String nombreTablaHistorial = "SELECT * FROM historialIngresosCondominio_v";
-    // tablavisita
-    DefaultTableModel modeloVisita;
-     int idTablaVisita=5;
-       String[] TitulosVisita={"NombreVisita","Fecha","Hora","ResidenteAVisitar","Motivo"};
-       String nombreTablaVisita = "select * from VisitasProximas_v";
     /**
      * Creates new form CheckIn
      */
@@ -51,62 +30,32 @@ public class CheckIn_Nw extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         c = new G5_GestionDB();
-        pv = new model.ParqueaderoVisita();
-        v = new Visita();
-      //  jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update buyer.png")));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update buyer.png")));
         lbResidente1.setVisible(false);
         lbResidente2.setVisible(false);
         lbFecha1.setVisible(false);
         lbFecha2.setVisible(false);
         lbHora1.setVisible(false);
-        lbHora2.setVisible(false);
-        
-        //tablaHistorial
-        modeloHistorial = new DefaultTableModel();
-        modeloHistorial.addColumn("TipoUsuario");
-        modeloHistorial.addColumn("Nombre");
-        modeloHistorial.addColumn("Fecha de Ingreso");
-        modeloHistorial.addColumn("Hora de Ingreso");
-        
-        jTableHistorial.setModel(modeloHistorial);
-        
-        c.cargarTabla(modeloHistorial, jTableHistorial, nombreTablaHistorial, TitulosHistorial, idTablaHistorial);
-        
-        
-        //tablaVisitas
-        modeloVisita = new DefaultTableModel();
-        modeloVisita.addColumn("Visita");
-        modeloVisita.addColumn("Fecha");
-        modeloVisita.addColumn("Hora");
-        modeloVisita.addColumn("Residente");
-        modeloVisita.addColumn("Motivo");
-        
-        jTableVisitasP.setModel(modeloVisita);
-        
-        c.cargarTabla(modeloVisita, jTableVisitasP, nombreTablaVisita, TitulosVisita, idTablaVisita);
+        lbHora1.setVisible(false);
         
         JTextNombreResidente.setEditable(false);
         JTextNombreResidente2.setEditable(true);
-         lbParqueadero.setVisible(false);
         jTabbedPane1.setSelectedIndex(1);
         
     }
 
-    public CheckIn_Nw(String parqueadero,String[] a,String estado) {
+    public CheckIn_Nw(String parqueadero,String[] a) {
        initComponents();
         this.setLocationRelativeTo(this);
         c = new G5_GestionDB();
-        pv = new model.ParqueaderoVisita();
-        v = new Visita();
-        estadoParqueadero = estado;
         jTabbedPane1.setSelectedIndex(2);
-      //  jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update buyer.png")));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update buyer.png")));
         lbResidente1.setVisible(false);
         lbResidente2.setVisible(false);
         lbFecha1.setVisible(false);
         lbFecha2.setVisible(false);
         lbHora1.setVisible(false);
-        lbHora2.setVisible(false);
+        lbHora1.setVisible(false);
         
         JTextNombreResidente.setEditable(false);
         JTextNombreResidente2.setEditable(true);
@@ -121,30 +70,6 @@ public class CheckIn_Nw extends javax.swing.JFrame {
         parqueaderoID = Integer.parseInt(parqueadero);
         lbParqueadero.setText("Parqueadero #"+parqueadero+" asignado");
         
-        //tablaHistorial
-        modeloHistorial = new DefaultTableModel();
-        modeloHistorial.addColumn("TipoUsuario");
-        modeloHistorial.addColumn("Nombre");
-        modeloHistorial.addColumn("Fecha de Ingreso");
-        modeloHistorial.addColumn("Hora de Ingreso");
-        
-        jTableHistorial.setModel(modeloHistorial);
-        
-        c.cargarTabla(modeloHistorial, jTableHistorial, nombreTablaHistorial, TitulosHistorial, idTablaHistorial);
-        
-        
-        //tablaVisitas
-        modeloVisita = new DefaultTableModel();
-        modeloVisita.addColumn("Visita");
-        modeloVisita.addColumn("Fecha");
-        modeloVisita.addColumn("Hora");
-        modeloVisita.addColumn("Residente");
-        modeloVisita.addColumn("Motivo");
-        
-        jTableVisitasP.setModel(modeloVisita);
-        
-        c.cargarTabla(modeloVisita, jTableVisitasP, nombreTablaVisita, TitulosVisita, idTablaVisita);
-         lbParqueadero.setVisible(true);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -204,14 +129,13 @@ public class CheckIn_Nw extends javax.swing.JFrame {
         lbResidente2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextDep2 = new javax.swing.JTextField();
-        jcheckProveedor = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableHistorial = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTableVisitasP = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -549,13 +473,6 @@ public class CheckIn_Nw extends javax.swing.JFrame {
             }
         });
 
-        jcheckProveedor.setText("Proveedor");
-        jcheckProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcheckProveedorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -567,11 +484,7 @@ public class CheckIn_Nw extends javax.swing.JFrame {
                         .addComponent(JTextNombreVistante, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jcheckProveedor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel14))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(169, 169, 169)
@@ -595,7 +508,10 @@ public class CheckIn_Nw extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextDep2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTextDep2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel14)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -623,13 +539,8 @@ public class CheckIn_Nw extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jcheckProveedor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jLabel14)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -729,7 +640,7 @@ public class CheckIn_Nw extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Historial", jPanel4);
 
-        jTableVisitasP.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -740,7 +651,7 @@ public class CheckIn_Nw extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTableVisitasP);
+        jScrollPane5.setViewportView(jTable2);
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel15.setText("Agendaciones de Visitantes");
@@ -820,13 +731,10 @@ public class CheckIn_Nw extends javax.swing.JFrame {
             String fecha = JTextFecha1.getText();
             String hora = JTextHora1.getText();
 
-            String query = "INSERT INTO IngresoResidente (id_usuario, fecha, hora) VALUES ('" + idUsuario + "','" + fecha + "', '" + hora + "')";
+            String query = "INSERT INTO IngresoResidente (id_usuario,fecha,hora) VALUES ('" + idUsuario + "','" + fecha + "', '" + hora + "')";
             try {
-                System.out.println(query);
                 c.ejecutar(query);
-                c.cargarTabla(modeloHistorial, jTableHistorial, nombreTablaHistorial, TitulosHistorial, idTablaHistorial);
                 JOptionPane.showMessageDialog(null, "Ingresado correctamente");
-                jTextDep1.setText("");
                 JTextNombreResidente.setText("");
                 JTextFecha1.setText("");
                 JTextHora1.setText("");
@@ -837,10 +745,14 @@ public class CheckIn_Nw extends javax.swing.JFrame {
                 JTextHora1.setText("");
             }
         }
+
+       
     }//GEN-LAST:event_btnRegistrarIngresoActionPerformed
 
     private void btnRegistrarNotificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarNotificarActionPerformed
-       String nombre = JTextNombreVistante.getText();
+      aux++;
+        
+      String nombre = JTextNombreVistante.getText();
       String numDep = jTextDep2.getText();
         String idUsuario = "";
 
@@ -853,23 +765,18 @@ public class CheckIn_Nw extends javax.swing.JFrame {
             //  System.out.println(c.obtenerNombreUsuario(numDep));
 
         }
+      String auxS = "VS00"+aux;
       String motivo = JTextMotivoVisita.getText(); 
       String fecha = JTextFecha2.getText();
       String hora = JTextHora2.getText();
       
-      // String query = "INSERT INTO Visitante (idVisitante, id_usuario, nombreVisitante, motivoVisita, fecha, hora, vehiculo, tipoUsuario) VALUES ('"+auxS+"', '"+idUsuario+"', '"+nombre+"', '"+motivo+"', '"+fecha+"', '"+hora+"', '"+VehiculoParqueadero+"', 'Visitante')";    
-      if (proveedor){
-          nombre = "Proveedor";
-           v.registrarProveedor(nombre, motivo, fecha, hora, VehiculoParqueadero);
-           
-           JOptionPane.showMessageDialog(null, "Ingresado correctamente");
-      }else{
-           v.registrarVisita(idUsuario, nombre, motivo, fecha, hora, VehiculoParqueadero);
-           JOptionPane.showMessageDialog(null, "Ingresado correctamente");
-      }
+       String query = "INSERT INTO Visitante (idVisitante, id_usuario, nombreVisitante, motivoVisita, fecha, hora, vehiculo, tipoUsuario) VALUES ('"+auxS+"', '"+idUsuario+"', '"+nombre+"', '"+motivo+"', '"+fecha+"', '"+hora+"', '"+VehiculoParqueadero+"', 'Visitante')";
       
+       
+      c.ejecutar(query);
       if (VehiculoParqueadero.equals("Si")){
-          pv.cambiarEstadoParqueadero(parqueaderoID, estadoParqueadero);
+          String queryParqueadero = "UPDATE ParqueaderoVisita SET estado = 'Ocupado' WHERE idParqueadero = "+parqueaderoID;
+          c.ejecutar(queryParqueadero);
       }
       
       //notificarPersonal(); GRUPO COMUNICACION GR6
@@ -882,26 +789,25 @@ public class CheckIn_Nw extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNotificarActionPerformed
 
     private void JCBVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBVehiculoActionPerformed
-       switch (JCBVehiculo.getSelectedIndex()) {
+         switch (JCBVehiculo.getSelectedIndex()) {
             case 0 :
-                lbParqueadero.setVisible(true);
-                VehiculoParqueadero = "Si";
-                arrayInfo[0] =  JTextNombreVistante.getText();
-                arrayInfo[1] = jTextDep2.getText();
-                arrayInfo[2] = JTextNombreResidente2.getText();
-                arrayInfo[3] =  JTextMotivoVisita.getText();
-                arrayInfo[4] = JTextFecha2.getText();
-                arrayInfo[5] = JTextHora2.getText();
-
-                Parqueaderovisita pvv = new Parqueaderovisita(arrayInfo);
-                pvv.setVisible(true);
-                this.setVisible(false);
-
-                //this.setVisible(false);
+                
+            VehiculoParqueadero = "Si";
+            arrayInfo[0] =  JTextNombreVistante.getText();
+            arrayInfo[1] = jTextDep2.getText();
+            arrayInfo[2] = JTextNombreResidente2.getText();
+            arrayInfo[3] =  JTextMotivoVisita.getText();
+            arrayInfo[4] = JTextFecha2.getText();
+            arrayInfo[5] = JTextHora2.getText();
+            
+            ParqueaderoVisita pv = new ParqueaderoVisita(arrayInfo);
+            pv.setVisible(true);
+            this.setVisible(false);
+            
+            //this.setVisible(false);
             break;
             case 1 :
-                VehiculoParqueadero = "No";
-                lbParqueadero.setVisible(false);
+            VehiculoParqueadero = "No";
             break;
         }
     }//GEN-LAST:event_JCBVehiculoActionPerformed
@@ -1172,19 +1078,6 @@ public class CheckIn_Nw extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextDep1KeyTyped
 
-    private void jcheckProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcheckProveedorActionPerformed
-
-        if (jcheckProveedor.isSelected()) {
-            proveedor = true;
-            JTextNombreVistante.setEditable(false);
-            jTextDep2.setEditable(false);
-        }else{
-            proveedor = false;
-            JTextNombreVistante.setEditable(true);
-            jTextDep2.setEditable(true);
-        }
-    }//GEN-LAST:event_jcheckProveedorActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1297,11 +1190,10 @@ public class CheckIn_Nw extends javax.swing.JFrame {
     private javax.swing.JTextArea jTXMensajeAlerta;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableHistorial;
-    private javax.swing.JTable jTableVisitasP;
     private javax.swing.JTextField jTextDep1;
     private javax.swing.JTextField jTextDep2;
-    private javax.swing.JCheckBox jcheckProveedor;
     private javax.swing.JLabel labelfecha;
     private javax.swing.JLabel lbFecha1;
     private javax.swing.JLabel lbFecha2;

@@ -1,6 +1,5 @@
-package G2_Usuarios;
 
-import condominio.Principal;
+package G2_Usuarios;
 import condominio.usuarios;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
@@ -27,8 +26,7 @@ import javax.swing.event.DocumentListener;
  * @author JoisH
  */
 public class ResetearContraseña extends javax.swing.JFrame {
-
-    public JTextField[] textFields;
+         public JTextField[] textFields;
     public int currentTextFieldIndex = 0;
     public final int MAX_TEXTFIELDS = 6;
     public final Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -39,16 +37,17 @@ public class ResetearContraseña extends javax.swing.JFrame {
     String ciInput = "2350207219"; // Obtenerlo desde JTextField
     String pinInput = "123456"; // Obtenerlo desde JTextField
     String contraseña;
-
+    
     public ResetearContraseña() {
         this.validar = new ValidarLogin(nombreUsuarioInput, ciInput, pinInput, contraseña);
         this.contraseña = contraseña;
         initComponents();
         setLocationRelativeTo(null);
-        jLabel1.putClientProperty("FlatLaf.styleClass", "h0");
-
+        jLabel1.putClientProperty( "FlatLaf.styleClass", "h0" );
+        
         setResizable(false);//no miximizar
-
+      
+        
         //para que el boton de cerrar no lo cierre al sistema
         setDefaultCloseOperation(ResetearContraseña.DO_NOTHING_ON_CLOSE); // evita que el botón "Exit" cierre el programa
 
@@ -60,11 +59,14 @@ public class ResetearContraseña extends javax.swing.JFrame {
         });
 
         setVisible(true); // hace visible el JFrame
-
+        
+       
+        
+       
         jLNC7.setVisible(false);
         jLNC10.setVisible(false);
-        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-
+   
+        
     }
 
     public void setContraseña(String contraseña) {
@@ -372,16 +374,16 @@ public class ResetearContraseña extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFContraseñaUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseEntered
-
+      
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseEntered
 
     private void jTFContraseñaUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseExited
-
-
+       
+        
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseExited
 
     private void jLBIniciarSesion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBIniciarSesion1MouseClicked
-        /*   //Modulos
+     /*   //Modulos
         Modulos frame = new Modulos();
         frame.setVisible(true);
 
@@ -390,7 +392,7 @@ public class ResetearContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBIniciarSesion1MouseClicked
 
     private void jLBIniciarSesion1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBIniciarSesion1MouseEntered
-
+        
         // Configura la propiedad de opacidad del color de fondo
         jLBIniciarSesion1.setOpaque(true);
 
@@ -398,7 +400,7 @@ public class ResetearContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBIniciarSesion1MouseEntered
 
     private void jLBIniciarSesion1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBIniciarSesion1MouseExited
-
+       
         // Configura la propiedad de opacidad del color de fondo
         jLBIniciarSesion1.setOpaque(true);
 
@@ -406,64 +408,62 @@ public class ResetearContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBIniciarSesion1MouseExited
 
     private void jLBResetearContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBResetearContraseñaMouseClicked
-        String usuario = jTFUsuario.getText();
-        String nuevaContraseña = jTFContraseñaUsuario.getText();
-        String verificacionNuevaContraseña = jTFContraseñaUsuario1.getText();
+String usuario = jTFUsuario.getText();
+String nuevaContraseña = jTFContraseñaUsuario.getText();
+String verificacionNuevaContraseña = jTFContraseñaUsuario1.getText();
 
 // Validar que la contraseña ingresada cumpla con tus criterios de seguridad
-        if (validarContraseña(nuevaContraseña)) {
-            JOptionPane.showMessageDialog(null, "La nueva contraseña no cumple con los requisitos de seguridad.");
-        } else {
-            Connection connection = null;
-            try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "");
+if (validarContraseña(nuevaContraseña)) {
+    JOptionPane.showMessageDialog(null, "La nueva contraseña no cumple con los requisitos de seguridad.");
+} else {
+    Connection connection = null;
+    try {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pruebita", "root", "");
 
-                // Verificar si el usuario existe en la base de datos
-                String selectQuery = "SELECT * FROM usuario WHERE usuario = ?";
-                PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
-                preparedStatement.setString(1, usuario);
+        // Verificar si el usuario existe en la base de datos
+        String selectQuery = "SELECT * FROM usuarios WHERE usuario = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+        preparedStatement.setString(1, usuario);
 
-                ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-                if (resultSet.next()) {
-                    // El usuario existe, actualizar su contraseña en la base de datos
-                    String updateQuery = "UPDATE usuario SET contrasenia = ? WHERE usuario = ?";
-                    preparedStatement = connection.prepareStatement(updateQuery);
-                    preparedStatement.setString(1, nuevaContraseña);
-                    preparedStatement.setString(2, usuario);
+        if (resultSet.next()) {
+            // El usuario existe, actualizar su contraseña en la base de datos
+            String updateQuery = "UPDATE usuarios SET contrasenia = ? WHERE usuario = ?";
+            preparedStatement = connection.prepareStatement(updateQuery);
+            preparedStatement.setString(1, nuevaContraseña);
+            preparedStatement.setString(2, usuario);
 
-                    int rowsUpdated = preparedStatement.executeUpdate();
+            int rowsUpdated = preparedStatement.executeUpdate();
 
-                    if (rowsUpdated > 0) {
-                        JOptionPane.showMessageDialog(null, "Contraseña actualizada exitosamente.");
-                        setVisible(false);
-                        usuarios frame = new usuarios();
-                        frame.setVisible(true);
-                        Principal principal = new Principal();
-                        principal.setVisible(false);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo actualizar la contraseña.");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "El usuario no existe en la base de datos.");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace(); // Manejar la excepción de manera adecuada, por ejemplo, mostrando un mensaje de error al usuario
-            } finally {
-                try {
-                    if (connection != null) {
-                        connection.close();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "Contraseña actualizada exitosamente.");
+                setVisible(false);
+                usuarios frame = new usuarios();
+                frame.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar la contraseña.");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "El usuario no existe en la base de datos.");
         }
-
+    } catch (SQLException e) {
+        e.printStackTrace(); // Manejar la excepción de manera adecuada, por ejemplo, mostrando un mensaje de error al usuario
+    } finally {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+        
     }//GEN-LAST:event_jLBResetearContraseñaMouseClicked
 
     private void jLBResetearContraseñaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBResetearContraseñaMouseEntered
-
+        
         // Configura la propiedad de opacidad del color de fondo
         jLBResetearContraseña.setOpaque(true);
 
@@ -471,7 +471,7 @@ public class ResetearContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBResetearContraseñaMouseEntered
 
     private void jLBResetearContraseñaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBResetearContraseñaMouseExited
-
+       
         // Configura la propiedad de opacidad del color de fondo
         jLBResetearContraseña.setOpaque(true);
 
@@ -483,38 +483,41 @@ public class ResetearContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFContraseñaUsuario1MouseEntered
 
     private void jTFContraseñaUsuario1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1MouseExited
-        jLNC7.setVisible(false);
+      jLNC7.setVisible(false);
     }//GEN-LAST:event_jTFContraseñaUsuario1MouseExited
 
     private void jTFContraseñaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseClicked
 
-
+        
+        
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseClicked
 
     private void jTFContraseñaUsuario1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1MouseClicked
 
-        if (!jTFContraseñaUsuario1.getText().equals("")) {
-            jLNC7.setVisible(false);
-        }
-
+        if(!jTFContraseñaUsuario1.getText().equals("")){
+        jLNC7.setVisible(false);
+        } 
+        
         jLNC7.setVisible(true);
-
+        
     }//GEN-LAST:event_jTFContraseñaUsuario1MouseClicked
 
     private void jTFContraseñaUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyPressed
-
+ 
     }//GEN-LAST:event_jTFContraseñaUsuarioKeyPressed
 
     private void jTFContraseñaUsuario1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1KeyPressed
-
+ 
     }//GEN-LAST:event_jTFContraseñaUsuario1KeyPressed
 
     private void jTFUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFUsuarioMouseClicked
 
-        if (!jTFUsuario.getText().equals("")) {
-            jLNC10.setVisible(false);
+        if(!jTFUsuario.getText().equals("")){
+        jLNC10.setVisible(false);
         }
-
+        
+        
+        
 
     }//GEN-LAST:event_jTFUsuarioMouseClicked
 
@@ -531,18 +534,22 @@ public class ResetearContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFUsuarioActionPerformed
 
     private void jTFUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyPressed
-
+  
     }//GEN-LAST:event_jTFUsuarioKeyPressed
 
     private void jTFUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyTyped
 
-        // Cuando el usuario empiece a escribir, ocultar el JLabel
-        jLNC10.setVisible(false);
-
+        
+       
+                // Cuando el usuario empiece a escribir, ocultar el JLabel
+                jLNC10.setVisible(false);
+            
+        
+        
         jTFUsuario.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isLetter(c) && !Character.isDigit(c) && c != 'ñ' && c != 'Ñ' && c != '_' && c != '.' && c == ' ') {
+                if (!Character.isLetter(c) && !Character.isDigit(c)  && c != 'ñ' && c != 'Ñ' && c != '_'&& c != '.'&&  c==' ') {
                     Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
                     e.consume();
                 }
@@ -558,25 +565,27 @@ public class ResetearContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFUsuarioKeyTyped
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        frame.setVisible(true);
+ frame.setVisible(true);
         this.dispose();  // Cierra la ventana actual       
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        frame.setVisible(true);
+      frame.setVisible(true);
         this.dispose();  // Cierra la ventana actual
     }//GEN-LAST:event_formWindowClosing
 
     private void jTFContraseñaUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyTyped
-
+    
     }//GEN-LAST:event_jTFContraseñaUsuarioKeyTyped
 
     private void jTFContraseñaUsuario1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuario1KeyTyped
-
+            
     }//GEN-LAST:event_jTFContraseñaUsuario1KeyTyped
 
-    ///aqui valida lo de que haya solo un caracter ingresado en cada textfield e ingrese el siguiente valor en el proximo jtextfield
-    private void setupTextField(JTextField textField) {
+
+
+   ///aqui valida lo de que haya solo un caracter ingresado en cada textfield e ingrese el siguiente valor en el proximo jtextfield
+  private void setupTextField(JTextField textField) {
         textField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -608,6 +617,9 @@ public class ResetearContraseña extends javax.swing.JFrame {
         }
     }
 
+ 
+   
+    
     //Aqui recopila todo el contenido de todos los jtextfield para el ping de seguridad 
     public String gatherTextFieldsContent() {
         StringBuilder content = new StringBuilder();
@@ -632,6 +644,9 @@ public class ResetearContraseña extends javax.swing.JFrame {
 
         return matcher.matches();
     }
+
+
+
 
     /**
      * @param args the command line arguments
@@ -667,5 +682,6 @@ public class ResetearContraseña extends javax.swing.JFrame {
     private javax.swing.JPasswordField jTFContraseñaUsuario1;
     private javax.swing.JTextField jTFUsuario;
     // End of variables declaration//GEN-END:variables
+
 
 }

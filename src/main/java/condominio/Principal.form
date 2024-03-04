@@ -38,7 +38,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnIniciar4" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCheckIn" min="-2" pref="142" max="-2" attributes="0"/>
+                      <Component id="btnIniciar3" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnIniciar2" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -59,7 +59,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnIniciar1" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="btnIniciar2" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
-                      <Component id="btnCheckIn" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
+                      <Component id="btnIniciar3" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="btnIniciar4" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="btnIniciar5" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="btnUsuarios" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
@@ -113,7 +113,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciar2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnCheckIn">
+    <Component class="javax.swing.JButton" name="btnIniciar3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="3"/>
@@ -129,7 +129,7 @@
         <Property name="name" type="java.lang.String" value="btnIniciar" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheckInActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciar3ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnIniciar4">
@@ -194,9 +194,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="3"/>
         </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/logout.png"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Salir"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
             <EtchetBorder bevelType="0">

@@ -5,15 +5,14 @@ import java.sql.Time;
 
 public class Reserva {
     int idReserva;
-    String usuarioReserva;
     String area;
+    int usuarioReserva;
     Date fechaDeReserva;
     Time horaDeReserva;
     int duracion;
     String estadoDeReserva;
-    boolean cancelado; 
 
-    public Reserva(int idReserva, String area, String usuarioReserva, Date fechaDeReserva, Time horaDeReserva, int duracion, String estadoDeReserva, boolean cancelado) {
+    public Reserva(int idReserva, String area, int usuarioReserva, Date fechaDeReserva, Time horaDeReserva, int duracion, String estadoDeReserva) {
         this.idReserva = idReserva;
         this.area = area;
         this.usuarioReserva = usuarioReserva;
@@ -21,17 +20,15 @@ public class Reserva {
         this.horaDeReserva = horaDeReserva;
         this.duracion = duracion;
         this.estadoDeReserva = estadoDeReserva;
-        this.cancelado = cancelado;
     }
     
-    public Reserva(String area, String usuarioReserva, Date fechaDeReserva, Time horaDeReserva, int duracion, String estadoDeReserva, boolean cancelado) {
+    public Reserva(String area, int usuarioReserva, Date fechaDeReserva, Time horaDeReserva, int duracion, String estadoDeReserva) {
         this.area = area;
         this.usuarioReserva = usuarioReserva;
         this.fechaDeReserva = fechaDeReserva;
         this.horaDeReserva = horaDeReserva;
         this.duracion = duracion;
         this.estadoDeReserva = estadoDeReserva;
-        this.cancelado = cancelado;
     }
     
     public int getIdReserva() {
@@ -50,11 +47,11 @@ public class Reserva {
         this.area = area;
     }
 
-    public String getUsuarioReserva() {
+    public int getUsuarioReserva() {
         return usuarioReserva;
     }
 
-    public void setUsuarioReserva(String usuarioReserva) {
+    public void setUsuarioReserva(int usuarioReserva) {
         this.usuarioReserva = usuarioReserva;
     }
     
@@ -90,13 +87,5 @@ public class Reserva {
 
     public void setEstadoDeReserva(String estadoDeReserva) {
         this.estadoDeReserva = estadoDeReserva;
-    }
-
-    public boolean isCancelado() {
-        return cancelado;
-    }
-
-    public void setCancelado(boolean cancelado) {
-        this.cancelado = cancelado;
     }
 }

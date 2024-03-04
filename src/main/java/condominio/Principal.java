@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -8,9 +8,15 @@ import G1_Finanzas.Vista_FinanzasAdministrador;
 import G1_Finanzas.Vista_FinanzasCliente;
 import G3_Inmuebles.ModuloInmuebles;
 import G4_Reservas.AreasComunesUsuarios;
+import G6_Comunicacion.GUI_Comunicacion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
+
+
+
 
 /**
  *
@@ -22,7 +28,6 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
-
         initComponents();
     }
 
@@ -42,6 +47,7 @@ public class Principal extends javax.swing.JFrame {
         btnIniciar4 = new javax.swing.JButton();
         btnIniciar5 = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
@@ -106,6 +112,16 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 102, 255), null));
+        btnSalir.setName("btnIniciar"); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,7 +141,8 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(btnIniciar3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnIniciar2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -133,13 +150,15 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIniciar1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIniciar2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIniciar3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIniciar4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIniciar5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnIniciar1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnIniciar2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnIniciar3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnIniciar4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnIniciar5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(643, Short.MAX_VALUE))
@@ -150,28 +169,29 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnIniciar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar1ActionPerformed
         
-        //verificar si el usuario logeado es admin
-        boolean esAdmin = true;
-        try {
-            if(esAdmin){
-            
-                Vista_FinanzasAdministrador vf = new Vista_FinanzasAdministrador();
-                vf.setVisible(true);
-            
-        }else{
-                //se deberia enviar el id_usuario a la vista para que se muestre la inf
-                // del cliente en cuestion
-            Vista_FinanzasCliente vc = new Vista_FinanzasCliente();
-            vc.setVisible(true);
-        }
-            } catch (SQLException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        //AQUI SE DEBE REDIGIR A LA VISTA CORRESPONDIENTE 
+        //SEGUN EL TIPO DE USUARIO LOGEADO ACTUAL
         
+        
+        //YA QUE NO SE TIENE ACCESO A LA INFORMACION MODULO DE USUARIOS SE FUERZA ENTRAR A LA VISTA DEL ADMINISTRADOR
+        
+        boolean esAdministrador = true;
+        //SE COMPRUEBA SI EL QUE ESTA EN EL SISTEMA ES EL CLIENTE O ADMINISTRADOR
+        try {
+            if(esAdministrador){
+                Vista_FinanzasAdministrador vfa = new Vista_FinanzasAdministrador();
+                vfa.setVisible(true);          
+            }else{
+                Vista_FinanzasCliente vfc = new Vista_FinanzasCliente();
+                vfc.setVisible(true);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnIniciar1ActionPerformed
 
     private void btnIniciar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar2ActionPerformed
-        // TODO add your handling code here:
+        new GUI_Comunicacion().setVisible(true);
     }//GEN-LAST:event_btnIniciar2ActionPerformed
 
     private void btnIniciar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar3ActionPerformed
@@ -185,13 +205,16 @@ public class Principal extends javax.swing.JFrame {
     private void btnIniciar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar5ActionPerformed
         // TODO add your handling code here:
         new ModuloInmuebles().setVisible(true);
-
+        
     }//GEN-LAST:event_btnIniciar5ActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        usuarios usuario = new usuarios();
-        usuario.setVisible(true);
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,6 +257,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnIniciar3;
     private javax.swing.JButton btnIniciar4;
     private javax.swing.JButton btnIniciar5;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables

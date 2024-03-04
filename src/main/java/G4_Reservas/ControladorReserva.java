@@ -45,7 +45,7 @@ public class ControladorReserva {
 
     public ArrayList<Reserva> verReservasPendientes() {
         ArrayList<Reserva> reservas = new ArrayList<>();
-        String query = "SELECT ID_RESERVA, AREA_RESERVADA, USUARIO_RESERVA, FECHA_RESERVA, HORA_RESERVA, DURACION, ESTADO_RESERVA, CANCELADO\n"
+        String query = "SELECT ID_RESERVA, AREA_RESERVADA, USUARIO_RESERVA, FECHA_RESERVA, HORA_RESERVA, DURACION, ESTADO_RESERVA\n"
                 + "FROM RESERVA\n"
                 + "WHERE ESTADO_RESERVA = 'Pendiente';";
         try {
@@ -56,14 +56,13 @@ public class ControladorReserva {
             while (res.next()) {
                 int idReserva = res.getInt("ID_RESERVA");
                 String areaReservada = res.getString("AREA_RESERVADA");
-                String usuarioReserva = res.getString("USUARIO_RESERVA");
+                int usuarioReserva = res.getInt("USUARIO_RESERVA");
                 Date fechaDeReserva = res.getDate("FECHA_RESERVA");
                 Time horaDeReserva = res.getTime("HORA_RESERVA");
                 int duracion = res.getInt("DURACION");
-                String estadoDeReserva = res.getString("ESTADO_RESERVA");
-                boolean cancelado = res.getBoolean("CANCELADO");
+                String estadoDeReserva = res.getString("ESTADO_RESERVA");                
 
-                Reserva reserva = new Reserva(idReserva, areaReservada, usuarioReserva, fechaDeReserva, horaDeReserva, duracion, estadoDeReserva, cancelado);
+                Reserva reserva = new Reserva(idReserva, areaReservada, usuarioReserva, fechaDeReserva, horaDeReserva, duracion, estadoDeReserva);
                 reservas.add(reserva);
             }
         } catch (Exception e) {
@@ -75,7 +74,7 @@ public class ControladorReserva {
     public void reservar(Reserva reserva) {
         try {
             Connection con = Conexion.getCon();
-            String sql = "INSERT INTO RESERVA(AREA_RESERVADA, USUARIO_RESERVA, FECHA_RESERVA, HORA_RESERVA, DURACION, ESTADO_RESERVA, CANCELADO) "
+            String sql = "INSERT INTO RESERVA(AREA_RESERVADA, USUARIO_RESERVA, FECHA_RESERVA, HORA_RESERVA, DURACION, ESTADO_RESERVA) "
                     + "VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, reserva.getArea());
@@ -84,7 +83,6 @@ public class ControladorReserva {
             ps.setTime(4, reserva.getHoraDeReserva());
             ps.setInt(5, reserva.getDuracion());
             ps.setString(6, reserva.getEstadoDeReserva());
-            ps.setBoolean(7, reserva.isCancelado());
 
             int filasAgregadas = ps.executeUpdate();
             if (filasAgregadas > 0) {
@@ -109,19 +107,33 @@ public class ControladorReserva {
             while (res.next()) {
                 int idReserva = res.getInt("ID_RESERVA");
                 String areaReservada = res.getString("AREA_RESERVADA");
-                String usuarioReserva = res.getString("USUARIO_RESERVA");
+                int usuarioReserva = res.getInt("USUARIO_RESERVA");
                 Date fechaDeReserva = res.getDate("FECHA_RESERVA");
                 Time horaDeReserva = res.getTime("HORA_RESERVA");
                 int duracion = res.getInt("DURACION");
                 String estadoDeReserva = res.getString("ESTADO_RESERVA");
-                boolean cancelado = res.getBoolean("CANCELADO");
 
-                Reserva reserva = new Reserva(areaReservada, usuarioReserva, fechaDeReserva, horaDeReserva, duracion, estadoDeReserva, cancelado);
+                Reserva reserva = new Reserva(areaReservada, usuarioReserva, fechaDeReserva, horaDeReserva, duracion, estadoDeReserva);
                 reservas.add(reserva);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return reservas;
+    }
+    
+    public int obtenerIdUsuario(String usuario){
+        int idUsuario = 0;
+        String query = "SELECT id_usuario FROM Usuario WHERE usuario = "+ usuario;
+        try {
+            Connection con = Conexion.getCon();
+            PreparedStatement sql = con.prepareStatement(query);
+            ResultSet res = sql.executeQuery();
+
+            idUsuario = res.getInt("id_usuario");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return idUsuario;
     }
 }

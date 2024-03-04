@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package G2_Usuarios;
-
 import condominio.Conexion;
 import condominio.Principal;
 import java.awt.Cursor;
@@ -16,30 +15,33 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import javax.swing.JTextField;
 /**
  *
  * @author JoisH
  */
 public class Login extends javax.swing.JFrame {
-
     ValidarLogin validar;
-
+ 
     private int intentosFallidos = 0;
     Conexion connection = new Conexion();
-
+    
     /**
      * Creates new form Login1
      */
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
-
+       
+ 
         setResizable(false);//no miximizar
-
+       
         setResizable(false);//no miximizar
-        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-
+        
+       
+       //jTFContraseñaUsuario.setEnabled(false);
+        
+        
     }
 
     /**
@@ -271,7 +273,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLBResetearContraseñaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBResetearContraseñaMouseExited
-
+        
         // Configura la propiedad de opacidad del color de fondo
         jLBResetearContraseña.setOpaque(true);
 
@@ -279,7 +281,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBResetearContraseñaMouseExited
 
     private void jLBResetearContraseñaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBResetearContraseñaMouseEntered
-
+      
         // Configura la propiedad de opacidad del color de fondo
         jLBResetearContraseña.setOpaque(true);
 
@@ -289,13 +291,13 @@ public class Login extends javax.swing.JFrame {
     private void jLBResetearContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBResetearContraseñaMouseClicked
         setVisible(false);
         ResetearContraseña frame = new ResetearContraseña();
-
+        
         frame.setVisible(true);
-
+        
     }//GEN-LAST:event_jLBResetearContraseñaMouseClicked
 
     private void jLBIniciarSesion1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBIniciarSesion1MouseExited
-
+       
         // Configura la propiedad de opacidad del color de fondo
         jLBIniciarSesion1.setOpaque(true);
 
@@ -303,7 +305,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBIniciarSesion1MouseExited
 
     private void jLBIniciarSesion1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBIniciarSesion1MouseEntered
-
+        
         // Configura la propiedad de opacidad del color de fondo
         jLBIniciarSesion1.setOpaque(true);
 
@@ -312,70 +314,74 @@ public class Login extends javax.swing.JFrame {
 
     private void jLBIniciarSesion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBIniciarSesion1MouseClicked
 // Establece la conexión a la base de datos
-        Connection connection = null;
+Connection connection = null;
 
-        if (jTFUsuario.getText().equals("") || jTFContraseñaUsuario.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese usuario y contraseña");
-        } else
+
+
+
+
+if(jTFUsuario.getText().equals("")|| jTFContraseñaUsuario.getText().equals(""))
+{
+ JOptionPane.showMessageDialog(null, "Por favor, ingrese usuario y contraseña");
+}  else
 
 
 try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio", "root", "");
+    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio?useSSL=false&serverTimezone=UTC", "root", "123456");
 
-            // Obtén los valores del usuario y la contraseña ingresados
-            String usuario = jTFUsuario.getText();
-            String contraseña = jTFContraseñaUsuario.getText();
+    // Obtén los valores del usuario y la contraseña ingresados
+    String usuario = jTFUsuario.getText();
+    String contraseña = jTFContraseñaUsuario.getText();
 
-            // Consulta SQL para verificar las credenciales
-            String selectQuery = "SELECT * FROM usuario WHERE usuario = ? AND contrasenia = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
-            preparedStatement.setString(1, usuario);
-            preparedStatement.setString(2, contraseña);
+    // Consulta SQL para verificar las credenciales
+    String selectQuery = "SELECT * FROM usuario WHERE usuario = ? AND contrasenia = ?";
+    PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+    preparedStatement.setString(1, usuario);
+    preparedStatement.setString(2, contraseña);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+    ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                // Las credenciales son correctas, bienvenido al sistema
-                JOptionPane.showMessageDialog(null, "Bienvenido al sistema ");
-                setVisible(false);
-                // Modulos
-                Principal frame = new Principal();
-                frame.setVisible(true);
-                //Se guardan las credenciales con las cuales se ingreso al sistema
-                SessionManager.iniciarSesion(usuario, contraseña);
-                System.out.println("Usuario inició sesión: " + SessionManager.getUsuario());
-                System.out.println("Contraseña del usuario: " + SessionManager.getContrasenia());
+    if (resultSet.next()) {
+        // Las credenciales son correctas, bienvenido al sistema
+        
+        JOptionPane.showMessageDialog(null, "Bienvenido al sistema ");
+        setVisible(false);
+        // Modulos
+        Principal frame = new Principal();
+        frame.setVisible(true);
+        
 
-            } else {
-                // Las credenciales son incorrectas
-                intentosFallidos++;
+    } else {
+        // Las credenciales son incorrectas
+        intentosFallidos++;
 
-                if (intentosFallidos >= 3) {
-                    jTFUsuario.setText("");
-                    jTFContraseñaUsuario.setText("");
-                    bloquearSistemaPorMinuto();
-                    intentosFallidos = 0;
-                    jTFUsuario.setEnabled(true);
-                    jTFContraseñaUsuario.setEnabled(true);
-                    jLBIniciarSesion1.setEnabled(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Credenciales equivocadas");
-                    jTFUsuario.setText("");
-                    jTFContraseñaUsuario.setText("");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        if (intentosFallidos >= 3) {
+            jTFUsuario.setText("");
+            jTFContraseñaUsuario.setText("");
+            bloquearSistemaPorMinuto();
+            intentosFallidos = 0;
+            jTFUsuario.setEnabled(true);
+            jTFContraseñaUsuario.setEnabled(true);
+            jLBIniciarSesion1.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Credenciales equivocadas");
+            jTFUsuario.setText("");
+            jTFContraseñaUsuario.setText("");
         }
+    }
+} catch (SQLException e) {
+    e.printStackTrace();
+} finally {
+    try {
+        if (connection != null) {
+            connection.close();
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
 
+        
 
     }//GEN-LAST:event_jLBIniciarSesion1MouseClicked
 
@@ -383,7 +389,7 @@ try {
         jTFUsuario.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isLetter(c) && !Character.isDigit(c) && c != 'ñ' && c != 'Ñ' && c != '_' && c != '.') {
+                if (!Character.isLetter(c) && !Character.isDigit(c)  && c != 'ñ' && c != 'Ñ' && c != '_'&& c != '.') {
                     Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
                     e.consume();
                 }
@@ -406,7 +412,7 @@ try {
         jTFUsuario.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isLetter(c) && !Character.isDigit(c) && c != 'ñ' && c != 'Ñ' && c != '_' && c != '.') {
+                if (!Character.isLetter(c) && !Character.isDigit(c)  && c != 'ñ' && c != 'Ñ' && c != '_'&& c != '.') {
                     Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
                     e.consume();
                 }
@@ -423,12 +429,13 @@ try {
 
     private void jTFUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFUsuarioActionPerformed
 
-
+       
+        
     }//GEN-LAST:event_jTFUsuarioActionPerformed
 
     private void jTFUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFUsuarioMouseExited
         setCursor(Cursor.getDefaultCursor());
-
+       
     }//GEN-LAST:event_jTFUsuarioMouseExited
 
     private void jTFUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFUsuarioMouseEntered
@@ -436,7 +443,7 @@ try {
     }//GEN-LAST:event_jTFUsuarioMouseEntered
 
     private void jTFUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFUsuarioMouseClicked
-        // TODO add your handling code here:
+           // TODO add your handling code here:
     }//GEN-LAST:event_jTFUsuarioMouseClicked
 
     private void jTFContraseñaUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioKeyTyped
@@ -444,7 +451,7 @@ try {
 
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isLetter(c) && !Character.isDigit(c) && c != '.' && c != '-' && c != '*' && c != '/' && c != '_' && c != 'ñ' && c != 'Ñ') {
+                if (!Character.isLetter(c) && !Character.isDigit(c)&& c != '.' && c != '-' && c != '*' && c != '/' && c != '_'  && c != 'ñ' && c != 'Ñ' ) {
                     Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
                     e.consume();
 
@@ -467,7 +474,7 @@ try {
 
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isLetter(c) && !Character.isDigit(c) && c != '.' && c != '-' && c != '*' && c != '/' && c != '_' && c != 'ñ' && c != 'Ñ') {
+                if (!Character.isLetter(c) && !Character.isDigit(c)&& c != '.' && c != '-' && c != '*' && c != '/' && c != '_'  && c != 'ñ' && c != 'Ñ' ) {
                     Toolkit.getDefaultToolkit().beep(); // Emite un sonido de alerta
                     e.consume();
 
@@ -489,7 +496,7 @@ try {
 
     private void jTFContraseñaUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseExited
         setCursor(Cursor.getDefaultCursor());
-
+       
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseExited
 
     private void jTFContraseñaUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseEntered
@@ -497,22 +504,26 @@ try {
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseEntered
 
     private void jTFContraseñaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFContraseñaUsuarioMouseClicked
+       
 
 
     }//GEN-LAST:event_jTFContraseñaUsuarioMouseClicked
 
-    private void bloquearSistemaPorMinuto() {
-        BloqueoVentana bloqueoVentana = new BloqueoVentana(this); // "this" es la instancia de tu JFrame principal
-        bloqueoVentana.setVisible(true); // Muestra la ventana de bloqueo
+ private void bloquearSistemaPorMinuto() {
+    BloqueoVentana bloqueoVentana = new BloqueoVentana(this); // "this" es la instancia de tu JFrame principal
+    bloqueoVentana.setVisible(true); // Muestra la ventana de bloqueo
 
-        // Deshabilita los campos de entrada en la ventana principal
-        jTFUsuario.setEnabled(false);
-        jTFContraseñaUsuario.setEnabled(false);
-        jLBIniciarSesion1.setEnabled(false);
-    }
-
+    // Deshabilita los campos de entrada en la ventana principal
+    jTFUsuario.setEnabled(false);
+    jTFContraseñaUsuario.setEnabled(false);
+    jLBIniciarSesion1.setEnabled(false);
+}
+    
+    
+    
+    
     public static void main(String args[]) {
-
+         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
@@ -533,4 +544,8 @@ try {
     private javax.swing.JPasswordField jTFContraseñaUsuario;
     private javax.swing.JTextField jTFUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public String getjTFUsuario() {
+        return jTFUsuario.getText();
+    }
 }

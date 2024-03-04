@@ -17,7 +17,7 @@ public class Conexion {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql.//localhost:3306/condominio/","root","123456");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio?useSSL=false&serverTimezone=UTC", "root", "123456");
             return con;
         }
         catch(Exception e){
