@@ -387,7 +387,6 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="reservaDateChooser" min="-2" pref="277" max="-2" attributes="0"/>
                           <Component id="areaComboBox" min="-2" pref="277" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="hourComboBox" min="-2" max="-2" attributes="0"/>
@@ -427,11 +426,8 @@
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           <Component id="areaComboBox" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <Component id="reservaDateChooser" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -630,8 +626,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reservarButtonActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="reservaDateChooser">
             </Component>
             <Component class="javax.swing.JLabel" name="idLabel">
               <Properties>
