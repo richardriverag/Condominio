@@ -1,6 +1,5 @@
 package model;
 
-import G4_Reservas.EstadoArea;
 import java.sql.Time;
 
 public class AreaComun {
