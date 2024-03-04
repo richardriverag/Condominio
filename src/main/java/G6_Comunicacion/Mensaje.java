@@ -1,19 +1,86 @@
-
 package G6_Comunicacion;
 
-import G6_Comunicacion.consultas;
+import condominio.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author LEGION
  */
-public class Comunicado extends javax.swing.JPanel {
+public class Mensaje extends javax.swing.JPanel {
+
+    DefaultTableModel model1 = new DefaultTableModel();
+    Conexion conexion = new Conexion();
 
     /**
      * Creates new form Anuncios
      */
-    public Comunicado() {
+    public Mensaje() {
         initComponents();
+        cargarDatos2();
+        cargarDatosMensaje();
+    }
+
+    private void cargarDatos2() {
+        Conexion conexion = new Conexion();
+
+        try {
+            String sSQl = "SELECT * FROM Usuario";
+            Connection con = conexion.getCon();
+            Statement cn = con.createStatement();
+            ResultSet rn = cn.executeQuery(sSQl);
+
+            while (rn.next()) {
+                Usuario1.addItem(rn.getString("usuario"));
+                Usuario2.addItem(rn.getString("usuario"));
+            }
+
+            // Cerrar recursos
+            rn.close();
+            cn.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void cargarDatosMensaje() {
+        try {
+            // Agrega las columnas al modelo de la tabla
+            DefaultTableModel modelMensaje = new DefaultTableModel();
+            modelMensaje.addColumn("ID");
+            modelMensaje.addColumn("ASUNTO");
+            modelMensaje.addColumn("USUARIO ENVÍA");
+            modelMensaje.addColumn("USUARIO DESTINATARIO");
+            modelMensaje.addColumn("MENSAJE");
+
+            String sSQl = "SELECT * FROM Mensaje";
+            Connection con = conexion.getCon(); // Obtén la conexión a la base de datos
+            Statement cn = con.createStatement();
+            ResultSet rn = cn.executeQuery(sSQl);
+
+            // Agrega filas al modelo de la tabla con los datos obtenidos de la base de datos
+            while (rn.next()) {
+                modelMensaje.addRow(new Object[]{rn.getInt("id_mensaje"), rn.getString("asunto"), rn.getString("usuario_envia"), rn.getString("usuario_destinatario"), rn.getString("mensaje")});
+            }
+
+            // Asigna el modelo de la tabla con los datos cargados
+            jTableComunicados.setModel(modelMensaje);
+
+            // Cierra los recursos
+            rn.close();
+            cn.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -59,15 +126,17 @@ public class Comunicado extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTAsunto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTADescripcion = new javax.swing.JTextArea();
+        jTAMensaje = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTUsuario = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        Usuario1 = new javax.swing.JComboBox<>();
+        Usuario2 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jBEliminar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableComunicados = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -132,37 +201,45 @@ public class Comunicado extends javax.swing.JPanel {
 
         jLabel2.setText("Asunto:");
 
-        jLabel3.setText("Descripción:");
+        jLabel3.setText("Mensaje:");
 
-        jTADescripcion.setColumns(20);
-        jTADescripcion.setRows(5);
-        jScrollPane1.setViewportView(jTADescripcion);
+        jTAMensaje.setColumns(20);
+        jTAMensaje.setRows(5);
+        jScrollPane1.setViewportView(jTAMensaje);
 
         jButton1.setText("Enviar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEnviar(evt);
+            }
+        });
 
-        jLabel4.setText("Usuario:");
+        jLabel4.setText("Emisor:");
+
+        jLabel6.setText("Nombre Destinatario:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel2)))
-                .addGap(91, 91, 91)
+                    .addComponent(jLabel6))
+                .addGap(68, 68, 68)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTAsunto)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                    .addComponent(jTUsuario))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(Usuario1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Usuario2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(136, 136, 136))
+                .addGap(275, 275, 275))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,14 +251,18 @@ public class Comunicado extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(Usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(Usuario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addComponent(jButton1)
-                .addGap(15, 15, 15))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -191,27 +272,17 @@ public class Comunicado extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabAnuncios.addTab("Enviar Mensaje", jPanel2);
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane3.setViewportView(jTable2);
 
         jBEliminar.setText("Eliminar");
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +291,19 @@ public class Comunicado extends javax.swing.JPanel {
             }
         });
 
+        jTableComunicados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableComunicados);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -227,21 +311,21 @@ public class Comunicado extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
                         .addComponent(jBEliminar)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBEliminar)
-                .addGap(33, 33, 33))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -257,13 +341,13 @@ public class Comunicado extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabAnuncios.addTab("Visualizar o Eliminar Mensajes", jPanel3);
 
-        jLabel1.setText("COMUNICADOS");
+        jLabel1.setText("Mensaje");
 
         javax.swing.GroupLayout jPAnunciosLayout = new javax.swing.GroupLayout(jPAnuncios);
         jPAnuncios.setLayout(jPAnunciosLayout);
@@ -272,11 +356,13 @@ public class Comunicado extends javax.swing.JPanel {
             .addGroup(jPAnunciosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPAnunciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabAnuncios)
                     .addGroup(jPAnunciosLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPAnunciosLayout.createSequentialGroup()
+                        .addComponent(jTabAnuncios)
+                        .addContainerGap())))
         );
         jPAnunciosLayout.setVerticalGroup(
             jPAnunciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,36 +370,85 @@ public class Comunicado extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabAnuncios)
-                .addContainerGap())
+                .addComponent(jTabAnuncios, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPAnuncios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPAnuncios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPAnuncios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPAnuncios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        // TODO add your handling code here:
-        
-        consultas.consultaComunicadoGUI();
+        Conexion conexion = new Conexion();
+        try {
+            String usuarioEnvia = Usuario1.getSelectedItem().toString(); // Suponiendo que Usuario1 es un JComboBox que contiene los usuarios
+
+            // Consulta SQL para eliminar el mensaje enviado por el usuario seleccionado
+            String sSQl = "DELETE FROM Mensaje WHERE usuario_envia = ? AND asunto = ?";
+            Connection con = conexion.getCon();
+            PreparedStatement ps = con.prepareStatement(sSQl);
+            ps.setString(1, usuarioEnvia);
+            ps.setString(2, jTAsunto.getText()); // Suponiendo que jTAsunto es un JTextField que contiene el asunto del mensaje a eliminar
+
+            int eliminar = ps.executeUpdate();
+            ps.close();
+
+            if (eliminar > 0) {
+                JOptionPane.showMessageDialog(null, "El mensaje enviado ha sido eliminado correctamente.", "Eliminación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontraron mensajes enviados por el usuario seleccionado con el asunto especificado.", "Mensaje no encontrado", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
     }//GEN-LAST:event_jBEliminarActionPerformed
 
 
+    private void jEnviar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnviar
+        Conexion conexion = new Conexion();
+        try {
+            String asunto = jTAsunto.getText();
+            String usuarioEnvia = Usuario1.getSelectedItem().toString();
+            String usuarioDestinatario = Usuario2.getSelectedItem().toString();
+            String mensaje = jTAMensaje.getText();
+
+            String sSQl = "INSERT INTO Mensaje (asunto, usuario_envia, usuario_destinatario, mensaje) VALUES (?, ?, ?, ?)";
+            Connection con = conexion.getCon();
+            PreparedStatement ps = con.prepareStatement(sSQl);
+            ps.setString(1, asunto);
+            ps.setString(2, usuarioEnvia);
+            ps.setString(3, usuarioDestinatario);
+            ps.setString(4, mensaje);
+
+            int agregar = ps.executeUpdate();
+            ps.close();
+
+            JOptionPane.showMessageDialog(null, "Los datos se han insertado correctamente.", "Inserción Exitosa", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }//GEN-LAST:event_jEnviar
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Usuario1;
+    private javax.swing.JComboBox<String> Usuario2;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -321,6 +456,7 @@ public class Comunicado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
@@ -352,11 +488,10 @@ public class Comunicado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTADescripcion;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTAMensaje;
     private javax.swing.JTextField jTAsunto;
-    private javax.swing.JTextField jTUsuario;
     private javax.swing.JTabbedPane jTabAnuncios;
-    public static javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableComunicados;
     // End of variables declaration//GEN-END:variables
 }

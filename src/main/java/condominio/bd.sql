@@ -186,51 +186,70 @@ SELECT * FROM RESERVA;
 /*=========================TABLAS USADAS POR MODULO RESERVAS GRUPO 6=============================*/
 /*===============================================================================================*/
 
--- Drop tables if they already exist
-/*DROP TABLE IF EXISTS Comunicado;*/
-/*DROP TABLE IF EXISTS Anuncios_Generales;*/
-
--- Creating table Anuncios_Generales
-CREATE TABLE Anuncios_Generales (
-    ID_AnunciosGenerales INT PRIMARY KEY,
-    ID_Administrador INT,
-    ID_Usuario INT,
-    Fecha_Anuncio DATE,
-    Titulo_Anuncio VARCHAR(50),
-    Descripcion_Anuncio VARCHAR(150),
-    FOREIGN KEY (ID_Administrador) REFERENCES Administrador(ID_Administrador),
-    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
+use condominio;
+CREATE TABLE Usuario (
+  id_usuario int,
+  usuario varchar(50) NOT NULL,
+  contrasenia varchar(50) NOT NULL,
+  nombre varchar(10) NOT NULL,
+  apellido varchar(100) NOT NULL,
+  email varchar(100) NOT NULL,
+  tipoUsuario int DEFAULT NULL,
+  PRIMARY KEY (id_usuario),
+  INDEX idx_usuario (usuario) -- Agrega un índice a la columna usuario
 );
 
--- Creating table Comunicado
-CREATE TABLE Comunicado (
-    ID_Comunicado INT PRIMARY KEY,
-    ID_Administrador INT,
-    ID_Usuario INT,
-    Fecha_Comunicado DATE,
-    Titulo_Comunicado VARCHAR(50),
-    Descripcion_Comunicado VARCHAR(150),
-    FOREIGN KEY (ID_Administrador) REFERENCES Administrador(ID_Administrador),
-    FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
+CREATE TABLE Comunicacion (
+  id_comunicacion INT AUTO_INCREMENT PRIMARY KEY,
+  asunto VARCHAR(255),
+  usuario VARCHAR(50),
+  tipoUsuario INT,
+  descripcion VARCHAR(255),
+  FOREIGN KEY (usuario) REFERENCES Usuario(usuario)
 );
 
--- Generar e insertar datos aleatorios para la tabla Anuncios_Generales
-INSERT INTO Anuncios_Generales (ID_AnunciosGenerales, ID_Administrador, ID_Usuario, Fecha_Anuncio, Titulo_Anuncio, Descripcion_Anuncio)
-VALUES 
-(1, 1, 2, '2024-02-17', 'Nuevo horario de atención', 'Se informa a todos los usuarios que a partir del día de mañana el horario de atención será de 8:00 a.m. a 5:00 p.m.'),
-(2, 2, 4, '2024-02-17', 'Cambio de ubicación de la oficina', 'Por motivos de remodelación, la oficina se trasladará temporalmente a la siguiente dirección: Calle Principal #123.'),
-(3, 3, 1, '2024-02-17', 'Suspensión de servicio de agua', 'Se comunica a los usuarios que el servicio de agua estará suspendido el próximo sábado debido a trabajos de mantenimiento.'),
-(4, 4, 3, '2024-02-17', 'Reunión de condominio', 'Recordatorio: La reunión de condominio se llevará a cabo el próximo viernes a las 7:00 p.m. en el salón comunal.'),
-(5, 5, 5, '2024-02-17', 'Nueva política de seguridad', 'A partir del mes próximo, se implementará una nueva política de seguridad en el edificio. Se solicita la cooperación de todos los residentes.');
+-- Luego puedes realizar tus inserciones
+INSERT INTO Usuario (id_usuario, usuario, contrasenia, nombre, apellido, email, tipoUsuario) VALUES
+(1, 'Juan', 'Contraseña1', 'Juan', 'Perez', 'juan@example.com', 1),
+(2, 'Maria', 'Contraseña2', 'Maria', 'Lopez', 'maria@example.com', 2);
 
--- Generar e insertar datos aleatorios para la tabla Comunicado
-INSERT INTO Comunicado (ID_Comunicado, ID_Administrador, ID_Usuario, Fecha_Comunicado, Titulo_Comunicado, Descripcion_Comunicado)
-VALUES 
-(1, 2, 3, '2024-02-17', 'Recordatorio de pago de expensas', 'Se recuerda a todos los residentes que el plazo para el pago de expensas vence el próximo viernes.'),
-(2, 3, 5, '2024-02-17', 'Fiesta de fin de año', 'Estimados residentes, les informamos que la fiesta de fin de año se llevará a cabo el sábado 20 de diciembre en la terraza del edificio.'),
-(3, 4, 2, '2024-02-17', 'Cierre temporal de parqueadero', 'Por motivos de mantenimiento, el parqueadero estará cerrado desde el lunes hasta el miércoles de la próxima semana.'),
-(4, 5, 4, '2024-02-17', 'Horario especial de atención', 'Durante la temporada navideña, la administración estará atendiendo en horario extendido.'),
-(5, 1, 1, '2024-02-17', 'Asamblea extraordinaria', 'Se convoca a todos los propietarios a una asamblea extraordinaria que se llevará a cabo el próximo domingo a las 10:00 a.m.');
+INSERT INTO Comunicacion (asunto, usuario, tipoUsuario, descripcion) VALUES
+('Reunión de condominio', 'Juan', 1, 'Se llevará a cabo el próximo viernes a las 7:00 p.m.'),
+('Suspensión de servicio de agua', 'Maria', 2, 'El servicio de agua estará suspendido el próximo sábado debido a trabajos de mantenimiento.');
+
+INSERT INTO Usuario (id_usuario, usuario, contrasenia, nombre, apellido, email, tipoUsuario) VALUES
+(3, 'usuario3', 'contraseña3', 'Nombre3', 'Apellido3', 'usuario3@example.com', 3),
+(4, 'usuario4', 'contraseña4', 'Nombre4', 'Apellido4', 'usuario4@example.com', 4),
+(5, 'usuario5', 'contraseña5', 'Nombre5', 'Apellido5', 'usuario5@example.com', 1),
+(6, 'usuario6', 'contraseña6', 'Nombre6', 'Apellido6', 'usuario6@example.com', 2),
+(7, 'usuario7', 'contraseña7', 'Nombre7', 'Apellido7', 'usuario7@example.com', 3),
+(8, 'usuario8', 'contraseña8', 'Nombre8', 'Apellido8', 'usuario8@example.com', 4);
+
+Select * from Usuario;
+Select * from Comunicacion;
+
+INSERT INTO Comunicacion (asunto, usuario, tipoUsuario, descripcion) VALUES
+('Cambio de horario', 'usuario3', 2, 'Se informa que a partir de la próxima semana el horario de atención se modificará.'),
+('Recordatorio de pago', 'usuario3', 3, 'Recuerden que el plazo para el pago de las cuotas de mantenimiento vence el próximo viernes.'),
+('Revisión de normas', 'usuario4', 4, 'Se solicita a todos los residentes revisar las nuevas normas de convivencia establecidas por la administración.'),
+('Reparación de ascensor', 'usuario5', 1, 'Informamos que el ascensor estará fuera de servicio por reparaciones durante el fin de semana.'),
+('Fiesta de fin de año', 'usuario6', 2, 'Se invita a todos los residentes a la fiesta de fin de año que se llevará a cabo el 31 de diciembre en el salón comunal.');
+
+CREATE TABLE Mensaje (
+  id_mensaje INT AUTO_INCREMENT PRIMARY KEY,
+  asunto VARCHAR(255),
+  usuario_envia VARCHAR(50),
+  usuario_destinatario VARCHAR(50),
+  mensaje TEXT,
+  FOREIGN KEY (usuario_envia) REFERENCES Usuario(usuario),
+  FOREIGN KEY (usuario_destinatario) REFERENCES Usuario(usuario)
+);
+
+INSERT INTO Mensaje (asunto, usuario_envia, usuario_destinatario, mensaje) VALUES
+('Recordatorio de pago', 'usuario3', 'usuario4', 'Hola usuario4, recuerda que el plazo para el pago de las cuotas de mantenimiento vence el próximo viernes.'),
+('Invitación a evento', 'usuario4', 'usuario5', 'Hola usuario5, te invito cordialmente al evento que se realizará el próximo sábado en nuestro condominio.'),
+('Actualización de normativas', 'usuario4', 'usuario3', 'Hola usuario1, te informo que se han actualizado las normativas del condominio. Por favor, revisa el documento adjunto.'),
+('Felicitaciones', 'usuario5', 'usuario3', '¡Hola usuario3! Quiero felicitarte por tu cumpleaños. ¡Que tengas un día maravilloso!');
 
 
 /*===============================================================================================*/

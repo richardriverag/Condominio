@@ -1,4 +1,3 @@
-
 package G6_Comunicacion;
 
 import java.awt.BorderLayout;
@@ -13,25 +12,27 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-     public GUI_Comunicacion() {
+    public GUI_Comunicacion() {
         initComponents();
         InitContent();
     }
-    
-    private void InitContent(){
-        ShowJPanel(new Principal());
+
+    private void InitContent() {
+        ShowJPanel(new Comunicacion());
+
     }
-    
-    private void ShowJPanel(JPanel p){
-      
-        p.setSize(750, 430);
-        p.setLocation(0,0);
-        
+
+    private void ShowJPanel(JPanel p) {
+
+        p.setSize(850, 530);
+        p.setLocation(0, 0);
+
         content.removeAll();
         content.add(p, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,8 +46,6 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
         jBComunicadosI = new javax.swing.JButton();
         jBAnunciosP = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jBPrincipal = new javax.swing.JButton();
-        header = new javax.swing.JPanel();
         content = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -54,7 +53,7 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
 
         menu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jBComunicadosI.setText("Comunicados Individuales");
+        jBComunicadosI.setText("Mensajes Individuales");
         jBComunicadosI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBComunicadosI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +61,7 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
             }
         });
 
-        jBAnunciosP.setText("Anuncios Generales");
+        jBAnunciosP.setText("Comunicados Generales");
         jBAnunciosP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBAnunciosP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,13 +70,6 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
         });
 
         jLabel2.setText("MENÚ GENERAL");
-
-        jBPrincipal.setText("Principal");
-        jBPrincipal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBPrincipalActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
@@ -91,8 +83,7 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBComunicadosI, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                    .addComponent(jBAnunciosP, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                    .addComponent(jBPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBAnunciosP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuLayout.setVerticalGroup(
@@ -100,26 +91,11 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
             .addGroup(menuLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(139, 139, 139)
                 .addComponent(jBAnunciosP, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(57, 57, 57)
                 .addComponent(jBComunicadosI, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
-        );
-
-        header.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
-        header.setLayout(headerLayout);
-        headerLayout.setHorizontalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
-        );
-        headerLayout.setVerticalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 106, Short.MAX_VALUE)
+                .addContainerGap(289, Short.MAX_VALUE))
         );
 
         content.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -128,11 +104,11 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 707, Short.MAX_VALUE)
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+            .addGap(0, 577, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -147,18 +123,12 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,12 +139,10 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
                         .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)))
+                        .addGap(10, 10, 10)))
                 .addContainerGap())
         );
 
@@ -182,17 +150,12 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBComunicadosIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBComunicadosIActionPerformed
-        ShowJPanel(new Comunicado());
+        ShowJPanel(new Mensaje());
     }//GEN-LAST:event_jBComunicadosIActionPerformed
 
     private void jBAnunciosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnunciosPActionPerformed
-        ShowJPanel(new Anuncios());
+        ShowJPanel(new Comunicacion());
     }//GEN-LAST:event_jBAnunciosPActionPerformed
-
-    private void jBPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrincipalActionPerformed
-        ShowJPanel(new Principal());
-        consultas.consultaAnunciosGeneralesGUI();
-    }//GEN-LAST:event_jBPrincipalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,10 +186,6 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -238,10 +197,8 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel content;
-    private javax.swing.JPanel header;
     private javax.swing.JButton jBAnunciosP;
     private javax.swing.JButton jBComunicadosI;
-    private javax.swing.JButton jBPrincipal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel menu;
