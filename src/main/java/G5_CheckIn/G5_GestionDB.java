@@ -75,7 +75,7 @@ public class G5_GestionDB {
                   apellido = rs.getString("APELLIDO_USUARIO");
               }
               
-              nombreCompleto = nombre + apellido;
+              nombreCompleto = nombre +" "+ apellido;
               //System.out.println(nombreCompleto);
               //nombreCompleto = nombreCompleto.replaceAll("\\s+", " ");
               return nombreCompleto;
