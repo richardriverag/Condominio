@@ -450,7 +450,7 @@ JOIN
 JOIN
     DEPARTAMENTO_F df ON u.ID_USUARIO = df.ID_USUARIO
 WHERE 
-    v.fecha > CURRENT_DATE() OR v.fecha = '2024-03-04';
+    v.fecha > CURRENT_DATE() OR v.fecha = '2024-03-06';
 
 select * from VisitasProximas_v;
 
