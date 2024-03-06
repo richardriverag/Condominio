@@ -826,21 +826,20 @@ public class CheckIn_Nw extends javax.swing.JFrame {
                 System.out.println(query);
                 c.ejecutar(query);
                 c.cargarTabla(modeloHistorial, jTableHistorial, nombreTablaHistorial, TitulosHistorial, idTablaHistorial);
+                c.cargarTabla(modeloVisita, jTableVisitasP, nombreTablaVisita, TitulosVisita, idTablaVisita);
+         
                 JOptionPane.showMessageDialog(null, "Ingresado correctamente");
-                JTextNombreVistante.setText("");
-                jTextDep2.setText("");
-                JTextNombreResidente2.setText("");
-                JTextMotivoVisita.setText("");
-                JTextFecha2.setText("");
-                JCBVehiculo.setSelectedIndex(-1);
+                
+                jTextDep1.setText("");
+                JTextNombreResidente.setText("");
+                JTextFecha1.setText("");
+                JTextHora1.setText("");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
-                JTextNombreVistante.setText("");
-                jTextDep2.setText("");
-                JTextNombreResidente2.setText("");
-                JTextMotivoVisita.setText("");
-                JTextFecha2.setText("");
-                JCBVehiculo.setSelectedIndex(-1);
+                 jTextDep1.setText("");
+                JTextNombreResidente.setText("");
+                JTextFecha1.setText("");
+                JTextHora1.setText("");
             }
         }
     }//GEN-LAST:event_btnRegistrarIngresoActionPerformed
@@ -867,10 +866,30 @@ public class CheckIn_Nw extends javax.swing.JFrame {
         if (proveedor) {
             nombre = "Proveedor";
             v.registrarProveedor(nombre, motivo, fecha, hora, VehiculoParqueadero);
+            c.cargarTabla(modeloHistorial, jTableHistorial, nombreTablaHistorial, TitulosHistorial, idTablaHistorial);
+            c.cargarTabla(modeloVisita, jTableVisitasP, nombreTablaVisita, TitulosVisita, idTablaVisita);
+            
+            JTextNombreVistante.setText("");
+            jTextDep2.setText("");
+            JTextNombreResidente2.setText("");
+            JTextMotivoVisita.setText("");
+            JTextFecha2.setText("");
+            JTextHora2.setText("");
+            JCBVehiculo.setSelectedIndex(-1);
             
             JOptionPane.showMessageDialog(null, "Ingresado correctamente");
         } else {
             v.registrarVisita(idUsuario, nombre, motivo, fecha, hora, VehiculoParqueadero);
+            c.cargarTabla(modeloHistorial, jTableHistorial, nombreTablaHistorial, TitulosHistorial, idTablaHistorial);
+            c.cargarTabla(modeloVisita, jTableVisitasP, nombreTablaVisita, TitulosVisita, idTablaVisita);
+            
+            JTextNombreVistante.setText("");
+            jTextDep2.setText("");
+            JTextNombreResidente2.setText("");
+            JTextMotivoVisita.setText("");
+            JTextFecha2.setText("");
+            JTextHora2.setText("");
+            JCBVehiculo.setSelectedIndex(-1);
             JOptionPane.showMessageDialog(null, "Ingresado correctamente");
         }
         
@@ -1185,13 +1204,15 @@ public class CheckIn_Nw extends javax.swing.JFrame {
 
         if (jcheckProveedor.isSelected()) {
             proveedor = true;
-            JTextNombreResidente2.setText("Proveedor");
+            JTextNombreVistante.setText("Proveedor");
             JTextNombreVistante.setEditable(false);
             jTextDep2.setEditable(false);
             jTextDep2.setText("");
             JTextNombreResidente2.setText("");
         }else{
             proveedor = false;
+            JTextNombreVistante.setText("");
+             jTextDep2.setText("");
             JTextNombreVistante.setEditable(true);
             jTextDep2.setEditable(true);
         }
