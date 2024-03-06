@@ -9,6 +9,7 @@ import G1_Finanzas.Vista_FinanzasCliente;
 import G2_Usuarios.SessionManager;
 import G3_Inmuebles.ModuloInmuebles;
 import G4_Reservas.AreasComunesUsuarios;
+import G5_CheckIn.CheckIn_Nw;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -178,7 +179,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciar2ActionPerformed
 
     private void btnIniciar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar3ActionPerformed
-        // TODO add your handling code here:
+         new CheckIn_Nw().setVisible(true);
+         
     }//GEN-LAST:event_btnIniciar3ActionPerformed
 
     private void btnIniciar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar4ActionPerformed
