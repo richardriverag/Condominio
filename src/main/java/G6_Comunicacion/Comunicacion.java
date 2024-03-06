@@ -118,10 +118,13 @@ public class Comunicacion extends javax.swing.JPanel {
         UsuarioAnuncios = new javax.swing.JComboBox<>();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
         jBEliminar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAnuncios = new javax.swing.JTable();
+        jComboBoxUsuarioAnuncios1 = new javax.swing.JComboBox<>();
+        jComboBoxUsuarioAnuncios2 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -303,6 +306,12 @@ public class Comunicacion extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTableAnuncios);
 
+        jComboBoxUsuarioAnuncios1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guardia", "Visita", "Residente", "Administrador" }));
+
+        jComboBoxUsuarioAnuncios2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guardia", "Visita", "Residente", "Administrador" }));
+
+        jLabel6.setText("Rol:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -310,21 +319,35 @@ public class Comunicacion extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(547, 547, 547)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxUsuarioAnuncios2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(302, 302, 302)
-                        .addComponent(jBEliminar)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jComboBoxUsuarioAnuncios1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jBEliminar)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxUsuarioAnuncios2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 157, Short.MAX_VALUE)
+                    .addComponent(jComboBoxUsuarioAnuncios1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 158, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -335,13 +358,19 @@ public class Comunicacion extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(313, 313, 313)
+                .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         jTabAnuncios.addTab("Eliminar o Actualizar", jPanel3);
@@ -389,49 +418,6 @@ public class Comunicacion extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        try {
-            // Obtener el usuario seleccionado desde la tabla
-            String usuarioSeleccionado = jTableAnuncios.getValueAt(jTableAnuncios.getSelectedRow(), 1).toString();
-
-            // Consultar el tipo de usuario correspondiente al usuario seleccionado desde la base de datos
-            String sqlConsulta = "SELECT tipoUsuario FROM Usuario WHERE usuario = '" + usuarioSeleccionado + "'";
-            Connection con = conexion.getCon();
-            Statement statement = con.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlConsulta);
-
-            if (resultSet.next()) {
-                int tipoUsuarioDB = resultSet.getInt("tipoUsuario");
-
-                // Obtener el tipo de usuario seleccionado desde el combo box
-                int tipoUsuarioCombo = jComboBoxUsuarioAnuncios.getSelectedIndex() + 1; // Sumar 1 porque el índice 0 corresponde al tipo de usuario 1 (Guardia)
-
-                // Verificar si el tipo de usuario coincide con el tipo de usuario obtenido de la base de datos
-                if (tipoUsuarioCombo == tipoUsuarioDB) {
-                    // El tipo de usuario coincide, realizar la acción deseada (por ejemplo, eliminar el registro)
-                    String asunto = jTableAnuncios.getValueAt(jTableAnuncios.getSelectedRow(), 0).toString();
-                    String sqlEliminar = "DELETE FROM Comunicacion WHERE asunto = '" + asunto + "'";
-                    int eliminar = statement.executeUpdate(sqlEliminar);
-                    model1.removeRow(jTableAnuncios.getSelectedRow());
-                } else {
-                    // El tipo de usuario no coincide, mostrar un mensaje de error
-                    JOptionPane.showMessageDialog(null, "No tiene permisos para realizar esta acción.", "Mensaje", JOptionPane.WARNING_MESSAGE);
-                }
-            } else {
-                // No se encontró el usuario en la base de datos, mostrar un mensaje de error
-                JOptionPane.showMessageDialog(null, "El usuario seleccionado no existe.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-            // Cerrar recursos
-            resultSet.close();
-            statement.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-
-    }//GEN-LAST:event_jBEliminarActionPerformed
-
     private void jPublicar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPublicar
         Conexion conexion = new Conexion();
         try {
@@ -467,6 +453,42 @@ public class Comunicacion extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxUsuarioAnunciosActionPerformed
 
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        try {
+            int tipoUsuario = 11; // Valor por defecto
+            switch (jComboBoxUsuarioAnuncios2.getSelectedIndex()) {
+                case 0:
+                tipoUsuario = 1; // Guardia
+                break;
+                case 1:
+                tipoUsuario = 2; // Visita
+                break;
+                case 2:
+                tipoUsuario = 3; // Residente
+                break;
+                case 3:
+                tipoUsuario = 4; // Administrador
+                break;
+            }
+
+            // Comprobar si el tipoUsuario es Administrador
+            if (tipoUsuario == 4) {
+                String asunto = jTableAnuncios.getValueAt(jTableAnuncios.getSelectedRow(), 0).toString(); // Obtener el valor del asunto seleccionado
+                System.out.println(asunto);
+                String sSQl = "DELETE FROM Comunicacion WHERE asunto = '" + asunto + "'";
+                Connection con = conexion.getCon();
+                Statement cn = con.createStatement();
+                int eliminar = cn.executeUpdate(sSQl);
+                cn.close();
+                model1.removeRow(jTableAnuncios.getSelectedRow());
+            } else {
+                JOptionPane.showMessageDialog(null, "No tiene permisos para eliminar.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> UsuarioAnuncios;
@@ -474,11 +496,14 @@ public class Comunicacion extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JComboBox<String> jComboBoxUsuarioAnuncios;
+    private javax.swing.JComboBox<String> jComboBoxUsuarioAnuncios1;
+    private javax.swing.JComboBox<String> jComboBoxUsuarioAnuncios2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;

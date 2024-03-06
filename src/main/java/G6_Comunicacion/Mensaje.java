@@ -23,9 +23,17 @@ public class Mensaje extends javax.swing.JPanel {
      * Creates new form Anuncios
      */
     public Mensaje() {
+        //initComponents();
+        //cargarDatos2();
+        //cargarDatosMensaje();
+        
         initComponents();
         cargarDatos2();
-        cargarDatosMensaje();
+        //cargarDatos();
+        // Verificar si la tabla está vacía antes de cargar los datos
+        if (model1.getRowCount() == 0) {
+            cargarDatosMensaje(); // Llamar a cargarDatos() solo si la tabla está vacía
+        }
     }
 
     private void cargarDatos2() {
@@ -40,6 +48,7 @@ public class Mensaje extends javax.swing.JPanel {
             while (rn.next()) {
                 Usuario1.addItem(rn.getString("usuario"));
                 Usuario2.addItem(rn.getString("usuario"));
+                Usuario3.addItem(rn.getString("usuario"));
             }
 
             // Cerrar recursos
@@ -137,6 +146,10 @@ public class Mensaje extends javax.swing.JPanel {
         jBEliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableComunicados = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        asuntoEliminar = new javax.swing.JTextField();
+        Usuario3 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -217,6 +230,12 @@ public class Mensaje extends javax.swing.JPanel {
         jLabel4.setText("Emisor:");
 
         jLabel6.setText("Nombre Destinatario:");
+
+        Usuario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Usuario1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -304,6 +323,22 @@ public class Mensaje extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTableComunicados);
 
+        jLabel5.setText("Asunto a Eliminar:");
+
+        jLabel7.setText("Emisor:");
+
+        asuntoEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asuntoEliminarActionPerformed(evt);
+            }
+        });
+
+        Usuario3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Usuario3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -311,21 +346,40 @@ public class Mensaje extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(54, 54, 54)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(jBEliminar)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                        .addGap(73, 73, 73)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(asuntoEliminar)
+                            .addComponent(Usuario3, 0, 303, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jBEliminar)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(asuntoEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(Usuario3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -342,7 +396,7 @@ public class Mensaje extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jTabAnuncios.addTab("Visualizar o Eliminar Mensajes", jPanel3);
@@ -395,14 +449,14 @@ public class Mensaje extends javax.swing.JPanel {
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         Conexion conexion = new Conexion();
         try {
-            String usuarioEnvia = Usuario1.getSelectedItem().toString(); // Suponiendo que Usuario1 es un JComboBox que contiene los usuarios
+            String usuarioEnvia = Usuario3.getSelectedItem().toString(); // Suponiendo que Usuario1 es un JComboBox que contiene los usuarios
 
             // Consulta SQL para eliminar el mensaje enviado por el usuario seleccionado
             String sSQl = "DELETE FROM Mensaje WHERE usuario_envia = ? AND asunto = ?";
             Connection con = conexion.getCon();
             PreparedStatement ps = con.prepareStatement(sSQl);
             ps.setString(1, usuarioEnvia);
-            ps.setString(2, jTAsunto.getText()); // Suponiendo que jTAsunto es un JTextField que contiene el asunto del mensaje a eliminar
+            ps.setString(2, asuntoEliminar.getText()); // Suponiendo que jTAsunto es un JTextField que contiene el asunto del mensaje a eliminar
 
             int eliminar = ps.executeUpdate();
             ps.close();
@@ -412,6 +466,10 @@ public class Mensaje extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron mensajes enviados por el usuario seleccionado con el asunto especificado.", "Mensaje no encontrado", JOptionPane.WARNING_MESSAGE);
             }
+            
+            // Después de insertar un nuevo comunicado, cargar nuevamente los datos en la tabla
+            cargarDatosMensaje();
+            
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -439,16 +497,34 @@ public class Mensaje extends javax.swing.JPanel {
             ps.close();
 
             JOptionPane.showMessageDialog(null, "Los datos se han insertado correctamente.", "Inserción Exitosa", JOptionPane.INFORMATION_MESSAGE);
+        
+            // Después de insertar un nuevo comunicado, cargar nuevamente los datos en la tabla
+            cargarDatosMensaje();
+        
         } catch (SQLException e) {
             System.out.println(e);
         }
 
     }//GEN-LAST:event_jEnviar
 
+    private void asuntoEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asuntoEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_asuntoEliminarActionPerformed
+
+    private void Usuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Usuario1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Usuario1ActionPerformed
+
+    private void Usuario3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Usuario3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Usuario3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Usuario1;
     private javax.swing.JComboBox<String> Usuario2;
+    private javax.swing.JComboBox<String> Usuario3;
+    private javax.swing.JTextField asuntoEliminar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -456,7 +532,9 @@ public class Mensaje extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;

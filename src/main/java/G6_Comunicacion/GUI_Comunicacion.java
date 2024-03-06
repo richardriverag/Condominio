@@ -24,7 +24,7 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
 
     private void ShowJPanel(JPanel p) {
 
-        p.setSize(850, 530);
+        p.setSize(900, 600);
         p.setLocation(0, 0);
 
         content.removeAll();
@@ -182,6 +182,10 @@ public class GUI_Comunicacion extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUI_Comunicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
