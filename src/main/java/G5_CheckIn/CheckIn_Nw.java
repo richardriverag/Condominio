@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import model.Comunicacion;
 import model.Visita;
 
 /**
@@ -809,10 +810,10 @@ public class CheckIn_Nw extends javax.swing.JFrame {
         if (c.validarUsuario(numDep)) {
             //obtengo nombre por el numdep despues de consultar si esta en bd
             idUsuario = c.getUsuario(numDep);
-            //System.out.println(idUsuario);
             JTextNombreResidente.setText(c.obtenerNombreUsuario(numDep));
-            //  System.out.println(c.obtenerNombreUsuario(numDep));
-
+            lbResidente2.setVisible(false);
+        }else{
+            lbResidente2.setVisible(true);
         }
         if (numDep.equals("") || JTextFecha1.getText().equals("") || JTextFecha1.equals("")) {
             JOptionPane.showMessageDialog(null, "No se puede dejar campos vacios, por favor ingrese los datos");
@@ -826,22 +827,27 @@ public class CheckIn_Nw extends javax.swing.JFrame {
                 c.ejecutar(query);
                 c.cargarTabla(modeloHistorial, jTableHistorial, nombreTablaHistorial, TitulosHistorial, idTablaHistorial);
                 JOptionPane.showMessageDialog(null, "Ingresado correctamente");
-                jTextDep1.setText("");
-                JTextNombreResidente.setText("");
-                JTextFecha1.setText("");
-                JTextHora1.setText("");
+                JTextNombreVistante.setText("");
+                jTextDep2.setText("");
+                JTextNombreResidente2.setText("");
+                JTextMotivoVisita.setText("");
+                JTextFecha2.setText("");
+                JCBVehiculo.setSelectedIndex(-1);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
-                JTextNombreResidente.setText("");
-                JTextFecha1.setText("");
-                JTextHora1.setText("");
+                JTextNombreVistante.setText("");
+                jTextDep2.setText("");
+                JTextNombreResidente2.setText("");
+                JTextMotivoVisita.setText("");
+                JTextFecha2.setText("");
+                JCBVehiculo.setSelectedIndex(-1);
             }
         }
     }//GEN-LAST:event_btnRegistrarIngresoActionPerformed
 
     private void btnRegistrarNotificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarNotificarActionPerformed
-       String nombre = JTextNombreVistante.getText();
-      String numDep = jTextDep2.getText();
+        String nombre = JTextNombreVistante.getText();
+        String numDep = jTextDep2.getText();
         String idUsuario = "";
 
         // System.out.println(c.validarUsuario(numDep));
@@ -853,32 +859,35 @@ public class CheckIn_Nw extends javax.swing.JFrame {
             //  System.out.println(c.obtenerNombreUsuario(numDep));
 
         }
-      String motivo = JTextMotivoVisita.getText(); 
-      String fecha = JTextFecha2.getText();
-      String hora = JTextHora2.getText();
-      
-      // String query = "INSERT INTO Visitante (idVisitante, id_usuario, nombreVisitante, motivoVisita, fecha, hora, vehiculo, tipoUsuario) VALUES ('"+auxS+"', '"+idUsuario+"', '"+nombre+"', '"+motivo+"', '"+fecha+"', '"+hora+"', '"+VehiculoParqueadero+"', 'Visitante')";    
-      if (proveedor){
-          nombre = "Proveedor";
-           v.registrarProveedor(nombre, motivo, fecha, hora, VehiculoParqueadero);
-           
-           JOptionPane.showMessageDialog(null, "Ingresado correctamente");
-      }else{
-           v.registrarVisita(idUsuario, nombre, motivo, fecha, hora, VehiculoParqueadero);
-           JOptionPane.showMessageDialog(null, "Ingresado correctamente");
-      }
-      
-      if (VehiculoParqueadero.equals("Si")){
-          pv.cambiarEstadoParqueadero(parqueaderoID, estadoParqueadero);
-      }
-      
-      //notificarPersonal(); GRUPO COMUNICACION GR6
-	
+        String motivo = JTextMotivoVisita.getText();        
+        String fecha = JTextFecha2.getText();
+        String hora = JTextHora2.getText();
+
+        // String query = "INSERT INTO Visitante (idVisitante, id_usuario, nombreVisitante, motivoVisita, fecha, hora, vehiculo, tipoUsuario) VALUES ('"+auxS+"', '"+idUsuario+"', '"+nombre+"', '"+motivo+"', '"+fecha+"', '"+hora+"', '"+VehiculoParqueadero+"', 'Visitante')";    
+        if (proveedor) {
+            nombre = "Proveedor";
+            v.registrarProveedor(nombre, motivo, fecha, hora, VehiculoParqueadero);
+            
+            JOptionPane.showMessageDialog(null, "Ingresado correctamente");
+        } else {
+            v.registrarVisita(idUsuario, nombre, motivo, fecha, hora, VehiculoParqueadero);
+            JOptionPane.showMessageDialog(null, "Ingresado correctamente");
+        }
+        
+        if (VehiculoParqueadero.equals("Si")) {
+            pv.cambiarEstadoParqueadero(parqueaderoID, estadoParqueadero);
+        }
+
+        //notificarPersonal(); GRUPO COMUNICACION GR6
+
     }//GEN-LAST:event_btnRegistrarNotificarActionPerformed
 
     private void btnNotificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotificarActionPerformed
         String mensaje = jTXMensajeAlerta.getText();
+        Comunicacion com = new Comunicacion();
+        com.setAsunto(mensaje);
         //Enviar mensajes a Residentes () GRUPO COMUNICACION GR6
+        jTXMensajeAlerta.setText("");
     }//GEN-LAST:event_btnNotificarActionPerformed
 
     private void JCBVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBVehiculoActionPerformed
@@ -1176,8 +1185,11 @@ public class CheckIn_Nw extends javax.swing.JFrame {
 
         if (jcheckProveedor.isSelected()) {
             proveedor = true;
+            JTextNombreResidente2.setText("Proveedor");
             JTextNombreVistante.setEditable(false);
             jTextDep2.setEditable(false);
+            jTextDep2.setText("");
+            JTextNombreResidente2.setText("");
         }else{
             proveedor = false;
             JTextNombreVistante.setEditable(true);

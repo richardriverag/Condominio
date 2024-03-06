@@ -24,7 +24,7 @@ public class Conexion {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Nos conectamos a la base de datos
             
-            con= (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio?serverTimezone=UTC", "root", "Hidalgo.2212");
+            con= (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/condominio?serverTimezone=UTC", "root", "123456");
             if(con !=null){
                // JOptionPane.showMessageDialog(null, "Conexion existosa", "alert", JOptionPane.ERROR_MESSAGE);
             }else{
